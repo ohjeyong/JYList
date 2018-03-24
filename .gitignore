@@ -1,0 +1,36 @@
+__pycache__/
+.env
+.Trash-*
+.nfs*
+.idea/
+
+
+# VisualStudioCode template
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+
+# macOS template
+# General
+*.DS_Store
+.AppleDouble
+.LSOverride
+
+
+# Icon must end with two \r
+Icon
+
+
+# Thumbnails
+._*
+
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
