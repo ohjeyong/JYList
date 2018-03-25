@@ -93,7 +93,8 @@ DJANGO_BASIC_APPS = [
 
 CUSTOM_APPS = [
     'user',
-    'todo'
+    'todo',
+    'migrate_legacy'
 ]
 
 INSTALLED_APPS = DJANGO_BASIC_APPS + CUSTOM_APPS
@@ -139,6 +140,14 @@ DATABASES = {
         'USER': get_env('DB_USER'),
         'PASSWORD': get_env('DB_PASSWORD'),
         'HOST': get_env('DB_HOST'),
+        'PORT': 5432
+    },
+    'legacy': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': get_env('LEGACY_DB_NAME'),
+        'USER': get_env('LEGACY_DB_USER'),
+        'PASSWORD': get_env('LEGACY_DB_PASSWORD'),
+        'HOST': get_env('LEGACY_DB_HOST'),
         'PORT': 5432
     }
 }

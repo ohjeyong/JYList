@@ -16,4 +16,4 @@ class User(BaseModel, AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['name']
 
-    object = UserManager()
+    objects = UserManager()
