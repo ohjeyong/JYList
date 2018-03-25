@@ -13,7 +13,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'name')
     search_fields = ('username', 'name')
     fieldsets = (
-        (None, {'fields': ('username', 'password', 'created_at')}),
-        ('회원 정보', {'fields': ('name',)}),
+        (None, {'fields': ('username', 'name', 'password', 'created_at')}),
+        ('친구 목록', {'fields': ('friends',)}),
         ('권한', {'fields': ('is_active', 'is_staff', 'is_superuser', 'groups', 'user_permissions')}),
     )
