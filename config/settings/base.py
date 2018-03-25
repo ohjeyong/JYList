@@ -92,7 +92,8 @@ DJANGO_BASIC_APPS = [
 ]
 
 CUSTOM_APPS = [
-    'user'
+    'user',
+    'todo'
 ]
 
 INSTALLED_APPS = DJANGO_BASIC_APPS + CUSTOM_APPS
