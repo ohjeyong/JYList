@@ -92,13 +92,14 @@ DJANGO_BASIC_APPS = [
 ]
 
 CUSTOM_APPS = [
-    'user',
+    'user.apps.UserConfig',
     'todo',
     'migrate_legacy'
 ]
 
 THIRD_PARTY_APPS = [
-    'rest_framework'
+    'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 INSTALLED_APPS = DJANGO_BASIC_APPS + CUSTOM_APPS + THIRD_PARTY_APPS
@@ -193,3 +194,11 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 AUTH_USER_MODEL = 'user.User'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    )
+}

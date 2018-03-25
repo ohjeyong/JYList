@@ -1,5 +1,7 @@
 import abc
 
+from rest_framework.authtoken.models import Token
+
 from todo.models import Todo, TodoComment, Tag
 from user.models import User
 
@@ -49,6 +51,8 @@ class MigrateUser(MigrateLegacy):
         for friends_rel in UserUserFriends.objects.using('legacy').all():
             from_user = User.objects.get(id=friends_rel.from_user_id)
             from_user.friends.add(friends_rel.to_user_id)
+        for user in User.objects.all():
+            Token.objects.get_or_create(user=user)
 
 
 class MigrateTodo(MigrateLegacy):
