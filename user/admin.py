@@ -9,6 +9,12 @@ from .models import User
 class UserAdmin(BaseUserAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('username', 'name', 'password1', 'password2'),
+        }),
+    )
 
     list_display = ('username', 'name')
     search_fields = ('username', 'name')
