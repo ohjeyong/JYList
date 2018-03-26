@@ -1,4 +1,9 @@
 import abc
+import re
+from io import StringIO
+
+from django.core.management import call_command
+from django.db import connection
 
 from rest_framework.authtoken.models import Token
 
@@ -106,12 +111,24 @@ class MigrateTag(MigrateLegacy):
 
 
 def migrate():
-    print("Start migrate User model...")
+    print("Start migrating User model...")
     MigrateUser.migrate()
-    print("Start migrate Todo model...")
+    print("Start migrating Todo model...")
     MigrateTodo.migrate()
-    print("Start migrate Comment model...")
+    print("Start migrating Comment model...")
     MigrateComment.migrate()
-    print("Start migrate Tag model...")
+    print("Start migrating Tag model...")
     MigrateTag.migrate()
+
+    print("Reset SQL sequence...")
+    output = StringIO()
+    call_command('sqlsequencereset', 'user', 'todo', stdout=output)
+    sql = output.getvalue()
+
+    ansi_escape = re.compile(r'\x1b[^m]*m')
+    sql = ansi_escape.sub('', sql)
+
+    with connection.cursor() as cursor:
+        cursor.execute(sql)
+    output.close()
     print("Migration has successfully completed.")
