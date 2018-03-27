@@ -1,10 +1,11 @@
 from django.db import models
 from django.utils import timezone
 from django.conf import settings
+from common.behaviors import FriendsMixin
 from common.models import BaseModel
 
 
-class Todo(BaseModel):
+class Todo(BaseModel, FriendsMixin):
     CATEGORY_CHOICE = (
         ('FOOD', '먹을 곳'),
         ('PLACE', '갈 곳'),
@@ -51,7 +52,7 @@ class Tag(BaseModel):
         return self.name
 
 
-class TodoComment(BaseModel):
+class TodoComment(BaseModel, FriendsMixin):
     todo = models.ForeignKey(Todo, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     content = models.CharField(max_length=100)

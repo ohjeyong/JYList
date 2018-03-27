@@ -22,6 +22,15 @@ class CommentSerializer(serializers.ModelSerializer):
     author_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='author')
     author = UserSerializer(read_only=True)
 
+    def validate(self, data):
+        author = data['author']
+        author_and_friends = data['todo'].get_author_and_friends()
+        if author not in author_and_friends:
+            raise serializers.ValidationError({
+                'todo_id': "권한이 없습니다."
+            })
+        return data
+
 
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
