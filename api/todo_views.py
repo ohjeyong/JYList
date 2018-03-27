@@ -1,9 +1,8 @@
 from rest_framework import status, viewsets, generics
-from rest_framework.decorators import list_route, detail_route
+from rest_framework.decorators import detail_route
 from rest_framework.exceptions import PermissionDenied
-from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-
+from rest_framework.response import Response
 
 from todo.models import Todo, TodoComment, Tag
 from .base_views import FriendsQuerysetMixin

@@ -1,6 +1,7 @@
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from django.conf import settings
+
 from common.behaviors import FriendsMixin
 from common.models import BaseModel
 

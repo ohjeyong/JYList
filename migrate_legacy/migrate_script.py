@@ -4,12 +4,10 @@ from io import StringIO
 
 from django.core.management import call_command
 from django.db import connection
-
 from rest_framework.authtoken.models import Token
 
 from todo.models import Todo, TodoComment, Tag
 from user.models import User
-
 from .legacy_models import TodoTag, TodoTodo, TodoTodoTag, TodoTodocomment, UserUser, UserUserFriends
 
 
