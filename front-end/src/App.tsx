@@ -1,11 +1,10 @@
 import * as React from 'react';
+import JYListIndex from './routers';
 
 class App extends React.Component {
     render() {
         return (
-            <div className="App">
-                Hello World!
-            </div>
+            <JYListIndex/>
         );
     }
 }
