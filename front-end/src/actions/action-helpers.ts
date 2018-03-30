@@ -1,8 +1,8 @@
-interface Action<T extends string> {
+export interface Action<T extends string> {
     type: T;
 }
 
-interface ActionWithPayload<T extends string, P> extends Action<T> {
+export interface ActionWithPayload<T extends string, P> extends Action<T> {
     payload: P;
 }
 

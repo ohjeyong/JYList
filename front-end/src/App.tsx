@@ -1,10 +1,20 @@
 import * as React from 'react';
-import JYListIndex from './routers';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import promiseMiddleware from 'redux-promise-middleware';
+import { rootReducer } from './reducers';
+import { JYRoute } from './routers';
+
+const store = createStore(rootReducer, applyMiddleware(promiseMiddleware({
+    promiseTypeSeparator: '/'
+})));
 
 class App extends React.Component {
     render() {
         return (
-            <JYListIndex/>
+            <Provider store={store}>
+                <JYRoute/>
+            </Provider>
         );
     }
 }

@@ -1,24 +1,23 @@
 import axios, { AxiosPromise } from 'axios';
-import { createAction } from './action-helpers';
-import { ActionUnion } from './types';
+import { ActionTypes } from './types';
+import { createAction, Action, ActionWithPayload } from './action-helpers';
 import { User } from '../models/user';
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 
-export enum ActionTypes {
-    GET_LOGIN_USER_INFO_BY_TOKEN = '[user] GET_LOGIN_USER_INFO_BY_TOKEN'
+export function getLoginUserInfoByToken() {
+    const token = localStorage.getItem('token');
+    const request = axios.get('/', {
+        headers: {
+            'Authorization': token
+        }
+    });
+    return createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN, request as AxiosPromise<User>);
 }
 
-export const Actions = {
-    getLoginUserInfoByToken: () => {
-        const token = localStorage.getItem('token');
-        const request = axios.get('/', {
-            headers: {
-                'Authorization': token
-            }
-        });
-        return createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN, request as AxiosPromise<User>);
-    }
-};
+type GetLoginUserInfoByTokenPending = Action<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING>;
+type GetLoginUserInfoByTokenFulfilled = ActionWithPayload<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, User>;
+type GetLoginUserInfoByTokenRejected = ActionWithPayload<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, {}>;
 
-export type Actions = ActionUnion<typeof Actions>;
+export type Actions = GetLoginUserInfoByTokenPending | GetLoginUserInfoByTokenFulfilled |
+    GetLoginUserInfoByTokenRejected;

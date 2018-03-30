@@ -1,6 +1,6 @@
-/* tslint:disable:no-any */
-type FunctionType = (...args: any[]) => any;
-/* tslint:enable:no-any */
-type ActionCreatorsMapObject = { [actionCreator: string]: FunctionType };
-
-export type ActionUnion<A extends ActionCreatorsMapObject> = ReturnType<A[keyof A]>;
+export enum ActionTypes {
+    'GET_LOGIN_USER_INFO_BY_TOKEN' = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/PENDING',
+    'GET_LOGIN_USER_INFO_BY_TOKEN_PENDING' = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/PENDING',
+    'GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED' = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/FULFILLED',
+    'GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED' = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/REJECTED'
+}
