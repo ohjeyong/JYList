@@ -3,17 +3,26 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import promiseMiddleware from 'redux-promise-middleware';
 import { rootReducer } from './reducers';
-import { JYListIndexContainer } from './containers/JYListIndexContainer';
+import { JYRoute } from './routers';
 
-const store = createStore(rootReducer, applyMiddleware(promiseMiddleware({
+const middlewares = [];
+
+if (process.env.NODE_ENV === `development`) {
+    const { logger } = require('redux-logger');
+    middlewares.push(logger);
+}
+
+middlewares.push(promiseMiddleware({
     promiseTypeSeparator: '/'
-})));
+}));
+
+const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
 class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <JYListIndexContainer/>
+                <JYRoute/>
             </Provider>
         );
     }
