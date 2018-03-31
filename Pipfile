@@ -7,9 +7,9 @@ name = "pypi"
 
 [packages]
 
-django = "*"
-"psycopg2-binary" = "*"
-djangorestframework = "*"
+django = "==2.0.3"
+djangorestframework = "==3.7.7"
+"psycopg2-binary" = "==2.7.4"
 
 
 [dev-packages]
