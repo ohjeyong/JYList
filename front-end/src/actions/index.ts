@@ -16,10 +16,19 @@ export function getLoginUserInfoByToken() {
     return createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN, request as AxiosPromise<User>);
 }
 
+export function logout() {
+    const request = axios.get('/api/users/logout/');
+    return createAction(ActionTypes.LOGOUT, request as AxiosPromise<null>);
+}
+
 type GetLoginUserInfoByTokenPending = Action<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING>;
 type GetLoginUserInfoByTokenFulfilled =
     ActionWithPayload<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, AxiosResponse<User>>;
 type GetLoginUserInfoByTokenRejected = ActionWithPayload<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, {}>;
 
+type LogoutPending = Action<ActionTypes.LOGOUT_PENDING>;
+type LogoutFulfilled = ActionWithPayload<ActionTypes.LOGOUT_FULFILLED, null>;
+type LogoutRejected = ActionWithPayload<ActionTypes.LOGOUT_REJECTED, {}>;
+
 export type Actions = GetLoginUserInfoByTokenPending | GetLoginUserInfoByTokenFulfilled |
-    GetLoginUserInfoByTokenRejected;
+    GetLoginUserInfoByTokenRejected | LogoutPending | LogoutFulfilled | LogoutRejected;

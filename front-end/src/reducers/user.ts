@@ -1,8 +1,9 @@
 import * as _ from 'lodash';
+import axios from 'axios';
 import { User } from '../models/user';
 import { ActionTypes } from '../actions/types';
 import * as fromActions from '../actions';
-import { setAuthToken } from '../utils/localStorage';
+import { removeAuthToken, setAuthToken } from '../utils/localStorage';
 
 export interface UserState {
     loginUser: User | {};
@@ -25,12 +26,27 @@ export const userReducer = (state: UserState = initialState, action: fromActions
         case ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED: {
             const user = action.payload.data;
             if (!_.isEmpty(user)) {
-                setAuthToken(user.token);
+                setAuthToken(user.auth_token);
+                axios.defaults.headers.Authorization = user.auth_token;
             }
             return {
                 ...state,
                 loginLoading: false,
                 loginUser: action.payload.data
+            };
+        }
+        case ActionTypes.LOGOUT_PENDING: {
+            return {
+                ...state,
+                loginLoading: true
+            };
+        }
+        case ActionTypes.LOGOUT_FULFILLED: {
+            removeAuthToken();
+            return {
+                ...state,
+                loginLoading: false,
+                loginUser: {}
             };
         }
         default: {
