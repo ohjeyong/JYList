@@ -1,6 +1,8 @@
+import * as _ from 'lodash';
 import { User } from '../models/user';
 import { ActionTypes } from '../actions/types';
 import * as fromActions from '../actions';
+import { setAuthToken } from '../utils/localStorage';
 
 export interface UserState {
     loginUser: User | {};
@@ -21,10 +23,14 @@ export const userReducer = (state: UserState = initialState, action: fromActions
             };
         }
         case ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED: {
+            const user = action.payload.data;
+            if (!_.isEmpty(user)) {
+                setAuthToken(user.token);
+            }
             return {
                 ...state,
                 loginLoading: false,
-                loginUser: action.payload
+                loginUser: action.payload.data
             };
         }
         default: {

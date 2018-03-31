@@ -2,30 +2,31 @@ import * as _ from 'lodash';
 import * as React from 'react';
 import { Redirect, Route } from 'react-router';
 import { AuthRoute as Props } from '../containers/AuthRouteContainer';
+import { getAuthToken } from '../utils/localStorage';
 
-export const AuthRoute: React.SFC<Props> = props => {
-    const user = props.loginUser;
-    const token = localStorage.getItem('token');
-    if (_.isEmpty(user)) {
-        if (token === null) {
-            console.log('Token empty. Redirect to login');
-            return (
-                <Redirect to="/login"/>
-            );
-        } else {
-            console.log('Token exists. Request login');
-            props.getLoginUserInfoByToken();
-            if (props.loginLoading) {
-                return (
-                    <div>
-                        Loading...
-                    </div>
-                );
-            } else {
-                return null;
-            }
+export class AuthRoute extends React.Component<Props> {
+    componentDidMount() {
+        const user = this.props.loginUser;
+        const token = getAuthToken();
+        if (_.isEmpty(user) && token !== null) {
+            this.props.getLoginUserInfoByToken();
         }
-    } else {
-        return <Route {...props} />;
     }
-};
+
+    render() {
+        const loading = this.props.loginLoading;
+        if (loading) {
+            return (
+                <div>
+                    Loading ...
+                </div>
+            );
+        }
+        const user = this.props.loginUser;
+        if (_.isEmpty(user)) {
+            return <Redirect to="/login"/>;
+        } else {
+            return <Route {...this.props} />;
+        }
+    }
+}
