@@ -8,7 +8,7 @@ from user.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'username', 'name')
+        fields = ('id', 'username', 'name', 'auth_token')
 
     def create(self, validated_data):
         raise NotImplementedError()
