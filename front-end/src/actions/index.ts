@@ -7,7 +7,7 @@ axios.defaults.baseURL = 'http://localhost:8000/';
 
 export function getLoginUserInfoByToken() {
     const token = localStorage.getItem('token');
-    const request = axios.get('/', {
+    const request = axios.get('/api/users/me/', {
         headers: {
             'Authorization': token
         }
