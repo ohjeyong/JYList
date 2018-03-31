@@ -1,9 +1,7 @@
 import * as React from 'react';
 
-const TodoIndex: React.SFC<{}> = () => (
+export const TodoIndex: React.SFC<{}> = () => (
     <div>
-        asdf
+        Todo
     </div>
 );
-
-export default TodoIndex;

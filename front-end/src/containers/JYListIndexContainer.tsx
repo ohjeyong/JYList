@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { RedirectIfNotLogin } from '../components/RedirectIfNotLogin';
+import { JYListIndex } from '../components/JYListIndex';
 import { getLoginUserInfoByToken } from '../actions';
 import { UserState } from '../reducers/user';
 import { RootReducer } from '../reducers';
@@ -20,5 +20,5 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
     };
 };
 
-export const RedirectIfNotLoginContainer =
-    connect<StateToProps, DispatchToProps, {}>(mapStateToProps, { getLoginUserInfoByToken })(RedirectIfNotLogin);
+export const JYListIndexContainer =
+    connect<StateToProps, DispatchToProps, {}>(mapStateToProps, { getLoginUserInfoByToken })(JYListIndex);

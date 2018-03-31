@@ -4,14 +4,12 @@ interface LoginSignupState {
     showSignupForm: boolean;
 }
 
-class LoginSignup extends React.Component<{}, LoginSignupState> {
+export class LoginSignup extends React.Component<{}, LoginSignupState> {
     render() {
         return (
             <div>
-                JyList
+                LoginSignup
             </div>
         );
     }
 }
-
-export default LoginSignup;
