@@ -23,6 +23,7 @@ export function getLoginUserInfoByToken() {
         }, (error: AxiosError) => {
             if (error.response!.status === 401) {
                 dispatch(createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, error));
+                dispatch(createAction(ActionTypes.SET_APP_LOADING, false));
             } else {
                 dispatch(createAction(ActionTypes.SET_APP_ERROR_MESSAGE, error.message));
             }
