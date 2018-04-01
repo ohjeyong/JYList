@@ -1,19 +1,29 @@
+/* tslint:disable:align */
 import axios, { AxiosPromise, AxiosResponse } from 'axios';
 import { ActionTypes } from './types';
 import { createAction, Action, ActionWithPayload } from './action-helpers';
 import { User } from '../models/user';
+import { RootReducer } from '../reducers';
 import { getAuthToken } from '../utils/localStorage';
+import { Dispatch } from 'redux';
 
 axios.defaults.baseURL = 'http://localhost:8000/';
 
 export function getLoginUserInfoByToken() {
     const token = getAuthToken();
-    const request = axios.get('/api/users/me/', {
-        headers: {
-            'Authorization': `Token ${token}`
-        }
-    });
-    return createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN, request as AxiosPromise<User>);
+    return (dispatch: Dispatch<RootReducer>) => {
+        dispatch(createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING));
+        axios.get('/api/users/me/', {
+            headers: {
+                'Authorization': `Token ${token}`
+            }
+        }).then(response => {
+            dispatch(createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, response));
+            dispatch(createAction(ActionTypes.SET_APP_LOADING, false));
+        }, error => {
+            dispatch(createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, error));
+        });
+    };
 }
 
 export function logout() {
