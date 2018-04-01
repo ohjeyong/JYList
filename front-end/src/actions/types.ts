@@ -7,5 +7,6 @@ export enum ActionTypes {
     'LOGOUT_PENDING' = '[user] LOGOUT/PENDING',
     'LOGOUT_FULFILLED' = '[user] LOGOUT/FULFILLED',
     'LOGOUT_REJECTED' = '[user] LOGOUT/REJECTED',
-    'SET_APP_LOADING' = '[app] SET_APP_LOADING'
+    'SET_APP_LOADING' = '[app] SET_APP_LOADING',
+    'SET_APP_ERROR_MESSAGE' = '[app] SET_APP_ERROR_MESSAGE'
 }

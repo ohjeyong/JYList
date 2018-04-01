@@ -3,10 +3,12 @@ import { ActionTypes } from '../actions/types';
 
 export interface AppState {
     loading: boolean;
+    errorMessage: string;
 }
 
 const initialState: AppState = {
-    loading: true
+    loading: true,
+    errorMessage: ''
 };
 
 export const appReducer = (state: AppState = initialState, action: fromActions.Actions): AppState => {
@@ -15,6 +17,12 @@ export const appReducer = (state: AppState = initialState, action: fromActions.A
             return {
                 ...state,
                 loading: action.payload
+            };
+        }
+        case ActionTypes.SET_APP_ERROR_MESSAGE: {
+            return {
+                ...state,
+                errorMessage: action.payload
             };
         }
         default: {

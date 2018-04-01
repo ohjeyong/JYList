@@ -35,6 +35,13 @@ export const userReducer = (state: UserState = initialState, action: fromActions
                 loginUser: action.payload.data
             };
         }
+        case ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED: {
+            return {
+                ...state,
+                loginLoading: false,
+                loginUser: {}
+            };
+        }
         case ActionTypes.LOGOUT_PENDING: {
             return {
                 ...state,

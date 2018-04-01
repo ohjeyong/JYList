@@ -1,5 +1,5 @@
 /* tslint:disable:align */
-import axios, { AxiosPromise, AxiosResponse } from 'axios';
+import axios, { AxiosPromise, AxiosResponse, AxiosError } from 'axios';
 import { ActionTypes } from './types';
 import { createAction, Action, ActionWithPayload } from './action-helpers';
 import { User } from '../models/user';
@@ -17,11 +17,15 @@ export function getLoginUserInfoByToken() {
             headers: {
                 'Authorization': `Token ${token}`
             }
-        }).then(response => {
+        }).then((response: AxiosResponse<User>) => {
             dispatch(createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, response));
             dispatch(createAction(ActionTypes.SET_APP_LOADING, false));
-        }, error => {
-            dispatch(createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, error));
+        }, (error: AxiosError) => {
+            if (error.response!.status === 401) {
+                dispatch(createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, error));
+            } else {
+                dispatch(createAction(ActionTypes.SET_APP_ERROR_MESSAGE, error.message));
+            }
         });
     };
 }
@@ -38,13 +42,16 @@ export function setAppLoading(value: boolean) {
 type GetLoginUserInfoByTokenPending = Action<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING>;
 type GetLoginUserInfoByTokenFulfilled =
     ActionWithPayload<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, AxiosResponse<User>>;
-type GetLoginUserInfoByTokenRejected = ActionWithPayload<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, {}>;
+type GetLoginUserInfoByTokenRejected = ActionWithPayload<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, AxiosError>;
 
 type LogoutPending = Action<ActionTypes.LOGOUT_PENDING>;
 type LogoutFulfilled = ActionWithPayload<ActionTypes.LOGOUT_FULFILLED, null>;
-type LogoutRejected = ActionWithPayload<ActionTypes.LOGOUT_REJECTED, {}>;
+type LogoutRejected = ActionWithPayload<ActionTypes.LOGOUT_REJECTED, AxiosError>;
 
 type SetAppLoading = ActionWithPayload<ActionTypes.SET_APP_LOADING, boolean>;
 
+type SetAppErrorMessage = ActionWithPayload<ActionTypes.SET_APP_ERROR_MESSAGE, string>;
+
 export type Actions = GetLoginUserInfoByTokenPending | GetLoginUserInfoByTokenFulfilled |
-    GetLoginUserInfoByTokenRejected | LogoutPending | LogoutFulfilled | LogoutRejected | SetAppLoading;
+    GetLoginUserInfoByTokenRejected | LogoutPending | LogoutFulfilled | LogoutRejected | SetAppLoading
+    | SetAppErrorMessage;

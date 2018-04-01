@@ -6,7 +6,7 @@ import { AppState } from '../reducers/app';
 import { RootReducer } from '../reducers';
 import { RouteProps } from 'react-router';
 
-type StateToProps = Pick<UserState, 'loginUser'> & Pick<AppState, 'loading'>;
+type StateToProps = Pick<UserState, 'loginUser'> & Pick<AppState, 'loading'|'errorMessage'>;
 interface DispatchToProps {
     getLoginUserInfoByToken: () => void;
 }
@@ -17,7 +17,8 @@ export type AuthRoute = StateToProps & DispatchToProps & OwnProps;
 const mapStateToProps = (state: RootReducer): StateToProps => {
     return {
         loginUser: state.user.loginUser,
-        loading: state.app.loading
+        loading: state.app.loading,
+        errorMessage: state.app.errorMessage
     };
 };
 

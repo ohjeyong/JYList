@@ -9,7 +9,7 @@ export class AuthRoute extends React.Component<Props> {
         const user = this.props.loginUser;
         const token = getAuthToken();
         if (_.isEmpty(user) && token !== null) {
-            console.log(this.props.getLoginUserInfoByToken());
+            this.props.getLoginUserInfoByToken();
         }
     }
 
