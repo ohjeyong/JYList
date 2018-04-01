@@ -12,7 +12,7 @@ export interface UserState {
 
 const initialState: UserState = {
     loginUser: {},
-    loginLoading: true
+    loginLoading: false
 };
 
 export const userReducer = (state: UserState = initialState, action: fromActions.Actions): UserState => {

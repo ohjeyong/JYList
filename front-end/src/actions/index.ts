@@ -21,6 +21,10 @@ export function logout() {
     return createAction(ActionTypes.LOGOUT, request as AxiosPromise<null>);
 }
 
+export function setAppLoading(value: boolean) {
+    return createAction(ActionTypes.SET_APP_LOADING, value);
+}
+
 type GetLoginUserInfoByTokenPending = Action<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING>;
 type GetLoginUserInfoByTokenFulfilled =
     ActionWithPayload<ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, AxiosResponse<User>>;
@@ -30,5 +34,7 @@ type LogoutPending = Action<ActionTypes.LOGOUT_PENDING>;
 type LogoutFulfilled = ActionWithPayload<ActionTypes.LOGOUT_FULFILLED, null>;
 type LogoutRejected = ActionWithPayload<ActionTypes.LOGOUT_REJECTED, {}>;
 
+type SetAppLoading = ActionWithPayload<ActionTypes.SET_APP_LOADING, boolean>;
+
 export type Actions = GetLoginUserInfoByTokenPending | GetLoginUserInfoByTokenFulfilled |
-    GetLoginUserInfoByTokenRejected | LogoutPending | LogoutFulfilled | LogoutRejected;
+    GetLoginUserInfoByTokenRejected | LogoutPending | LogoutFulfilled | LogoutRejected | SetAppLoading;

@@ -9,12 +9,12 @@ export class AuthRoute extends React.Component<Props> {
         const user = this.props.loginUser;
         const token = getAuthToken();
         if (_.isEmpty(user) && token !== null) {
-            this.props.getLoginUserInfoByToken();
+            console.log(this.props.getLoginUserInfoByToken());
         }
     }
 
     render() {
-        const loading = this.props.loginLoading;
+        const loading = this.props.loading;
         if (loading) {
             return (
                 <div>
