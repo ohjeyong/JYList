@@ -71,12 +71,6 @@
   dependencies:
     redux "^3.6.0"
 
-"@types/redux-promise-middleware@^0.0.9":
-  version "0.0.9"
-  resolved "https://registry.yarnpkg.com/@types/redux-promise-middleware/-/redux-promise-middleware-0.0.9.tgz#b39f8c9bf3ae125a9a9b701b6365e9dee3a46004"
-  dependencies:
-    redux "^3.6.0"
-
 abab@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.4.tgz#5faad9c2c07f60dd76770f71cf025b62a63cfd4e"
@@ -5921,9 +5915,9 @@ redux-logger@^3.0.6:
   dependencies:
     deep-diff "^0.3.5"
 
-redux-promise-middleware@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/redux-promise-middleware/-/redux-promise-middleware-5.0.0.tgz#1656b24f9ac962bf11fbe55ea8360810e18d47a7"
+redux-thunk@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
 redux@^3.6.0, redux@^3.7.2:
   version "3.7.2"
