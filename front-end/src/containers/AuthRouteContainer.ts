@@ -22,7 +22,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
-    const map = {
+    const map: DispatchToProps = {
         getLoginUserInfoByToken: thunksActionCreators.getLoginUserInfoByToken,
         setAppLoading: thunksActionCreators.setAppLoading,
     };
