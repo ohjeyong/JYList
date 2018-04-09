@@ -1,6 +1,4 @@
-import { ThunkAction } from 'redux-thunk';
-import { ActionTypes } from '.';
-import { RootReducer } from '../reducers';
+import { ActionTypes } from './types';
 
 interface Action<T extends ActionTypes> {
     type: T;
@@ -8,16 +6,6 @@ interface Action<T extends ActionTypes> {
 
 interface ActionWithPayload<T extends ActionTypes, P> extends Action<T> {
     payload: P;
-}
-
-/* tslint:disable:no-any */
-interface ThunkActionCreator {
-    (...args: any[]): ThunkAction<void, RootReducer, {}>;
-}
-/* tslint:enable:no-any */
-
-export interface ThunkActionCreators {
-    [key: string]: ThunkActionCreator;
 }
 
 export function createAction<T extends ActionTypes>(type: T): Action<T>;

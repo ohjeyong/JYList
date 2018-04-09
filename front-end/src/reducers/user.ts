@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
 import axios from 'axios';
 import { User } from '../models/user';
-import { ActionTypes } from '../actions/types';
 import * as fromActions from '../actions';
 import { removeAuthToken, setAuthToken } from '../utils/localStorage';
 
@@ -17,13 +16,13 @@ const initialState: UserState = {
 
 export const userReducer = (state: UserState = initialState, action: fromActions.Actions): UserState => {
     switch (action.type) {
-        case ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING: {
+        case fromActions.ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING: {
             return {
                 ...state,
                 loginLoading: true
             };
         }
-        case ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED: {
+        case fromActions.ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED: {
             const user = action.payload.data;
             if (!_.isEmpty(user)) {
                 setAuthToken(user.auth_token);
@@ -32,23 +31,23 @@ export const userReducer = (state: UserState = initialState, action: fromActions
             return {
                 ...state,
                 loginLoading: false,
-                loginUser: action.payload.data
+                loginUser: user
             };
         }
-        case ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED: {
+        case fromActions.ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED: {
             return {
                 ...state,
                 loginLoading: false,
                 loginUser: {}
             };
         }
-        case ActionTypes.LOGOUT_PENDING: {
+        case fromActions.ActionTypes.LOGOUT_PENDING: {
             return {
                 ...state,
                 loginLoading: true
             };
         }
-        case ActionTypes.LOGOUT_FULFILLED: {
+        case fromActions.ActionTypes.LOGOUT_FULFILLED: {
             removeAuthToken();
             return {
                 ...state,

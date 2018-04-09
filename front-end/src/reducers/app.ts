@@ -1,5 +1,4 @@
 import * as fromActions from '../actions';
-import { ActionTypes } from '../actions/types';
 
 export interface AppState {
     loading: boolean;
@@ -13,13 +12,13 @@ const initialState: AppState = {
 
 export const appReducer = (state: AppState = initialState, action: fromActions.Actions): AppState => {
     switch (action.type) {
-        case ActionTypes.SET_APP_LOADING: {
+        case fromActions.ActionTypes.SET_APP_LOADING: {
             return {
                 ...state,
                 loading: action.payload
             };
         }
-        case ActionTypes.SET_APP_ERROR_MESSAGE: {
+        case fromActions.ActionTypes.SET_APP_ERROR_MESSAGE: {
             return {
                 ...state,
                 errorMessage: action.payload

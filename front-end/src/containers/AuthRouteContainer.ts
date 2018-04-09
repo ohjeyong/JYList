@@ -1,16 +1,14 @@
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { AuthRoute } from '../routers/AuthRoute';
-import { getLoginUserInfoByToken, setAppLoading } from '../actions';
+import { thunksActionCreators } from '../actions';
 import { UserState } from '../reducers/user';
 import { AppState } from '../reducers/app';
 import { RootReducer } from '../reducers';
 import { RouteProps } from 'react-router';
 
 type StateToProps = Pick<UserState, 'loginUser'> & Pick<AppState, 'loading'|'errorMessage'>;
-interface DispatchToProps {
-    getLoginUserInfoByToken: () => void;
-    setAppLoading: (value: boolean) => void;
-}
+type DispatchToProps = Pick<typeof thunksActionCreators, 'getLoginUserInfoByToken' | 'setAppLoading'>;
 type OwnProps = RouteProps;
 
 export type AuthRoute = StateToProps & DispatchToProps & OwnProps;
@@ -23,6 +21,13 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
     };
 };
 
-export const AuthRouteContainer =
-    connect<StateToProps, DispatchToProps, OwnProps>
-    (mapStateToProps, { getLoginUserInfoByToken, setAppLoading })(AuthRoute);
+const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+    const map = {
+        getLoginUserInfoByToken: thunksActionCreators.getLoginUserInfoByToken,
+        setAppLoading: thunksActionCreators.setAppLoading,
+    };
+    return bindActionCreators(map, dispatch);
+};
+
+export const AuthRouteContainer = connect<StateToProps, DispatchToProps, OwnProps>
+(mapStateToProps, mapDispatchToProps)(AuthRoute);
