@@ -1,3 +1,6 @@
+export { ActionTypes, actions, Actions } from './types';
+export { createAction, ThunkActionCreators } from './action-helpers';
+
 /* tslint:disable:align */
 import axios, { AxiosPromise, AxiosResponse, AxiosError } from 'axios';
 import { ActionTypes } from './types';
@@ -53,6 +56,6 @@ type SetAppLoading = ActionWithPayload<ActionTypes.SET_APP_LOADING, boolean>;
 
 type SetAppErrorMessage = ActionWithPayload<ActionTypes.SET_APP_ERROR_MESSAGE, string>;
 
-export type Actions = GetLoginUserInfoByTokenPending | GetLoginUserInfoByTokenFulfilled |
-    GetLoginUserInfoByTokenRejected | LogoutPending | LogoutFulfilled | LogoutRejected | SetAppLoading
-    | SetAppErrorMessage;
+// export type Actions = GetLoginUserInfoByTokenPending | GetLoginUserInfoByTokenFulfilled |
+//     GetLoginUserInfoByTokenRejected | LogoutPending | LogoutFulfilled | LogoutRejected | SetAppLoading
+//     | SetAppErrorMessage;
