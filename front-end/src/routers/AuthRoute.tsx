@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import { Redirect, Route } from 'react-router';
+import { CircularProgress } from 'material-ui/Progress';
 import { AuthRoute as Props } from '../containers/AuthRouteContainer';
 import { getAuthToken } from '../utils/localStorage';
 
@@ -19,8 +20,8 @@ export class AuthRoute extends React.Component<Props> {
         const loading = this.props.loading;
         if (loading) {
             return (
-                <div>
-                    Loading ...
+                <div className="CircularProgressWrapper">
+                    <CircularProgress size={50}/>
                 </div>
             );
         }
