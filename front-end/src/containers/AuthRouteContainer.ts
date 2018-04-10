@@ -5,7 +5,7 @@ import { thunksActionCreators } from '../actions';
 import { RootReducer, UserState, AppState } from '../reducers';
 import { RouteProps } from 'react-router';
 
-type StateToProps = Pick<UserState, 'loginUser'> & Pick<AppState, 'loading'|'errorMessage'>;
+type StateToProps = Pick<UserState, 'loginUser'> & Pick<AppState, 'loading'>;
 type DispatchToProps = Pick<typeof thunksActionCreators, 'getLoginUserInfoByToken' | 'setAppLoading'>;
 type OwnProps = RouteProps;
 
@@ -14,8 +14,7 @@ export type AuthRoute = StateToProps & DispatchToProps & OwnProps;
 const mapStateToProps = (state: RootReducer): StateToProps => {
     return {
         loginUser: state.user.loginUser,
-        loading: state.app.loading,
-        errorMessage: state.app.errorMessage
+        loading: state.app.loading
     };
 };
 
