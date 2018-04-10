@@ -6,12 +6,44 @@ html, body {
 body > #root {
     width: 100%;
     height: 100%;
+    display: flex;
 }
 
 .CircularProgressWrapper {
-    width: 100%;
-    height: 100%;
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.LoginSignup {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+}
+
+.Header {
+    flex-basis: 50px;
+    background-color: #009688;
+    display: flex;
+    color: white;
+    align-items: center;
+    padding: 0 10px;
+    font-size: 2em;
+}
+.LoginSignup > .Header {
+    justify-content: center;
+}
+
+.LoginSignup > .FormWrapper {
+    max-width: 600px;
+    padding: 0 10px;
+    margin: auto;
+}
+
+.LoginSignup > .FormWrapper > .LoginForm {
+    flex: 1;
+}
+.LoginSignup > .FormWrapper > .LoginForm .LoginFormInput {
+    margin: 10px 0;
 }

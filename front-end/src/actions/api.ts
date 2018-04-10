@@ -42,5 +42,6 @@ export const thunksActionCreators = {
         };
     },
     setAppLoading: actions.setAppLoading,
-    setAppErrorMessage: actions.setAppErrorMessage
+    setAppErrorMessage: actions.setAppErrorMessage,
+    setShowSignupForm: actions.setShowSignupForm
 };

@@ -10,7 +10,8 @@ export enum ActionTypes {
     'LOGOUT_FULFILLED' = '[user] LOGOUT/FULFILLED',
     'LOGOUT_REJECTED' = '[user] LOGOUT/REJECTED',
     'SET_APP_LOADING' = '[app] SET_APP_LOADING',
-    'SET_APP_ERROR_MESSAGE' = '[app] SET_APP_ERROR_MESSAGE'
+    'SET_APP_ERROR_MESSAGE' = '[app] SET_APP_ERROR_MESSAGE',
+    'SET_SHOW_SIGNUP_FORM' = '[user] SET_SHOW_SIGNUP_FORM'
 }
 
 export const actions = {
@@ -23,7 +24,8 @@ export const actions = {
     logoutFulfilled: () => createAction(ActionTypes.LOGOUT_FULFILLED),
     logoutRejected: (response: AxiosError) => createAction(ActionTypes.LOGOUT_REJECTED, response),
     setAppLoading: (value: boolean) => createAction(ActionTypes.SET_APP_LOADING, value),
-    setAppErrorMessage: (value: string) => createAction(ActionTypes.SET_APP_ERROR_MESSAGE, value)
+    setAppErrorMessage: (value: string) => createAction(ActionTypes.SET_APP_ERROR_MESSAGE, value),
+    setShowSignupForm: (value: boolean) => createAction(ActionTypes.SET_SHOW_SIGNUP_FORM, value)
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

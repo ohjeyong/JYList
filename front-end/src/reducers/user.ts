@@ -7,11 +7,13 @@ import { removeAuthToken, setAuthToken } from '../utils/localStorage';
 export interface UserState {
     loginUser: User | {};
     loginLoading: boolean;
+    showSignupForm: boolean;
 }
 
 const initialState: UserState = {
     loginUser: {},
-    loginLoading: false
+    loginLoading: false,
+    showSignupForm: false // if true, show signup form, else, show login form
 };
 
 export const userReducer = (state: UserState = initialState, action: fromActions.Actions): UserState => {
@@ -53,6 +55,12 @@ export const userReducer = (state: UserState = initialState, action: fromActions
                 ...state,
                 loginLoading: false,
                 loginUser: {}
+            };
+        }
+        case fromActions.ActionTypes.SET_SHOW_SIGNUP_FORM: {
+            return {
+                ...state,
+                showSignupForm: action.payload
             };
         }
         default: {

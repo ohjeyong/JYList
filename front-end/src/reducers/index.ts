@@ -2,6 +2,8 @@ import { combineReducers } from 'redux';
 import { UserState, userReducer } from './user';
 import { AppState, appReducer } from './app';
 
+export { UserState, AppState };
+
 export interface RootReducer {
     user: UserState;
     app: AppState;

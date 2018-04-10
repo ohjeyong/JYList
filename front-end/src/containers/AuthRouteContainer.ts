@@ -2,9 +2,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { AuthRoute } from '../routers/AuthRoute';
 import { thunksActionCreators } from '../actions';
-import { UserState } from '../reducers/user';
-import { AppState } from '../reducers/app';
-import { RootReducer } from '../reducers';
+import { RootReducer, UserState, AppState } from '../reducers';
 import { RouteProps } from 'react-router';
 
 type StateToProps = Pick<UserState, 'loginUser'> & Pick<AppState, 'loading'|'errorMessage'>;
