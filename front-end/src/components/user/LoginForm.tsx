@@ -7,7 +7,11 @@ interface State {
     password: string;
 }
 
-export class LoginForm extends React.Component<{}, State> {
+interface Props {
+    onChangeForm: () => void;
+}
+
+export class LoginForm extends React.Component<Props, State> {
     readonly state: Readonly<State> = {
         username: '',
         password: ''
@@ -19,14 +23,19 @@ export class LoginForm extends React.Component<{}, State> {
         this.setState({ [key as any]: value });
     }
 
-    onSubmit = (e: React.FormEvent<HTMLInputElement>) => {
+    onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log('asdf');
+    }
+
+    onChangeForm = () => {
+        this.props.onChangeForm();
     }
 
     render() {
         const { username, password } = this.state;
         return (
-            <form className="LoginForm">
+            <form className="LoginForm" onSubmit={this.onSubmit}>
                 <TextField
                     className="LoginFormInput"
                     value={username}
@@ -47,16 +56,19 @@ export class LoginForm extends React.Component<{}, State> {
                     style={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        alignItems: 'center'
+                        alignItems: 'center',
+                        marginTop: '20px'
                     }}
                 >
                     <Button
                         variant="raised"
                         color="secondary"
+                        onClick={this.onChangeForm}
                     >
                         회원가입
                     </Button>
                     <Button
+                        type="submit"
                         variant="raised"
                         color="primary"
                     >

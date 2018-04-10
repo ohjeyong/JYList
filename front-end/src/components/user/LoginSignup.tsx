@@ -10,7 +10,12 @@ export const LoginSignup: React.SFC<Props> = (props: Props) => {
                 JY List
             </div>
             <div className="FormWrapper">
-                {props.showSignupForm ? <SignupForm/> : <LoginForm/>}
+                {props.showSignupForm ?
+                    <SignupForm/> :
+                    <LoginForm
+                        onChangeForm={() => props.setShowSignupForm(true)}
+                    />
+                }
             </div>
         </div>
     );
