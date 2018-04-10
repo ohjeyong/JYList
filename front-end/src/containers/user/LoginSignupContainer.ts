@@ -1,25 +1,29 @@
 import { connect } from 'react-redux';
 import { LoginSignup } from '../../components/user/LoginSignup';
-import { UserState, AppState, RootReducer } from '../../reducers';
+import { UserState, RootReducer } from '../../reducers';
 import { thunksActionCreators } from '../../actions';
 import { Dispatch, bindActionCreators } from 'redux';
 
-type StateToProps = Pick<UserState, 'showSignupForm'> & Pick<AppState, 'loading'|'errorMessage'>;
-type DispatchToProps = Pick<typeof thunksActionCreators, 'setAppErrorMessage' | 'setShowSignupForm'>;
+type StateToProps = Pick<UserState, 'showSignupForm' | 'showLoginErrorMessage' | 'loginLoading' | 'loginUser'>;
+type DispatchToProps = Pick<typeof thunksActionCreators, 'setAppErrorMessage'
+ | 'setShowSignupForm' | 'setShowLoginErrorMessage' | 'loginRequest'>;
 export type LoginSignup = StateToProps & DispatchToProps;
 
 const mapStateToProps = (state: RootReducer): StateToProps => {
     return {
         showSignupForm: state.user.showSignupForm,
-        loading: state.app.loading,
-        errorMessage: state.app.errorMessage
+        showLoginErrorMessage: state.user.showLoginErrorMessage,
+        loginLoading: state.user.loginLoading,
+        loginUser: state.user.loginUser
     };
 };
 
 const mapDispatchToProps = (dispatch: Dispatch<RootReducer>) => {
     const map = {
         setAppErrorMessage: thunksActionCreators.setAppErrorMessage,
-        setShowSignupForm: thunksActionCreators.setShowSignupForm
+        setShowSignupForm: thunksActionCreators.setShowSignupForm,
+        setShowLoginErrorMessage: thunksActionCreators.setShowLoginErrorMessage,
+        loginRequest: thunksActionCreators.loginRequest
     };
     return bindActionCreators(map, dispatch);
 };

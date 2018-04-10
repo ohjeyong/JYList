@@ -43,5 +43,28 @@ export const thunksActionCreators = {
     },
     setAppLoading: actions.setAppLoading,
     setAppErrorMessage: actions.setAppErrorMessage,
-    setShowSignupForm: actions.setShowSignupForm
+    setShowSignupForm: actions.setShowSignupForm,
+    setShowLoginErrorMessage: actions.setShowLoginErrorMessage,
+    loginRequest: (username: string, password: string) => {
+        return async (dispatch: Dispatch<RootReducer>) => {
+            dispatch(actions.loginRequestPending());
+            try {
+                const response = await axios.post('api/users/login/', {
+                    username, password
+                });
+                dispatch(actions.loginRequestFulfilled(response));
+                dispatch(actions.setAppLoading(false));
+            } catch (error) {
+                const errorProcess = () => {
+                    dispatch(actions.setAppLoading(false));
+                    if (error.response!.status === 401) {
+                        dispatch(actions.loginRequestRejected(error));
+                    } else {
+                        dispatch(actions.setAppErrorMessage(error.message));
+                    }
+                };
+                setTimeout(errorProcess, 500);
+            }
+        };
+    }
 };

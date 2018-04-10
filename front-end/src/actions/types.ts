@@ -11,7 +11,11 @@ export enum ActionTypes {
     'LOGOUT_REJECTED' = '[user] LOGOUT/REJECTED',
     'SET_APP_LOADING' = '[app] SET_APP_LOADING',
     'SET_APP_ERROR_MESSAGE' = '[app] SET_APP_ERROR_MESSAGE',
-    'SET_SHOW_SIGNUP_FORM' = '[user] SET_SHOW_SIGNUP_FORM'
+    'SET_SHOW_SIGNUP_FORM' = '[user] SET_SHOW_SIGNUP_FORM',
+    'SET_SHOW_LOGIN_ERROR_MESSAGE' = '[user] SET_SHOW_LOGIN_ERROR_MESSAGE',
+    'LOGIN_REQUEST_PENDING' = '[user] LOGIN_REQUEST_PENDING',
+    'LOGIN_REQUEST_FULFILLED' = '[user] LOGIN_REQUEST_FULFILLED',
+    'LOGIN_REQUEST_REJECTED' = '[user] LOGIN_REQUEST_REJECTED',
 }
 
 export const actions = {
@@ -25,7 +29,12 @@ export const actions = {
     logoutRejected: (response: AxiosError) => createAction(ActionTypes.LOGOUT_REJECTED, response),
     setAppLoading: (value: boolean) => createAction(ActionTypes.SET_APP_LOADING, value),
     setAppErrorMessage: (value: string) => createAction(ActionTypes.SET_APP_ERROR_MESSAGE, value),
-    setShowSignupForm: (value: boolean) => createAction(ActionTypes.SET_SHOW_SIGNUP_FORM, value)
+    setShowSignupForm: (value: boolean) => createAction(ActionTypes.SET_SHOW_SIGNUP_FORM, value),
+    setShowLoginErrorMessage: (value: boolean) => createAction(ActionTypes.SET_SHOW_LOGIN_ERROR_MESSAGE, value),
+    loginRequestPending: () => createAction(ActionTypes.LOGIN_REQUEST_PENDING),
+    loginRequestFulfilled: (response: AxiosResponse<User>) =>
+     createAction(ActionTypes.LOGIN_REQUEST_FULFILLED, response),
+    loginRequestRejected: (response: AxiosError) => createAction(ActionTypes.LOGIN_REQUEST_REJECTED, response)
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

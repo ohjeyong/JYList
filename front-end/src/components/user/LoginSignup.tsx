@@ -14,6 +14,10 @@ export const LoginSignup: React.SFC<Props> = (props: Props) => {
                     <SignupForm/> :
                     <LoginForm
                         onChangeForm={() => props.setShowSignupForm(true)}
+                        showLoginErrorMessage={props.showLoginErrorMessage}
+                        loginLoading={props.loginLoading}
+                        onSubmit={props.loginRequest}
+                        loginUser={props.loginUser}
                     />
                 }
             </div>

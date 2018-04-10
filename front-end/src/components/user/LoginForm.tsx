@@ -1,6 +1,11 @@
+import * as _ from 'lodash';
 import * as React from 'react';
 import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import { CircularProgress } from 'material-ui/Progress';
+import { red } from 'material-ui/colors';
+import { User } from '../../models/user';
+import { Redirect } from 'react-router';
 
 interface State {
     username: string;
@@ -9,12 +14,16 @@ interface State {
 
 interface Props {
     onChangeForm: () => void;
+    showLoginErrorMessage: boolean;
+    loginLoading: boolean;
+    onSubmit: (username: string, password: string) => void;
+    loginUser: User | {};
 }
 
 export class LoginForm extends React.Component<Props, State> {
     readonly state: Readonly<State> = {
         username: '',
-        password: ''
+        password: '',
     };
 
     onChange = (key: keyof State) => (e: React.FormEvent<HTMLInputElement>) => {
@@ -25,7 +34,7 @@ export class LoginForm extends React.Component<Props, State> {
 
     onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('asdf');
+        this.props.onSubmit(this.state.username, this.state.password);
     }
 
     onChangeForm = () => {
@@ -34,6 +43,10 @@ export class LoginForm extends React.Component<Props, State> {
 
     render() {
         const { username, password } = this.state;
+        const { loginLoading, showLoginErrorMessage, loginUser } = this.props;
+        if (!_.isEmpty(loginUser)) {
+            return <Redirect to="/todo"/>;
+        }
         return (
             <form className="LoginForm" onSubmit={this.onSubmit}>
                 <TextField
@@ -52,6 +65,11 @@ export class LoginForm extends React.Component<Props, State> {
                     type="password"
                     fullWidth={true}
                 />
+                {showLoginErrorMessage ?
+                    <div style={{textAlign: 'center', fontSize: '0.8em', color: red[500]}}>
+                        아이디 혹은 비밀번호가 올바르지 않습니다.
+                    </div>
+                    : null}
                 <div
                     style={{
                         display: 'flex',
@@ -71,8 +89,9 @@ export class LoginForm extends React.Component<Props, State> {
                         type="submit"
                         variant="raised"
                         color="primary"
+                        disabled={loginLoading}
                     >
-                        로그인
+                        {loginLoading ? <CircularProgress size={20}/> : '로그인'}
                     </Button>
                 </div>
             </form>
