@@ -23,27 +23,34 @@ body > #root {
 }
 
 .Header {
-    flex-basis: 50px;
+    flex: 0 0 50px;
     background-color: #009688;
     display: flex;
     color: white;
     align-items: center;
     padding: 0 10px;
     font-size: 2em;
+    z-index: 1;
 }
 .LoginSignup > .Header {
     justify-content: center;
 }
 
 .LoginSignup > .FormWrapper {
-    max-width: 600px;
-    padding: 0 10px;
-    margin: auto;
+    width: 100%;
+    flex: 1 0 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 15px;
+}
+.LoginSignup > .FormWrapper.SignupForm {
+    flex: 1 0 400px;
 }
 
-.LoginSignup > .FormWrapper > .LoginForm {
-    flex: 1;
+.LoginSignup > .FormWrapper > .LoginSignupForm {
+    flex: 0 0 300px;
 }
-.LoginSignup > .FormWrapper > .LoginForm .LoginFormInput {
+.LoginSignup > .FormWrapper > .LoginSignupForm .LoginSignupFormInput {
     margin: 10px 0;
 }

@@ -48,9 +48,9 @@ export class LoginForm extends React.Component<Props, State> {
             return <Redirect to="/todo"/>;
         }
         return (
-            <form className="LoginForm" onSubmit={this.onSubmit}>
+            <form className="LoginSignupForm" onSubmit={this.onSubmit}>
                 <TextField
-                    className="LoginFormInput"
+                    className="LoginSignupFormInput"
                     value={username}
                     onChange={this.onChange('username')}
                     label="아이디"
@@ -58,7 +58,7 @@ export class LoginForm extends React.Component<Props, State> {
                     fullWidth={true}
                 />
                 <TextField
-                    className="LoginFormInput"
+                    className="LoginSignupFormInput"
                     value={password}
                     onChange={this.onChange('password')}
                     label="비밀번호"
