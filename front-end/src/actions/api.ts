@@ -29,7 +29,7 @@ export const thunksActionCreators = {
             }
         };
     },
-    logout: () => {
+    logoutRequest: () => {
         return async (dispatch: Dispatch<RootReducer>) => {
             dispatch(actions.logoutPending());
             try {

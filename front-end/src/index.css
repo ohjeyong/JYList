@@ -70,3 +70,7 @@ a {
     align-items: center;
     justify-content: space-between;
 }
+
+.MyPage {
+    flex: 1;
+}
