@@ -54,3 +54,14 @@ body > #root {
 .LoginSignup > .FormWrapper > .LoginSignupForm .LoginSignupFormInput {
     margin: 10px 0;
 }
+
+.Todo {
+    flex: 1;
+    display: flex;
+    flex-flow: column;
+}
+
+.Todo > .Header {
+    align-items: center;
+    justify-content: space-between;
+}

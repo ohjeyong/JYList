@@ -1,7 +1,11 @@
 import * as React from 'react';
+import { MainSwitch } from '../../routers/MainSwitch';
 
 export const TodoIndex: React.SFC<{}> = () => (
-    <div>
-        Todo
+    <div className="Todo">
+        <div className="Header">
+            JY List
+        </div>
+        <MainSwitch/>
     </div>
 );
