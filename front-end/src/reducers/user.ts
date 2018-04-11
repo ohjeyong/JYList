@@ -114,11 +114,10 @@ export const userReducer = (state: UserState = initialState, action: fromActions
             };
         }
         case fromActions.ActionTypes.SIGNUP_REQUEST_REJECTED: {
-            console.log(action.payload);
             return {
                 ...state,
                 signupLoading: false,
-                signupError: action.payload
+                signupError: action.payload.data
             };
         }
         default: {

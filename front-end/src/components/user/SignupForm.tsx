@@ -11,6 +11,8 @@ interface State {
 
 interface Props {
     onChangeForm: () => void;
+    onSubmit: (username: string, password1: string, password2: string, name: string) => void;
+    signupError: object;
 }
 
 export class SignupForm extends React.Component<Props, State> {
@@ -29,7 +31,8 @@ export class SignupForm extends React.Component<Props, State> {
 
     onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log('submit');
+        const { username, password1, password2, name } = this.state;
+        this.props.onSubmit(username, password1, password2, name);
     }
 
     onChangeForm = () => {
@@ -38,6 +41,7 @@ export class SignupForm extends React.Component<Props, State> {
 
     render() {
         const { username, password1, password2, name } = this.state;
+        console.log(this.props.signupError);
         return (
             <form className="LoginSignupForm" onSubmit={this.onSubmit}>
                 <TextField

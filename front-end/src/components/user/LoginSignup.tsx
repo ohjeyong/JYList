@@ -13,6 +13,8 @@ export const LoginSignup: React.SFC<Props> = (props: Props) => {
                 {props.showSignupForm ?
                     <SignupForm
                         onChangeForm={() => props.setShowSignupForm(false)}
+                        onSubmit={props.signupRequest}
+                        signupError={props.signupError}
                     /> :
                     <LoginForm
                         onChangeForm={() => props.setShowSignupForm(true)}

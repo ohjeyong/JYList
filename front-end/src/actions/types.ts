@@ -41,7 +41,8 @@ export const actions = {
     signupRequestPending: () => createAction(ActionTypes.SIGNUP_REQUEST_PENDING),
     signupRequestFulfilled: (response: AxiosResponse<User>) =>
         createAction(ActionTypes.SIGNUP_REQUEST_FULFILLED, response),
-    signupRequestRejected: (error: AxiosError) => createAction(ActionTypes.SIGNUP_REQUEST_REJECTED, error),
+    // signup request rejected 는 201 일 경우 유저 생성, 200 일 경우 올바른 요청이지만 각 필드에 대한 에러 반환.
+    signupRequestRejected: (response: AxiosResponse) => createAction(ActionTypes.SIGNUP_REQUEST_REJECTED, response),
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

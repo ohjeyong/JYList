@@ -74,15 +74,15 @@ export const thunksActionCreators = {
                 const response = await axios.post('/api/users/signup/', {
                     username, password1, password2, name
                 });
-                dispatch(actions.signupRequestFulfilled(response));
                 dispatch(actions.setAppLoading(false));
+                if (response.data.status === 201) {
+                    dispatch(actions.signupRequestFulfilled(response));
+                } else {
+                    dispatch(actions.signupRequestRejected(response));
+                }
             } catch (error) {
                 dispatch(actions.setAppLoading(false));
-                if (error.response!.status === 401) {
-                    dispatch(actions.signupRequestRejected(error));
-                } else {
-                    dispatch(actions.setAppErrorMessage(error.message));
-                }
+                dispatch(actions.setAppErrorMessage(error.message));
             }
         };
     }
