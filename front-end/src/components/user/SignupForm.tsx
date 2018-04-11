@@ -44,7 +44,7 @@ export class SignupForm extends React.Component<Props, State> {
     render() {
         const { signupLoading, signupError, onChangeForm, loginUser } = this.props;
         if (!_.isEmpty(loginUser)) {
-            return <Redirect to="/todo"/>;
+            return <Redirect to="/"/>;
         }
         const { username, password1, password2, name } = this.state;
         return (

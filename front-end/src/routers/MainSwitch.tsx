@@ -5,7 +5,7 @@ import { MyPage } from '../components/user/MyPage';
 import { NotFound404 } from '../components/NotFound404';
 
 export const MainSwitch: React.SFC<{}> = () => (
-    <Router basename="todo">
+    <Router>
         <Switch>
             <Route exact={true} path="/" component={TodoList}/>
             <Route exact={true} path="/mypage" component={MyPage}/>

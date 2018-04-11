@@ -41,7 +41,7 @@ export class LoginForm extends React.Component<Props, State> {
         const { username, password } = this.state;
         const { loginLoading, showLoginErrorMessage, loginUser, onChangeForm } = this.props;
         if (!_.isEmpty(loginUser)) {
-            return <Redirect to="/todo"/>;
+            return <Redirect to="/"/>;
         }
         return (
             <form className="LoginSignupForm" onSubmit={this.onSubmit}>
