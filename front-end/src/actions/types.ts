@@ -16,14 +16,17 @@ export enum ActionTypes {
     'LOGIN_REQUEST_PENDING' = '[user] LOGIN_REQUEST_PENDING',
     'LOGIN_REQUEST_FULFILLED' = '[user] LOGIN_REQUEST_FULFILLED',
     'LOGIN_REQUEST_REJECTED' = '[user] LOGIN_REQUEST_REJECTED',
+    'SIGNUP_REQUEST_PENDING' = '[user] SIGNUP_REQUEST_PENDING',
+    'SIGNUP_REQUEST_FULFILLED' = '[user] SIGNUP_REQUEST_FULFILLED',
+    'SIGNUP_REQUEST_REJECTED' = '[user] SIGNUP_REQUEST_REJECTED',
 }
 
 export const actions = {
     getLoginUserInfoByTokenPending: () => createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING),
     getLoginUserInfoByTokenFulfilled: (response: AxiosResponse<User>) =>
-     createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, response),
+        createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, response),
     getLoginUserInfoByTokenRejected: (response: AxiosError) =>
-     createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, response),
+        createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, response),
     logoutPending: () => createAction(ActionTypes.LOGOUT_PENDING),
     logoutFulfilled: () => createAction(ActionTypes.LOGOUT_FULFILLED),
     logoutRejected: (response: AxiosError) => createAction(ActionTypes.LOGOUT_REJECTED, response),
@@ -33,8 +36,12 @@ export const actions = {
     setShowLoginErrorMessage: (value: boolean) => createAction(ActionTypes.SET_SHOW_LOGIN_ERROR_MESSAGE, value),
     loginRequestPending: () => createAction(ActionTypes.LOGIN_REQUEST_PENDING),
     loginRequestFulfilled: (response: AxiosResponse<User>) =>
-     createAction(ActionTypes.LOGIN_REQUEST_FULFILLED, response),
-    loginRequestRejected: (response: AxiosError) => createAction(ActionTypes.LOGIN_REQUEST_REJECTED, response)
+        createAction(ActionTypes.LOGIN_REQUEST_FULFILLED, response),
+    loginRequestRejected: (response: AxiosError) => createAction(ActionTypes.LOGIN_REQUEST_REJECTED, response),
+    signupRequestPending: () => createAction(ActionTypes.SIGNUP_REQUEST_PENDING),
+    signupRequestFulfilled: (response: AxiosResponse<User>) =>
+        createAction(ActionTypes.SIGNUP_REQUEST_FULFILLED, response),
+    signupRequestRejected: (error: AxiosError) => createAction(ActionTypes.SIGNUP_REQUEST_REJECTED, error),
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

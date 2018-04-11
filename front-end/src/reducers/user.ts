@@ -9,13 +9,17 @@ export interface UserState {
     loginLoading: boolean;
     showSignupForm: boolean;
     showLoginErrorMessage: boolean;
+    signupLoading: boolean;
+    signupError: object;
 }
 
 const initialState: UserState = {
     loginUser: {},
     loginLoading: false,
     showSignupForm: false, // if true, show signup form, else, show login form
-    showLoginErrorMessage: false
+    showLoginErrorMessage: false,
+    signupLoading: false,
+    signupError: {}
 };
 
 export const userReducer = (state: UserState = initialState, action: fromActions.Actions): UserState => {
@@ -74,6 +78,7 @@ export const userReducer = (state: UserState = initialState, action: fromActions
         case fromActions.ActionTypes.LOGIN_REQUEST_PENDING: {
             return {
                 ...state,
+                showLoginErrorMessage: false,
                 loginLoading: true
             };
         }
@@ -93,6 +98,27 @@ export const userReducer = (state: UserState = initialState, action: fromActions
                 ...state,
                 loginLoading: false,
                 showLoginErrorMessage: true
+            };
+        }
+        case fromActions.ActionTypes.SIGNUP_REQUEST_PENDING: {
+            return {
+                ...state,
+                signupLoading: true
+            };
+        }
+        case fromActions.ActionTypes.SIGNUP_REQUEST_FULFILLED: {
+            return {
+                ...state,
+                signupLoading: false,
+                signupError: {}
+            };
+        }
+        case fromActions.ActionTypes.SIGNUP_REQUEST_REJECTED: {
+            console.log(action.payload);
+            return {
+                ...state,
+                signupLoading: false,
+                signupError: action.payload
             };
         }
         default: {

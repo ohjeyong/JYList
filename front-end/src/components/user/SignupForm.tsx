@@ -50,6 +50,14 @@ export class SignupForm extends React.Component<Props, State> {
                 />
                 <TextField
                     className="LoginSignupFormInput"
+                    value={name}
+                    onChange={this.onChange('name')}
+                    label="이름"
+                    type="password"
+                    fullWidth={true}
+                />
+                <TextField
+                    className="LoginSignupFormInput"
                     value={password1}
                     onChange={this.onChange('password1')}
                     label="비밀번호"
@@ -61,14 +69,6 @@ export class SignupForm extends React.Component<Props, State> {
                     value={password2}
                     onChange={this.onChange('password2')}
                     label="비밀번호"
-                    type="password"
-                    fullWidth={true}
-                />
-                <TextField
-                    className="LoginSignupFormInput"
-                    value={name}
-                    onChange={this.onChange('name')}
-                    label="이름"
                     type="password"
                     fullWidth={true}
                 />

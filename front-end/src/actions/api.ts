@@ -4,7 +4,7 @@ import { getAuthToken } from '../utils/localStorage';
 import { Dispatch } from 'react-redux';
 import { RootReducer } from '../reducers';
 
-axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.baseURL = 'http://localhost:8000';
 
 export const thunksActionCreators = {
     getLoginUserInfoByToken: () => {
@@ -49,7 +49,7 @@ export const thunksActionCreators = {
         return async (dispatch: Dispatch<RootReducer>) => {
             dispatch(actions.loginRequestPending());
             try {
-                const response = await axios.post('api/users/login/', {
+                const response = await axios.post('/api/users/login/', {
                     username, password
                 });
                 dispatch(actions.loginRequestFulfilled(response));
@@ -64,6 +64,25 @@ export const thunksActionCreators = {
                     }
                 };
                 setTimeout(errorProcess, 500);
+            }
+        };
+    },
+    signupRequest: (username: string, password1: string, password2: string, name: string) => {
+        return async (dispatch: Dispatch<RootReducer>) => {
+            dispatch(actions.signupRequestPending());
+            try {
+                const response = await axios.post('/api/users/signup/', {
+                    username, password1, password2, name
+                });
+                dispatch(actions.signupRequestFulfilled(response));
+                dispatch(actions.setAppLoading(false));
+            } catch (error) {
+                dispatch(actions.setAppLoading(false));
+                if (error.response!.status === 401) {
+                    dispatch(actions.signupRequestRejected(error));
+                } else {
+                    dispatch(actions.setAppErrorMessage(error.message));
+                }
             }
         };
     }
