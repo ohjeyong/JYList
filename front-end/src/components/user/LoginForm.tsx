@@ -37,13 +37,9 @@ export class LoginForm extends React.Component<Props, State> {
         this.props.onSubmit(this.state.username, this.state.password);
     }
 
-    onChangeForm = () => {
-        this.props.onChangeForm();
-    }
-
     render() {
         const { username, password } = this.state;
-        const { loginLoading, showLoginErrorMessage, loginUser } = this.props;
+        const { loginLoading, showLoginErrorMessage, loginUser, onChangeForm } = this.props;
         if (!_.isEmpty(loginUser)) {
             return <Redirect to="/todo"/>;
         }
@@ -81,7 +77,7 @@ export class LoginForm extends React.Component<Props, State> {
                     <Button
                         variant="raised"
                         color="secondary"
-                        onClick={this.onChangeForm}
+                        onClick={onChangeForm}
                     >
                         회원가입
                     </Button>

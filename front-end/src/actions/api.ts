@@ -74,11 +74,11 @@ export const thunksActionCreators = {
                 const response = await axios.post('/api/users/signup/', {
                     username, password1, password2, name
                 });
-                dispatch(actions.setAppLoading(false));
-                if (response.data.status === 201) {
+                if (response.status === 201) {
                     dispatch(actions.signupRequestFulfilled(response));
+                    dispatch(actions.setAppLoading(false));
                 } else {
-                    dispatch(actions.signupRequestRejected(response));
+                    setTimeout(() => dispatch(actions.signupRequestRejected(response)), 500);
                 }
             } catch (error) {
                 dispatch(actions.setAppLoading(false));

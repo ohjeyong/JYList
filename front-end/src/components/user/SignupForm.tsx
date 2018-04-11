@@ -1,6 +1,10 @@
+import * as _ from 'lodash';
 import * as React from 'react';
-import TextField from 'material-ui/TextField';
 import Button from 'material-ui/Button';
+import { CircularProgress } from 'material-ui/Progress';
+import { TextInputControl } from '../common';
+import { User } from '../../models/user';
+import { Redirect } from 'react-router';
 
 interface State {
     username: string;
@@ -13,6 +17,8 @@ interface Props {
     onChangeForm: () => void;
     onSubmit: (username: string, password1: string, password2: string, name: string) => void;
     signupError: object;
+    signupLoading: boolean;
+    loginUser: User | {};
 }
 
 export class SignupForm extends React.Component<Props, State> {
@@ -23,7 +29,7 @@ export class SignupForm extends React.Component<Props, State> {
         name: '',
     };
 
-    onChange = (key: keyof State) => (e: React.FormEvent<HTMLInputElement>) => {
+    onChange = (key: keyof State) => (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
         // tslint:disable-next-line:no-any
         this.setState({ [key as any]: value });
@@ -35,46 +41,52 @@ export class SignupForm extends React.Component<Props, State> {
         this.props.onSubmit(username, password1, password2, name);
     }
 
-    onChangeForm = () => {
-        this.props.onChangeForm();
-    }
-
     render() {
+        const { signupLoading, signupError, onChangeForm, loginUser } = this.props;
+        if (!_.isEmpty(loginUser)) {
+            return <Redirect to="/todo"/>;
+        }
         const { username, password1, password2, name } = this.state;
-        console.log(this.props.signupError);
         return (
             <form className="LoginSignupForm" onSubmit={this.onSubmit}>
-                <TextField
+                <TextInputControl
                     className="LoginSignupFormInput"
+                    errorObject={signupError}
+                    name="username"
                     value={username}
                     onChange={this.onChange('username')}
-                    label="아이디"
                     autoFocus={true}
                     fullWidth={true}
+                    label="아이디"
                 />
-                <TextField
+                <TextInputControl
                     className="LoginSignupFormInput"
+                    errorObject={signupError}
+                    name="name"
                     value={name}
                     onChange={this.onChange('name')}
-                    label="이름"
-                    type="password"
                     fullWidth={true}
+                    label="이름"
                 />
-                <TextField
+                <TextInputControl
                     className="LoginSignupFormInput"
+                    errorObject={signupError}
+                    name="password1"
                     value={password1}
                     onChange={this.onChange('password1')}
+                    fullWidth={true}
                     label="비밀번호"
                     type="password"
-                    fullWidth={true}
                 />
-                <TextField
+                <TextInputControl
                     className="LoginSignupFormInput"
+                    errorObject={signupError}
+                    name="password2"
                     value={password2}
                     onChange={this.onChange('password2')}
-                    label="비밀번호"
-                    type="password"
                     fullWidth={true}
+                    label="비밀번호 재입력"
+                    type="password"
                 />
                 <div
                     style={{
@@ -87,7 +99,7 @@ export class SignupForm extends React.Component<Props, State> {
                     <Button
                         variant="raised"
                         color="secondary"
-                        onClick={this.onChangeForm}
+                        onClick={onChangeForm}
                     >
                         로그인으로
                     </Button>
@@ -95,8 +107,9 @@ export class SignupForm extends React.Component<Props, State> {
                         type="submit"
                         variant="raised"
                         color="primary"
+                        disabled={signupLoading}
                     >
-                        회원가입
+                        {signupLoading ? <CircularProgress size={20}/> : '회원가입'}
                     </Button>
                 </div>
             </form>

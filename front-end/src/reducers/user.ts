@@ -22,6 +22,11 @@ const initialState: UserState = {
     signupError: {}
 };
 
+const postLogin = (user: User) => {
+    setAuthToken(user.auth_token);
+    axios.defaults.headers.Authorization = user.auth_token;
+};
+
 export const userReducer = (state: UserState = initialState, action: fromActions.Actions): UserState => {
     switch (action.type) {
         case fromActions.ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING: {
@@ -84,12 +89,11 @@ export const userReducer = (state: UserState = initialState, action: fromActions
         }
         case fromActions.ActionTypes.LOGIN_REQUEST_FULFILLED: {
             const user = action.payload.data;
-            setAuthToken(user.auth_token);
-            axios.defaults.headers.Authorization = user.auth_token;
+            postLogin(user);
             return {
                 ...state,
                 loginLoading: false,
-                loginUser: action.payload.data,
+                loginUser: user,
                 showLoginErrorMessage: false
             };
         }
@@ -103,14 +107,18 @@ export const userReducer = (state: UserState = initialState, action: fromActions
         case fromActions.ActionTypes.SIGNUP_REQUEST_PENDING: {
             return {
                 ...state,
+                signupError: {},
                 signupLoading: true
             };
         }
         case fromActions.ActionTypes.SIGNUP_REQUEST_FULFILLED: {
+            const user = action.payload.data;
+            postLogin(user);
             return {
                 ...state,
                 signupLoading: false,
-                signupError: {}
+                signupError: {},
+                loginUser: user
             };
         }
         case fromActions.ActionTypes.SIGNUP_REQUEST_REJECTED: {
