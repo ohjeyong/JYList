@@ -9,6 +9,11 @@ body > #root {
     display: flex;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
 .CircularProgressWrapper {
     flex: 1;
     display: flex;
