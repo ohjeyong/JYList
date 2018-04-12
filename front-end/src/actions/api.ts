@@ -85,5 +85,16 @@ export const thunksActionCreators = {
                 dispatch(actions.setAppErrorMessage(error.message));
             }
         };
+    },
+    fetchTodoList: () => {
+        return async (dispatch: Dispatch<RootReducer>) => {
+            dispatch(actions.fetchTodoListPending());
+            try {
+                const response = await axios.get('/api/todo/');
+                dispatch(actions.fetchTodoListFulfilled(response));
+            } catch (error) {
+                dispatch(actions.fetchTodoListRejected(error));
+            }
+        };
     }
 };

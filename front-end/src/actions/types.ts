@@ -1,24 +1,28 @@
 import { AxiosResponse, AxiosError } from 'axios';
 import { createAction } from './action-helpers';
 import { APIUser } from '../models/user';
+import { APITodo } from '../models/todo';
 
 export enum ActionTypes {
-    'GET_LOGIN_USER_INFO_BY_TOKEN_PENDING' = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/PENDING',
-    'GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED' = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/FULFILLED',
-    'GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED' = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/REJECTED',
-    'LOGOUT_PENDING' = '[user] LOGOUT/PENDING',
-    'LOGOUT_FULFILLED' = '[user] LOGOUT/FULFILLED',
-    'LOGOUT_REJECTED' = '[user] LOGOUT/REJECTED',
-    'SET_APP_LOADING' = '[app] SET_APP_LOADING',
-    'SET_APP_ERROR_MESSAGE' = '[app] SET_APP_ERROR_MESSAGE',
-    'SET_SHOW_SIGNUP_FORM' = '[user] SET_SHOW_SIGNUP_FORM',
-    'SET_SHOW_LOGIN_ERROR_MESSAGE' = '[user] SET_SHOW_LOGIN_ERROR_MESSAGE',
-    'LOGIN_REQUEST_PENDING' = '[user] LOGIN_REQUEST_PENDING',
-    'LOGIN_REQUEST_FULFILLED' = '[user] LOGIN_REQUEST_FULFILLED',
-    'LOGIN_REQUEST_REJECTED' = '[user] LOGIN_REQUEST_REJECTED',
-    'SIGNUP_REQUEST_PENDING' = '[user] SIGNUP_REQUEST_PENDING',
-    'SIGNUP_REQUEST_FULFILLED' = '[user] SIGNUP_REQUEST_FULFILLED',
-    'SIGNUP_REQUEST_REJECTED' = '[user] SIGNUP_REQUEST_REJECTED'
+    GET_LOGIN_USER_INFO_BY_TOKEN_PENDING = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/PENDING',
+    GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/FULFILLED',
+    GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/REJECTED',
+    LOGOUT_PENDING = '[user] LOGOUT/PENDING',
+    LOGOUT_FULFILLED = '[user] LOGOUT/FULFILLED',
+    LOGOUT_REJECTED = '[user] LOGOUT/REJECTED',
+    SET_APP_LOADING = '[app] SET_APP_LOADING',
+    SET_APP_ERROR_MESSAGE = '[app] SET_APP_ERROR_MESSAGE',
+    SET_SHOW_SIGNUP_FORM = '[user] SET_SHOW_SIGNUP_FORM',
+    SET_SHOW_LOGIN_ERROR_MESSAGE = '[user] SET_SHOW_LOGIN_ERROR_MESSAGE',
+    LOGIN_REQUEST_PENDING = '[user] LOGIN_REQUEST_PENDING',
+    LOGIN_REQUEST_FULFILLED = '[user] LOGIN_REQUEST_FULFILLED',
+    LOGIN_REQUEST_REJECTED = '[user] LOGIN_REQUEST_REJECTED',
+    SIGNUP_REQUEST_PENDING = '[user] SIGNUP_REQUEST_PENDING',
+    SIGNUP_REQUEST_FULFILLED = '[user] SIGNUP_REQUEST_FULFILLED',
+    SIGNUP_REQUEST_REJECTED = '[user] SIGNUP_REQUEST_REJECTED',
+    FETCH_TODO_LIST_PENDING = '[todo] FETCH_TODO_LIST_PENDING',
+    FETCH_TODO_LIST_FULFILLED = '[todo] FETCH_TODO_LIST_FULFILLED',
+    FETCH_TODO_LIST_REJECTED = '[todo] FETCH_TODO_LIST_REJECTED',
 }
 
 export const actions = {
@@ -43,6 +47,10 @@ export const actions = {
         createAction(ActionTypes.SIGNUP_REQUEST_FULFILLED, response),
     // signup request rejected 는 201 일 경우 유저 생성, 200 일 경우 올바른 요청이지만 각 필드에 대한 에러 반환.
     signupRequestRejected: (response: AxiosResponse) => createAction(ActionTypes.SIGNUP_REQUEST_REJECTED, response),
+    fetchTodoListPending: () => createAction(ActionTypes.FETCH_TODO_LIST_PENDING),
+    fetchTodoListFulfilled: (response: AxiosResponse<APITodo>) =>
+        createAction(ActionTypes.FETCH_TODO_LIST_FULFILLED, response),
+    fetchTodoListRejected: (response: AxiosError) => createAction(ActionTypes.FETCH_TODO_LIST_REJECTED, response)
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;
