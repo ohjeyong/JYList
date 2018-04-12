@@ -48,7 +48,7 @@ export const actions = {
     // signup request rejected 는 201 일 경우 유저 생성, 200 일 경우 올바른 요청이지만 각 필드에 대한 에러 반환.
     signupRequestRejected: (response: AxiosResponse) => createAction(ActionTypes.SIGNUP_REQUEST_REJECTED, response),
     fetchTodoListPending: () => createAction(ActionTypes.FETCH_TODO_LIST_PENDING),
-    fetchTodoListFulfilled: (response: AxiosResponse<APITodo>) =>
+    fetchTodoListFulfilled: (response: AxiosResponse<APITodo[]>) =>
         createAction(ActionTypes.FETCH_TODO_LIST_FULFILLED, response),
     fetchTodoListRejected: (response: AxiosError) => createAction(ActionTypes.FETCH_TODO_LIST_REJECTED, response)
 };
