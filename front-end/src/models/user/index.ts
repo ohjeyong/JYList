@@ -1,4 +1,4 @@
-import { User as APIUser } from './APIReturn';
+import { APIUser } from './APIReturn';
 export { APIUser };
 
 export class User {

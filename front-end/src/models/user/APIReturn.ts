@@ -1,5 +1,5 @@
 /* tslint:disable:variable-name */
-export interface User {
+export interface APIUser {
     id: number;
     username: string;
     name: string;
