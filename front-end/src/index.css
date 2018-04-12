@@ -73,4 +73,28 @@ a {
 
 .MyPage {
     flex: 1;
+    display: flex;
+    color: rgba(0,0,0,0.54);
+}
+
+.MyPage > .MyPageInner {
+    max-width: 600px;
+    margin: auto;
+}
+.MyPage > .MyPageInner > .MyPageContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.MyPage > .MyPageInner > .MyPageContent > div:last-child {
+    margin-left: 20px;
+}
+.MyPage > .MyPageInner > .MyPageContent > div:last-child > div {
+    font-size: 1.2em;
+    margin: 10px;
+}
+
+.MyPage > .MyPageInner > div:last-child {
+    text-align: center;
 }
