@@ -1,13 +1,15 @@
-/* tslint:disable:variable-name */
+import { User as APIUser } from './APIReturn';
+export { APIUser };
+
 export class User {
     readonly id: number;
     readonly username: string;
     readonly name: string;
-    readonly auth_token: string;
-    constructor(userApiReturn: {id: number, username: string, name: string, auth_token: string}) {
-        this.id = userApiReturn.id;
-        this.username = userApiReturn.username;
-        this.name = userApiReturn.name;
-        this.auth_token = userApiReturn.auth_token;
+    readonly authToken: string;
+    constructor(apiReturn: APIUser) {
+        this.id = apiReturn.id;
+        this.username = apiReturn.username;
+        this.name = apiReturn.name;
+        this.authToken = apiReturn.auth_token;
     }
 }

@@ -1,6 +1,6 @@
 import { AxiosResponse, AxiosError } from 'axios';
 import { createAction } from './action-helpers';
-import { User } from '../models/user';
+import { APIUser } from '../models/user';
 
 export enum ActionTypes {
     'GET_LOGIN_USER_INFO_BY_TOKEN_PENDING' = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/PENDING',
@@ -18,12 +18,12 @@ export enum ActionTypes {
     'LOGIN_REQUEST_REJECTED' = '[user] LOGIN_REQUEST_REJECTED',
     'SIGNUP_REQUEST_PENDING' = '[user] SIGNUP_REQUEST_PENDING',
     'SIGNUP_REQUEST_FULFILLED' = '[user] SIGNUP_REQUEST_FULFILLED',
-    'SIGNUP_REQUEST_REJECTED' = '[user] SIGNUP_REQUEST_REJECTED',
+    'SIGNUP_REQUEST_REJECTED' = '[user] SIGNUP_REQUEST_REJECTED'
 }
 
 export const actions = {
     getLoginUserInfoByTokenPending: () => createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_PENDING),
-    getLoginUserInfoByTokenFulfilled: (response: AxiosResponse<User>) =>
+    getLoginUserInfoByTokenFulfilled: (response: AxiosResponse<APIUser>) =>
         createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED, response),
     getLoginUserInfoByTokenRejected: (response: AxiosError) =>
         createAction(ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_REJECTED, response),
@@ -35,11 +35,11 @@ export const actions = {
     setShowSignupForm: (value: boolean) => createAction(ActionTypes.SET_SHOW_SIGNUP_FORM, value),
     setShowLoginErrorMessage: (value: boolean) => createAction(ActionTypes.SET_SHOW_LOGIN_ERROR_MESSAGE, value),
     loginRequestPending: () => createAction(ActionTypes.LOGIN_REQUEST_PENDING),
-    loginRequestFulfilled: (response: AxiosResponse<User>) =>
+    loginRequestFulfilled: (response: AxiosResponse<APIUser>) =>
         createAction(ActionTypes.LOGIN_REQUEST_FULFILLED, response),
     loginRequestRejected: (response: AxiosError) => createAction(ActionTypes.LOGIN_REQUEST_REJECTED, response),
     signupRequestPending: () => createAction(ActionTypes.SIGNUP_REQUEST_PENDING),
-    signupRequestFulfilled: (response: AxiosResponse<User>) =>
+    signupRequestFulfilled: (response: AxiosResponse<APIUser>) =>
         createAction(ActionTypes.SIGNUP_REQUEST_FULFILLED, response),
     // signup request rejected 는 201 일 경우 유저 생성, 200 일 경우 올바른 요청이지만 각 필드에 대한 에러 반환.
     signupRequestRejected: (response: AxiosResponse) => createAction(ActionTypes.SIGNUP_REQUEST_REJECTED, response),
