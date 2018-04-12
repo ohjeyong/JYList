@@ -63,7 +63,7 @@ export const thunksActionCreators = {
                         dispatch(actions.setAppErrorMessage(error.message));
                     }
                 };
-                setTimeout(errorProcess, 500);
+                setTimeout(errorProcess, 300);
             }
         };
     },
@@ -78,7 +78,7 @@ export const thunksActionCreators = {
                     dispatch(actions.signupRequestFulfilled(response));
                     dispatch(actions.setAppLoading(false));
                 } else {
-                    setTimeout(() => dispatch(actions.signupRequestRejected(response)), 500);
+                    setTimeout(() => dispatch(actions.signupRequestRejected(response)), 300);
                 }
             } catch (error) {
                 dispatch(actions.setAppLoading(false));
