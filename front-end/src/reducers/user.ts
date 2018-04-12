@@ -23,7 +23,7 @@ const initialState: UserState = {
 
 const postLogin = (user: User) => {
     setAuthToken(user.authToken);
-    axios.defaults.headers.Authorization = user.authToken;
+    axios.defaults.headers.Authorization = `Token ${user.authToken}`;
 };
 
 export const userReducer = (state: UserState = initialState, action: fromActions.Actions): UserState => {
