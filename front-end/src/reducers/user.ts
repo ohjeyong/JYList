@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import axios from 'axios';
 import { User } from '../models/user';
 import * as fromActions from '../actions';
@@ -36,11 +35,8 @@ export const userReducer = (state: UserState = initialState, action: fromActions
             };
         }
         case fromActions.ActionTypes.GET_LOGIN_USER_INFO_BY_TOKEN_FULFILLED: {
-            const user = action.payload.data;
-            if (!_.isEmpty(user)) {
-                setAuthToken(user.auth_token);
-                axios.defaults.headers.Authorization = user.auth_token;
-            }
+            const user = new User(action.payload.data);
+            postLogin(user);
             return {
                 ...state,
                 loginLoading: false,
@@ -88,7 +84,7 @@ export const userReducer = (state: UserState = initialState, action: fromActions
             };
         }
         case fromActions.ActionTypes.LOGIN_REQUEST_FULFILLED: {
-            const user = action.payload.data;
+            const user = new User(action.payload.data);
             postLogin(user);
             return {
                 ...state,
@@ -112,7 +108,7 @@ export const userReducer = (state: UserState = initialState, action: fromActions
             };
         }
         case fromActions.ActionTypes.SIGNUP_REQUEST_FULFILLED: {
-            const user = action.payload.data;
+            const user = new User(action.payload.data);
             postLogin(user);
             return {
                 ...state,
