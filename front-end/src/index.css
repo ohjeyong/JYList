@@ -124,9 +124,12 @@ a {
     align-items: center;
     margin-top: -10px;
 }
+.TodoLi > div > .TodoLiUpper > div:first-child > .TodoMainContent > div:nth-child(2) {
+    padding: 15px 0;
+}
 .CategoryChip {
     display: inline-block;
-    max-width: 70px;
+    max-width: 80px;
     color: white;
     border-radius: 5px;
     font-size: 0.7em;
@@ -136,10 +139,19 @@ a {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
+    height: 100%;
+    padding: 0 8px;
+    font-weight: bold;
 }
 .CategoryChip > div:first-child > span {
     margin-left: 10px;
+}
+
+.Tag {
+    font-size: 0.6em !important;
+    height: 24px !important;
+    margin-right: 5px;
+    border-radius: 8px !important;
 }
 
 .LikeButton {

@@ -3,6 +3,7 @@ import { Todo } from '../../models/todo';
 import Paper from 'material-ui/Paper';
 import { CategoryChip } from './CategoryChip';
 import { LikeButtonContainer } from '../../containers/todo/LikeButtonContainer';
+import { Tag } from './Tag';
 
 interface State {
     showComments: boolean;
@@ -30,8 +31,14 @@ export class TodoLi extends React.Component<Props, State> {
                                     <CategoryChip category={todo.category}/>
                                     <LikeButtonContainer todo={todo}/>
                                 </div>
-                                <div>{todo.content}</div>
-                                <div>태그</div>
+                                <div>
+                                    {todo.content}
+                                </div>
+                                <div>
+                                    {todo.tagList.map(eachTag => (
+                                        <Tag tag={eachTag}/>
+                                    ))}
+                                </div>
                             </div>
                             <div>
                                 댓글보기, 작성자, 시간
