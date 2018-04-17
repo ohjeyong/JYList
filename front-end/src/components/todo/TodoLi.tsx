@@ -36,7 +36,7 @@ export class TodoLi extends React.Component<Props, State> {
                                 </div>
                                 <div>
                                     {todo.tagList.map(eachTag => (
-                                        <Tag tag={eachTag}/>
+                                        <Tag key={eachTag.id} tag={eachTag}/>
                                     ))}
                                 </div>
                             </div>
