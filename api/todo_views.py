@@ -14,7 +14,7 @@ class TodoViewSet(FriendsQuerysetMixin, viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
     queryset = Todo.objects.select_related('author')\
         .prefetch_related('todocomment_set', 'tag', 'todocomment_set__author', 'todocomment_set__author__auth_token',
-                          'author__auth_token').all()
+                          'author__auth_token').all().order_by('-created_at')
 
     def create(self, request, *args, **kwargs):
         """

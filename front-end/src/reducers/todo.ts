@@ -11,6 +11,16 @@ const initialState: TodoState = {
     loadingTodoList: false
 };
 
+function replaceTodo(oldList: Todo[], todo: Todo) {
+    return oldList.map(eachTodo => {
+        if (eachTodo.id === todo.id) {
+            return todo;
+        } else {
+            return eachTodo;
+        }
+    });
+}
+
 export const todoReducer = (state: TodoState = initialState, action: fromActions.Actions): TodoState => {
     switch (action.type) {
         case fromActions.ActionTypes.FETCH_TODO_LIST_PENDING: {
@@ -28,6 +38,13 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
                 ...state,
                 loadingTodoList: false,
                 todoList
+            };
+        }
+        case fromActions.ActionTypes.REQUEST_ADD_LIKE: {
+            const todo: Todo = new Todo(action.payload.data);
+            return {
+                ...state,
+                todoList: replaceTodo(state.todoList, todo)
             };
         }
         default: {

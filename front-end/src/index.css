@@ -98,3 +98,53 @@ a {
 .MyPage > .MyPageInner > div:last-child {
     text-align: center;
 }
+
+.TodoLi {
+    margin: 15px 0;
+}
+
+.TodoLi > div {
+    display: flex;
+    flex-direction: column;
+}
+.TodoLi > div > .TodoLiUpper {
+    display: flex;
+}
+.TodoLi > div > .TodoLiUpper > div:first-child {
+    flex: 4;
+}
+.TodoLi > div > .TodoLiUpper > div:last-child {
+    flex: 1;
+}
+.TodoLi > div > .TodoLiUpper > div:first-child > .TodoMainContent {
+    padding: 15px;
+}
+.TodoLi > div > .TodoLiUpper > div:first-child > .TodoMainContent > div:first-child {
+    display: flex;
+    align-items: center;
+    margin-top: -10px;
+}
+.CategoryChip {
+    display: inline-block;
+    max-width: 70px;
+    color: white;
+    border-radius: 5px;
+    font-size: 0.7em;
+    height: 23px;
+}
+.CategoryChip > div:first-child {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+}
+.CategoryChip > div:first-child > span {
+    margin-left: 10px;
+}
+
+.LikeButton {
+    color: gray !important;
+}
+.LikeButton:active {
+    color: red !important;
+}

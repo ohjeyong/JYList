@@ -1,6 +1,13 @@
 /* tslint:disable:variable-name */
 import { User } from '../user';
 import { APIComment, APITodo, APITag } from './APIReturn';
+import Orange from 'material-ui/colors/orange';
+import Teal from 'material-ui/colors/teal';
+import Blue from 'material-ui/colors/blue';
+import SvgIcon from 'material-ui/SvgIcon';
+import FoodIcon from '@material-ui/icons/Restaurant';
+import PlaceIcon from '@material-ui/icons/Place';
+import TodoIcon from '@material-ui/icons/Star';
 
 export { APITodo, APIComment, APITag };
 
@@ -13,11 +20,35 @@ export class Tag {
     }
 }
 
-export const enum Category {
-    FOOD = '먹을 것',
-    PLACE = '갈 곳',
-    TODO = '할 것'
+interface CategoryInner {
+    value: string;
+    color: string;
+    icon: typeof SvgIcon;
 }
+
+interface Category {
+    FOOD: CategoryInner;
+    PLACE: CategoryInner;
+    TODO: CategoryInner;
+}
+
+export const Category: Category = {
+    FOOD: {
+        value: '먹을 것',
+        color: Orange[500],
+        icon: FoodIcon
+    },
+    PLACE: {
+        value: '갈 곳',
+        color: Teal[500],
+        icon: PlaceIcon
+    },
+    TODO: {
+        value: '할 것',
+        color: Blue[500],
+        icon: TodoIcon
+    }
+};
 
 export class Comment {
     readonly id: number;
@@ -60,5 +91,8 @@ export class Todo {
         for (let eachTag of apiReturn.tag_list) {
             this.tagList.push(new Tag(eachTag));
         }
+    }
+    getCategory() {
+        return Category[this.category];
     }
 }

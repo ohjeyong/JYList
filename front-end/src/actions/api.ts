@@ -96,5 +96,15 @@ export const thunksActionCreators = {
                 dispatch(actions.fetchTodoListRejected(error));
             }
         };
+    },
+    requestAddLike: (todoId: number) => {
+        return async (dispatch: Dispatch<RootReducer>) => {
+            try {
+                const response = await axios.post(`/api/todo/${todoId}/add_like/`);
+                dispatch(actions.requestAddLike(response));
+            } catch (error) {
+                dispatch(actions.setAppErrorMessage(error.message));
+            }
+        };
     }
 };
