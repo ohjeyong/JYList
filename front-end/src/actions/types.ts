@@ -26,6 +26,7 @@ export enum ActionTypes {
     REQUEST_ADD_LIKE = '[todo] REQUEST_ADD_LIKE',
     REQUEST_TODO_REVERT_COMPLETE = '[todo] REQUEST_TODO_REVERT_COMPLETE',
     REQUEST_TODO_COMPLETE = '[todo] REQUEST_TODO_COMPLETE',
+    REQUEST_TODO_DELETE = '[todo] REQUEST_TODO_DELETE',
 }
 
 export const actions = {
@@ -59,6 +60,8 @@ export const actions = {
         createAction(ActionTypes.REQUEST_TODO_REVERT_COMPLETE, response),
     requestTodoComplete: (response: AxiosResponse<APITodo>) =>
         createAction(ActionTypes.REQUEST_TODO_COMPLETE, response),
+    requestTodoDelete: (response: AxiosResponse<{id: number}>) =>
+        createAction(ActionTypes.REQUEST_TODO_DELETE, response),
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

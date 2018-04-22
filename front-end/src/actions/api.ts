@@ -126,5 +126,15 @@ export const thunksActionCreators = {
                 dispatch(actions.setAppErrorMessage(error.message));
             }
         };
-    }
+    },
+    requestTodoDelete: (todoId: number) => {
+        return async (dispatch: Dispatch<RootReducer>) => {
+            try {
+                const response = await axios.delete(`/api/todo/${todoId}/`);
+                dispatch(actions.requestTodoDelete(response));
+            } catch (error) {
+                dispatch(actions.setAppErrorMessage(error.message));
+            }
+        };
+    },
 };

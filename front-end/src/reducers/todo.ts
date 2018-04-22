@@ -61,6 +61,13 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
                 todoList: replaceTodo(state.todoList, todo)
             };
         }
+        case fromActions.ActionTypes.REQUEST_TODO_DELETE: {
+            const todoList = state.todoList.filter((todo: Todo) => todo.id !== action.payload.data.id);
+            return {
+                ...state,
+                todoList
+            };
+        }
         default: {
             return state;
         }

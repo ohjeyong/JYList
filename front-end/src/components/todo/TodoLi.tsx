@@ -2,14 +2,13 @@ import * as React from 'react';
 import { Todo } from '../../models/todo';
 import Paper from 'material-ui/Paper';
 import Divider from 'material-ui/Divider';
-import Button from 'material-ui/Button';
 import { CategoryChip } from './CategoryChip';
 import { LikeButtonContainer } from '../../containers/todo/LikeButtonContainer';
 import { Tag } from './Tag';
 import { TimeAgo } from '../common';
-import red from 'material-ui/colors/red';
 import { RevertCompleteButtonContainer } from '../../containers/todo/RevertCompleteButtonContainer';
 import { CompleteButtonContainer } from '../../containers/todo/CompleteButtonContainer';
+import { DeleteButtonContainer } from '../../containers/todo/DeleteButtonContainer';
 
 interface State {
     showComments: boolean;
@@ -76,14 +75,7 @@ export class TodoLi extends React.Component<Props, State> {
                                     :
                                     <React.Fragment>
                                         <CompleteButtonContainer todo={todo}/>
-                                        <Button
-                                            size="small"
-                                            style={{
-                                                color: red[400]
-                                            }}
-                                        >
-                                            삭제
-                                        </Button>
+                                        <DeleteButtonContainer todo={todo}/>
                                     </React.Fragment>
                             }
                         </div>
