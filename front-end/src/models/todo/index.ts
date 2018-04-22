@@ -69,7 +69,7 @@ export class Todo {
     readonly like: number;
     readonly category: keyof typeof Category;
     readonly isCompleted: boolean;
-    readonly completeAt: Date;
+    readonly completeAt: Date | null;
     readonly author: User;
     readonly createdAt: Date;
     readonly commentList: Comment[];
@@ -80,7 +80,7 @@ export class Todo {
         this.like = apiReturn.like;
         this.category = apiReturn.category;
         this.isCompleted = apiReturn.is_completed;
-        this.completeAt = new Date(apiReturn.complete_at);
+        this.completeAt = apiReturn.complete_at ? new Date(apiReturn.complete_at) : null;
         this.author = new User(apiReturn.author);
         this.createdAt = new Date(apiReturn.created_at);
         this.commentList = [];
