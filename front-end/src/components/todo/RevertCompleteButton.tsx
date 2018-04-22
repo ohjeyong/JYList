@@ -9,7 +9,7 @@ export const RevertCompleteButton: React.SFC<Props> = (props: Props) => (
         style={{
             color: orange[500]
         }}
-        onClick={() => props.requestRevertComplete(props.todo.id)}
+        onClick={() => props.requestTodoRevertComplete(props.todo.id)}
     >
         되돌리기
     </Button>

@@ -107,11 +107,11 @@ export const thunksActionCreators = {
             }
         };
     },
-    requestRevertComplete: (todoId: number) => {
+    requestTodoRevertComplete: (todoId: number) => {
         return async (dispatch: Dispatch<RootReducer>) => {
             try {
                 const response = await axios.post(`/api/todo/${todoId}/revert_complete/`);
-                dispatch(actions.requestRevertComplete(response));
+                dispatch(actions.requestTodoRevertComplete(response));
             } catch (error) {
                 dispatch(actions.setAppErrorMessage(error.message));
             }
