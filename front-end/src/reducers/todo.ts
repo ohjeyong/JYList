@@ -4,11 +4,13 @@ import { Todo } from '../models/todo';
 export interface TodoState {
     todoList: Todo[];
     loadingTodoList: boolean;
+    alertTodoDelete: Todo | null;
 }
 
 const initialState: TodoState = {
     todoList: [],
-    loadingTodoList: false
+    loadingTodoList: false,
+    alertTodoDelete: null,
 };
 
 function replaceTodo(oldList: Todo[], todo: Todo) {
@@ -65,7 +67,14 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
             const todoList = state.todoList.filter((todo: Todo) => todo.id !== action.payload.data.id);
             return {
                 ...state,
-                todoList
+                todoList,
+                alertTodoDelete: null
+            };
+        }
+        case fromActions.ActionTypes.SET_ALERT_TODO_DELETE: {
+            return {
+                ...state,
+                alertTodoDelete: action.payload
             };
         }
         default: {

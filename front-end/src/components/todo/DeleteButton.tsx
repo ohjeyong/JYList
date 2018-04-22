@@ -9,7 +9,7 @@ export const DeleteButton: React.SFC<Props> = (props: Props) => (
         style={{
             color: red[400]
         }}
-        onClick={() => props.requestTodoDelete(props.todo.id)}
+        onClick={() => props.setAlertTodoDelete(props.todo)}
     >
         삭제
     </Button>

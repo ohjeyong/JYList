@@ -3,6 +3,7 @@ import { actions } from './types';
 import { getAuthToken } from '../utils/localStorage';
 import { Dispatch } from 'react-redux';
 import { RootReducer } from '../reducers';
+import { Todo } from '../models/todo';
 
 axios.defaults.baseURL = 'http://localhost:8000';
 
@@ -137,4 +138,5 @@ export const thunksActionCreators = {
             }
         };
     },
+    setAlertTodoDelete: (todo: Todo | null) => actions.setAlertTodoDelete(todo),
 };

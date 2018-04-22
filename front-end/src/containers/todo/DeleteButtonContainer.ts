@@ -5,7 +5,7 @@ import { Todo } from '../../models/todo';
 import { bindActionCreators, Dispatch } from 'redux';
 import { RootReducer } from '../../reducers';
 
-type DispatchToProps = Pick<typeof thunksActionCreators, 'requestTodoDelete'>;
+type DispatchToProps = Pick<typeof thunksActionCreators, 'setAlertTodoDelete'>;
 interface OwnProps {
     todo: Todo;
 }
@@ -14,7 +14,7 @@ export type DeleteButton = DispatchToProps & OwnProps;
 
 const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
     const map: DispatchToProps = {
-        requestTodoDelete: thunksActionCreators.requestTodoDelete
+        setAlertTodoDelete: thunksActionCreators.setAlertTodoDelete
     };
     return bindActionCreators(map, dispatch);
 };
