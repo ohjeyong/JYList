@@ -8,7 +8,7 @@ import { LikeButtonContainer } from '../../containers/todo/LikeButtonContainer';
 import { Tag } from './Tag';
 import { TimeAgo } from '../common';
 import red from 'material-ui/colors/red';
-import orange from 'material-ui/colors/orange';
+import { RevertCompleteButtonContainer } from '../../containers/todo/RevertCompleteButtonContainer';
 
 interface State {
     showComments: boolean;
@@ -70,14 +70,7 @@ export class TodoLi extends React.Component<Props, State> {
                                                 fontSize: '0.6em',
                                             }}
                                         />
-                                        <Button
-                                            size="small"
-                                            style={{
-                                                color: orange[700]
-                                            }}
-                                        >
-                                            되돌리기
-                                        </Button>
+                                        <RevertCompleteButtonContainer todo={todo}/>
                                     </React.Fragment>
                                     :
                                     <React.Fragment>
