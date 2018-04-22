@@ -18,6 +18,8 @@ export const TodoIndex: React.SFC<{}> = () => (
                 </Link>
             </div>
         </div>
-        <MainSwitch/>
+        <div className="TodoRouterWrapper">
+            <MainSwitch/>
+        </div>
     </div>
 );

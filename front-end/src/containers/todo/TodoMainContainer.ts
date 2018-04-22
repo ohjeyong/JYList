@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { TodoList } from '../../components/todo/TodoList';
+import { TodoMain } from '../../components/todo/TodoMain';
 import { RootReducer, TodoState } from '../../reducers';
 import { thunksActionCreators } from '../../actions';
 import { bindActionCreators, Dispatch } from 'redux';
@@ -7,7 +7,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 type StateToProps = Pick<TodoState, 'loadingTodoList' | 'todoList'>;
 type DispatchToProps = Pick<typeof thunksActionCreators, 'fetchTodoList'>;
 
-export type TodoList = StateToProps & DispatchToProps;
+export type TodoMain = StateToProps & DispatchToProps;
 
 const mapStateToProps = (state: RootReducer): StateToProps => {
     return {
@@ -23,5 +23,5 @@ const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps =>
     return bindActionCreators(map, dispatch);
 };
 
-export const TodoListContainer = connect<StateToProps, DispatchToProps, {}>
-(mapStateToProps, mapDispatchToProps)(TodoList);
+export const TodoMainContainer = connect<StateToProps, DispatchToProps, {}>
+(mapStateToProps, mapDispatchToProps)(TodoMain);
