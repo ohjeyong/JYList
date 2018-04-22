@@ -9,6 +9,7 @@ import { Tag } from './Tag';
 import { TimeAgo } from '../common';
 import red from 'material-ui/colors/red';
 import { RevertCompleteButtonContainer } from '../../containers/todo/RevertCompleteButtonContainer';
+import { CompleteButtonContainer } from '../../containers/todo/CompleteButtonContainer';
 
 interface State {
     showComments: boolean;
@@ -74,14 +75,7 @@ export class TodoLi extends React.Component<Props, State> {
                                     </React.Fragment>
                                     :
                                     <React.Fragment>
-                                        <Button
-                                            style={{
-                                                color: Todo.GetCompleteColor()
-                                            }}
-                                            size="small"
-                                        >
-                                            완료
-                                        </Button>
+                                        <CompleteButtonContainer todo={todo}/>
                                         <Button
                                             size="small"
                                             style={{

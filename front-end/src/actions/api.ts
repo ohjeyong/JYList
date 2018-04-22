@@ -117,4 +117,14 @@ export const thunksActionCreators = {
             }
         };
     },
+    requestTodoComplete: (todoId: number) => {
+        return async (dispatch: Dispatch<RootReducer>) => {
+            try {
+                const response = await axios.post(`/api/todo/${todoId}/complete/`);
+                dispatch(actions.requestTodoComplete(response));
+            } catch (error) {
+                dispatch(actions.setAppErrorMessage(error.message));
+            }
+        };
+    }
 };
