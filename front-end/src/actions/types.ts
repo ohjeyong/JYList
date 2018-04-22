@@ -25,6 +25,7 @@ export enum ActionTypes {
     FETCH_TODO_LIST_REJECTED = '[todo] FETCH_TODO_LIST_REJECTED',
     REQUEST_ADD_LIKE = '[todo] REQUEST_ADD_LIKE',
     REQUEST_REVERT_COMPLETE = '[todo] REQUEST_REVERT_COMPLETE',
+    REQUEST_TODO_REVERT_COMPLETE = '[todo] REQUEST_TODO_REVERT_COMPLETE',
 }
 
 export const actions = {
@@ -55,7 +56,7 @@ export const actions = {
     fetchTodoListRejected: (response: AxiosError) => createAction(ActionTypes.FETCH_TODO_LIST_REJECTED, response),
     requestAddLike: (response: AxiosResponse<APITodo>) => createAction(ActionTypes.REQUEST_ADD_LIKE, response),
     requestRevertComplete: (response: AxiosResponse<APITodo>) =>
-        createAction(ActionTypes.REQUEST_REVERT_COMPLETE, response),
+        createAction(ActionTypes.REQUEST_TODO_REVERT_COMPLETE, response),
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

@@ -47,7 +47,7 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
                 todoList: replaceTodo(state.todoList, todo)
             };
         }
-        case fromActions.ActionTypes.REQUEST_REVERT_COMPLETE: {
+        case fromActions.ActionTypes.REQUEST_TODO_REVERT_COMPLETE: {
             const todo: Todo = new Todo(action.payload.data);
             return {
                 ...state,
