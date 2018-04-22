@@ -41,6 +41,12 @@ class TodoViewSet(FriendsQuerysetMixin, viewsets.ModelViewSet):
         else:
             return Response(serializer.errors)
 
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        pk = instance.id
+        self.perform_destroy(instance)
+        return Response({"id": pk})
+
     @detail_route(methods=['POST'])
     def complete(self, request, pk=None):
         todo = self.get_object()
