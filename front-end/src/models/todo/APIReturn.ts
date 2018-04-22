@@ -19,7 +19,8 @@ export interface APITodo {
     like: number;
     category: keyof typeof Category;
     is_completed: boolean;
-    complete_at: string;
+    complete_at: string | null;
+    complete_by: APIUser | null;
     author: APIUser;
     created_at: string;
     comment_list: APIComment[];
