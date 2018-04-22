@@ -25,7 +25,8 @@ export const TimeAgo: React.SFC<Props> = (props: Props) => {
                 date={date}
                 formatter={formatter}
                 style={{
-                    ...props.style
+                    ...props.style,
+                    color: 'rgba(0,0,0,0.54)'
                 }}
             />
         </Tooltip>

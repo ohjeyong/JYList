@@ -8,6 +8,7 @@ import SvgIcon from 'material-ui/SvgIcon';
 import FoodIcon from '@material-ui/icons/Restaurant';
 import PlaceIcon from '@material-ui/icons/Place';
 import TodoIcon from '@material-ui/icons/Star';
+import teal from 'material-ui/colors/teal';
 
 export { APITodo, APIComment, APITag };
 
@@ -74,6 +75,9 @@ export class Todo {
     readonly createdAt: Date;
     readonly commentList: Comment[];
     readonly tagList: Tag[];
+    static GetCompleteColor() {
+        return teal[500];
+    }
     constructor(apiReturn: APITodo) {
         this.id = apiReturn.id;
         this.content = apiReturn.content;

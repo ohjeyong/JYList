@@ -1,9 +1,14 @@
 import * as React from 'react';
 import { Todo } from '../../models/todo';
 import Paper from 'material-ui/Paper';
+import Divider from 'material-ui/Divider';
+import Button from 'material-ui/Button';
 import { CategoryChip } from './CategoryChip';
 import { LikeButtonContainer } from '../../containers/todo/LikeButtonContainer';
 import { Tag } from './Tag';
+import { TimeAgo } from '../common';
+import red from 'material-ui/colors/red';
+import orange from 'material-ui/colors/orange';
 
 interface State {
     showComments: boolean;
@@ -40,12 +45,60 @@ export class TodoLi extends React.Component<Props, State> {
                                     ))}
                                 </div>
                             </div>
+                            <Divider/>
                             <div>
                                 댓글보기, 작성자, 시간
                             </div>
                         </div>
-                        <div>
-                            완료, 삭제 버튼
+                        <div className="TodoContentRight">
+                            {
+                                todo.isCompleted
+                                    ?
+                                    <React.Fragment>
+                                        <div
+                                            style={{
+                                                color: Todo.GetCompleteColor(),
+                                                fontWeight: 'bold',
+                                                fontSize: '1.2em'
+                                            }}
+                                        >
+                                            완료
+                                        </div>
+                                        <TimeAgo
+                                            date={todo.completeAt!}
+                                            style={{
+                                                fontSize: '0.6em',
+                                            }}
+                                        />
+                                        <Button
+                                            size="small"
+                                            style={{
+                                                color: orange[700]
+                                            }}
+                                        >
+                                            되돌리기
+                                        </Button>
+                                    </React.Fragment>
+                                    :
+                                    <React.Fragment>
+                                        <Button
+                                            style={{
+                                                color: Todo.GetCompleteColor()
+                                            }}
+                                            size="small"
+                                        >
+                                            완료
+                                        </Button>
+                                        <Button
+                                            size="small"
+                                            style={{
+                                                color: red[400]
+                                            }}
+                                        >
+                                            삭제
+                                        </Button>
+                                    </React.Fragment>
+                            }
                         </div>
                     </div>
                     {showComments ?

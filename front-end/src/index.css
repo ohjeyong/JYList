@@ -127,6 +127,13 @@ a {
 .TodoLi > div > .TodoLiUpper > div:first-child > .TodoMainContent > div:nth-child(2) {
     padding: 15px 0;
 }
+.TodoLi > div > .TodoLiUpper > .TodoContentRight {
+    border: 1px solid rgba(0,0,0,0.12);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 .CategoryChip {
     display: inline-block;
     max-width: 80px;
