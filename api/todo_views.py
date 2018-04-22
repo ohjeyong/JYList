@@ -12,9 +12,9 @@ from .todo_serializers import TodoSerializer, TagSerializer, CommentSerializer
 class TodoViewSet(FriendsQuerysetMixin, viewsets.ModelViewSet):
     serializer_class = TodoSerializer
     permission_classes = [IsAuthenticated]
-    queryset = Todo.objects.select_related('author')\
+    queryset = Todo.objects.select_related('author', 'complete_by')\
         .prefetch_related('todocomment_set', 'tag', 'todocomment_set__author', 'todocomment_set__author__auth_token',
-                          'author__auth_token').all().order_by('-created_at')
+                          'author__auth_token', 'complete_by__auth_token').all().order_by('-created_at')
 
     def create(self, request, *args, **kwargs):
         """

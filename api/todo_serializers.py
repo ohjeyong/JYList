@@ -35,9 +35,10 @@ class CommentSerializer(serializers.ModelSerializer):
 class TodoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Todo
-        fields = ('id', 'content', 'like', 'category', 'is_completed', 'complete_at', 'author', 'author_id',
-                  'created_at', 'comment_list', 'tag_list')
+        fields = ('id', 'content', 'like', 'category', 'is_completed', 'complete_at', 'complete_by', 'author',
+                  'author_id', 'created_at', 'comment_list', 'tag_list')
 
+    complete_by = UserSerializer(read_only=True)
     author = UserSerializer(read_only=True)
     author_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='author')
     comment_list = CommentSerializer(source='todocomment_set.all', many=True, read_only=True)
