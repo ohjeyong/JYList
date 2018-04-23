@@ -6,9 +6,12 @@ import { CategoryChip } from './CategoryChip';
 import { LikeButtonContainer } from '../../containers/todo/LikeButtonContainer';
 import { Tag } from './Tag';
 import { TimeAgo } from '../common';
+import { Comment } from '../../models/todo';
 import { RevertCompleteButtonContainer } from '../../containers/todo/RevertCompleteButtonContainer';
 import { CompleteButtonContainer } from '../../containers/todo/CompleteButtonContainer';
 import { DeleteButtonContainer } from '../../containers/todo/DeleteButtonContainer';
+import IconButton from 'material-ui/IconButton';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 interface State {
     showComments: boolean;
@@ -46,8 +49,23 @@ export class TodoLi extends React.Component<Props, State> {
                                 </div>
                             </div>
                             <Divider/>
-                            <div>
-                                댓글보기, 작성자, 시간
+                            <div className="TodoMainFooter">
+                                <div
+                                    style={{
+                                        cursor: 'pointer',
+                                        userSelect: 'none',
+                                        WebkitTapHighlightColor: 'transparent'
+                                    }}
+                                    onClick={() => this.setState({
+                                        showComments: !this.state.showComments
+                                    })}
+                                >
+                                    댓글({todo.commentList.length})
+                                </div>
+                                <div>
+                                    <TimeAgo date={todo.createdAt}/>
+                                    <span style={{marginLeft: '10px'}}>{todo.author.name}</span>
+                                </div>
                             </div>
                         </div>
                         <div className="TodoContentRight">
@@ -80,11 +98,77 @@ export class TodoLi extends React.Component<Props, State> {
                             }
                         </div>
                     </div>
-                    {showComments ?
-                        <div>
-                            댓글
-                        </div>
-                        : null}
+                    {
+                        showComments
+                        ?
+                            <div className="TodoLiLower">
+                                {
+                                    todo.commentList.length === 0
+                                    ?
+                                        null
+                                    :
+                                        <ul>
+                                            {todo.commentList.map((comment: Comment) => (
+                                                <li
+                                                    key={comment.id}
+                                                >
+                                                    <div>
+                                                        <div
+                                                            style={{
+                                                                margin: '6px 14px'
+                                                            }}
+                                                        >
+                                                            <div>
+                                                                <span
+                                                                    style={{
+                                                                        fontWeight: 'bold',
+                                                                        marginRight: '5px'
+                                                                    }}
+                                                                >
+                                                                    {comment.author.name}
+                                                                </span>
+                                                                <TimeAgo
+                                                                    date={comment.createdAt}
+                                                                    style={{
+                                                                        fontSize: '0.9em'
+                                                                    }}
+                                                                />
+                                                            </div>
+                                                            <div
+                                                                style={{
+                                                                    fontSize: '0.9em',
+                                                                    marginTop: '3px'
+                                                                }}
+                                                            >
+                                                                {comment.content}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <IconButton
+                                                            style={{
+                                                                height: '24px'
+                                                            }}
+                                                        >
+                                                            <DeleteIcon/>
+                                                        </IconButton>
+                                                    </div>
+                                                </li>
+                                            ))}
+                                        </ul>
+                                }
+                                <form className="TodoCommentForm">
+                                    <input type="text"/>
+                                    <button
+                                        type="submit"
+                                    >
+                                        쓰기
+                                    </button>
+                                </form>
+                            </div>
+                        :
+                            null
+                    }
                 </Paper>
             </li>
         );

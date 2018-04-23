@@ -134,6 +134,54 @@ a {
     justify-content: center;
     align-items: center;
 }
+.TodoLi > div > .TodoLiUpper > div:first-child > .TodoMainFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 14px;
+    color: rgba(0,0,0,0.54);
+    font-size: 0.85em;
+}
+.TodoLi > div > .TodoLiLower {
+    background-color: #f6f6f6;
+    border-top: 1px solid rgba(0,0,0,0.12);
+}
+.TodoLi > div > .TodoLiLower > ul > li {
+    display: flex;
+    font-size: 0.8em;
+    border-bottom: 1px solid rgba(0,0,0,0.12);
+}
+.TodoLi > div > .TodoLiLower > ul > li > div:first-child {
+    flex: 4;
+    border-right: 1px solid rgba(0,0,0,0.12);
+}
+.TodoLi > div > .TodoLiLower > ul > li > div:last-child {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.TodoLi > div > .TodoLiLower > .TodoCommentForm {
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.TodoLi > div > .TodoLiLower > .TodoCommentForm > input {
+    flex: 1;
+    padding: 4px 0;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    border: none;
+}
+.TodoLi > div > .TodoLiLower > .TodoCommentForm > button {
+    flex: 0 0 60px;
+    background-color: #dfdfdf;
+    padding: 4px 0;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border: none;
+}
 .CategoryChip {
     display: inline-block;
     max-width: 80px;
