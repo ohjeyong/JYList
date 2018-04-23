@@ -84,12 +84,17 @@ class TodoCommentViewSet(FriendsQuerysetMixin, viewsets.ModelViewSet):
         else:
             return Response(serializer.errors)
 
+    def update(self, request, *args, **kwargs):
+        comment = self.get_object()
+        if request.user.id != comment.author_id:
+            raise PermissionDenied()
+        return super(TodoCommentViewSet, self).update(request, *args, **kwargs)
+
     def destroy(self, request, *args, **kwargs):
         comment = self.get_object()
         if request.user.id != comment.author_id:
             raise PermissionDenied()
-        self.perform_destroy(comment)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return super(TodoCommentViewSet, self).destroy(request, *args, **kwargs)
 
 
 class TagListView(generics.ListAPIView):
