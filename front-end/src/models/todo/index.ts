@@ -14,7 +14,7 @@ export { APITodo, APIComment, APITag };
 
 export class Tag {
     readonly id: number;
-    readonly name: string;
+    name: string;
     constructor(apiReturn: Tag) {
         this.id = apiReturn.id;
         this.name = apiReturn.name;
@@ -53,7 +53,7 @@ export const Category: Category = {
 
 export class Comment {
     readonly id: number;
-    readonly content: string;
+    content: string;
     readonly author: User;
     readonly createdAt: Date;
     constructor(apiReturn: APIComment) {
@@ -66,15 +66,15 @@ export class Comment {
 
 export class Todo {
     readonly id: number;
-    readonly content: string;
-    readonly like: number;
-    readonly category: keyof typeof Category;
-    readonly isCompleted: boolean;
-    readonly completeAt: Date | null;
+    content: string;
+    like: number;
+    category: keyof typeof Category;
+    isCompleted: boolean;
+    completeAt: Date | null;
     readonly author: User;
     readonly createdAt: Date;
-    readonly commentList: Comment[];
-    readonly tagList: Tag[];
+    commentList: Comment[];
+    tagList: Tag[];
     static GetCompleteColor() {
         return teal[500];
     }

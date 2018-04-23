@@ -1,16 +1,18 @@
 import * as fromActions from '../actions';
-import { Todo } from '../models/todo';
+import { Todo, Comment } from '../models/todo';
 
 export interface TodoState {
     todoList: Todo[];
     loadingTodoList: boolean;
     alertTodoDelete: Todo | null;
+    alertCommentDelete: Comment | null;
 }
 
 const initialState: TodoState = {
     todoList: [],
     loadingTodoList: false,
     alertTodoDelete: null,
+    alertCommentDelete: null,
 };
 
 function replaceTodo(oldList: Todo[], todo: Todo) {
@@ -75,6 +77,22 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
             return {
                 ...state,
                 alertTodoDelete: action.payload
+            };
+        }
+        case fromActions.ActionTypes.REQUEST_TODO_COMMENT_DELETE: {
+            const { id, todo_id } = action.payload.data;
+            const todo = state.todoList.find((elem: Todo) => elem.id === todo_id);
+            todo!.commentList = todo!.commentList.filter((elem: Comment) => elem.id !== id);
+            return {
+                ...state,
+                todoList: replaceTodo(state.todoList, todo!),
+                alertCommentDelete: null
+            };
+        }
+        case fromActions.ActionTypes.SET_ALERT_TODO_COMMENT_DELETE: {
+            return {
+                ...state,
+                alertCommentDelete: action.payload
             };
         }
         default: {

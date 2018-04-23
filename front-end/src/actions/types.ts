@@ -1,7 +1,7 @@
 import { AxiosResponse, AxiosError } from 'axios';
 import { createAction } from './action-helpers';
 import { APIUser } from '../models/user';
-import { APITodo, Todo } from '../models/todo';
+import { APITodo, Todo, Comment } from '../models/todo';
 
 export enum ActionTypes {
     GET_LOGIN_USER_INFO_BY_TOKEN_PENDING = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/PENDING',
@@ -28,6 +28,8 @@ export enum ActionTypes {
     REQUEST_TODO_COMPLETE = '[todo] REQUEST_TODO_COMPLETE',
     REQUEST_TODO_DELETE = '[todo] REQUEST_TODO_DELETE',
     SET_ALERT_TODO_DELETE = '[todo] SET_ALERT_TODO_DELETE',
+    REQUEST_TODO_COMMENT_DELETE = '[todo] REQUEST_TODO_COMMENT_DELETE',
+    SET_ALERT_TODO_COMMENT_DELETE = '[todo] SET_ALERT_TODO_COMMENT_DELETE',
 }
 
 export const actions = {
@@ -64,6 +66,10 @@ export const actions = {
     requestTodoDelete: (response: AxiosResponse<{id: number}>) =>
         createAction(ActionTypes.REQUEST_TODO_DELETE, response),
     setAlertTodoDelete: (todo: Todo | null) => createAction(ActionTypes.SET_ALERT_TODO_DELETE, todo),
+    requestTodoCommentDelete: (response: AxiosResponse<{id: number, todo_id: number}>) =>
+        createAction(ActionTypes.REQUEST_TODO_COMMENT_DELETE, response),
+    setAlertTodoCommentDelete: (comment: Comment | null) =>
+        createAction(ActionTypes.SET_ALERT_TODO_COMMENT_DELETE, comment),
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

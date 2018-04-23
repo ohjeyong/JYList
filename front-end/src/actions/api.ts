@@ -3,7 +3,7 @@ import { actions } from './types';
 import { getAuthToken } from '../utils/localStorage';
 import { Dispatch } from 'react-redux';
 import { RootReducer } from '../reducers';
-import { Todo } from '../models/todo';
+import { Todo, Comment } from '../models/todo';
 
 axios.defaults.baseURL = 'http://localhost:8000';
 
@@ -139,4 +139,15 @@ export const thunksActionCreators = {
         };
     },
     setAlertTodoDelete: (todo: Todo | null) => actions.setAlertTodoDelete(todo),
+    requestTodoCommentDelete: (comment: Comment) => {
+        return async (dispatch: Dispatch<RootReducer>) => {
+            try {
+                const response = await axios.delete(`/api/todo-comment/${comment.id}/`);
+                dispatch(actions.requestTodoCommentDelete(response));
+            } catch (error) {
+                dispatch(actions.setAppErrorMessage(error.message));
+            }
+        };
+    },
+    setAlertTodoCommentDelete: (comment: Comment | null) => actions.setAlertTodoCommentDelete(comment),
 };

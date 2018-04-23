@@ -10,8 +10,7 @@ import { Comment } from '../../models/todo';
 import { RevertCompleteButtonContainer } from '../../containers/todo/RevertCompleteButtonContainer';
 import { CompleteButtonContainer } from '../../containers/todo/CompleteButtonContainer';
 import { DeleteButtonContainer } from '../../containers/todo/DeleteButtonContainer';
-import IconButton from 'material-ui/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import { TodoCommentDeleteButtonContainer } from '../../containers/todo/TodoCommentDeleteButtonContainer';
 
 interface State {
     showComments: boolean;
@@ -145,13 +144,7 @@ export class TodoLi extends React.Component<Props, State> {
                                                         </div>
                                                     </div>
                                                     <div>
-                                                        <IconButton
-                                                            style={{
-                                                                height: '24px'
-                                                            }}
-                                                        >
-                                                            <DeleteIcon/>
-                                                        </IconButton>
+                                                        <TodoCommentDeleteButtonContainer comment={comment}/>
                                                     </div>
                                                 </li>
                                             ))}

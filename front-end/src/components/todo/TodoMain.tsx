@@ -3,6 +3,7 @@ import { CircularProgress } from 'material-ui/Progress';
 import { TodoMain as Props } from '../../containers/todo/TodoMainContainer';
 import { TodoList } from './TodoList';
 import { DialogTodoDeleteAlertContainer } from '../../containers/todo/DialogTodoDeleteAlertContainer';
+import { DialogTodoCommentDeleteAlertContainer } from '../../containers/todo/DialogTodoCommentDeleteAlertContainer';
 
 export class TodoMain extends React.Component<Props> {
     componentDidMount() {
@@ -23,6 +24,7 @@ export class TodoMain extends React.Component<Props> {
                     emptyTodoListText="Todo 를 추가해보세요!"
                 />
                 <DialogTodoDeleteAlertContainer/>
+                <DialogTodoCommentDeleteAlertContainer/>
             </React.Fragment>
         );
     }
