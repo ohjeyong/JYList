@@ -80,7 +80,7 @@ class TodoCommentViewSet(FriendsQuerysetMixin, viewsets.ModelViewSet):
         serializer = self.get_serializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({'todo_id': data['todo_id'], 'comment': serializer.data}, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors)
 
