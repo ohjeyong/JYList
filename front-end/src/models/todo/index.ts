@@ -21,13 +21,13 @@ export class Tag {
     }
 }
 
-interface CategoryInner {
+export interface CategoryInner {
     value: string;
     color: string;
     icon: typeof SvgIcon;
 }
 
-interface Category {
+export interface Category {
     FOOD: CategoryInner;
     PLACE: CategoryInner;
     TODO: CategoryInner;

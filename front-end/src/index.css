@@ -225,3 +225,44 @@ a {
     display: flex;
     flex-direction: column;
 }
+.TodoRouterWrapper > .TodoList {
+    flex: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.TodoRouterWrapper > .TodoList > .TodoListFilterWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+}
+.TodoRouterWrapper > .TodoList > .TodoListFilterWrapper > .TodoListFilterUpper {
+    display: flex;
+    position: relative;
+}
+.TodoRouterWrapper > .TodoList > ul {
+    flex: 1;
+    overflow-y: auto;
+}
+.CategorySelector {
+    flex: 1;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8em;
+    cursor: pointer;
+    padding: 4px 8px;
+    transition: color 0.5s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+.CategorySelectorMovingBorder {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 25%;
+    height: 28px;
+    border-radius: 15px;
+    transition: 0.5s;
+}
