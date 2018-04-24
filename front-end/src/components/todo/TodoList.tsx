@@ -55,27 +55,27 @@ export class TodoList extends React.Component<Props, State> {
     onChangeCategory = (category: keyof typeof Category) => {
         this.setState({
             category: category,
-            filteredTodoList: this.getFilteredTodoList()
+            filteredTodoList: this.getFilteredTodoList(category, this.state.completeCategory, this.state.searchTerm)
         });
     }
 
     onChangeCompleteCategory = (completeCateogry: keyof typeof CompleteCategory) => {
         this.setState({
             completeCategory: completeCateogry,
-            filteredTodoList: this.getFilteredTodoList()
+            filteredTodoList: this.getFilteredTodoList(this.state.category, completeCateogry, this.state.searchTerm)
         });
     }
 
     onChangeSearchTerm = (searchTerm: string) => {
         this.setState({
             searchTerm,
-            filteredTodoList: this.getFilteredTodoList()
+            filteredTodoList: this.getFilteredTodoList(this.state.category, this.state.completeCategory, searchTerm)
         });
     }
 
-    getFilteredTodoList = (): Todo[] => {
+    getFilteredTodoList = (category: keyof typeof Category, completeCategory: keyof typeof CompleteCategory,
+                           searchTerm: string): Todo[] => {
         const { todoList } = this.props;
-        const { category, completeCategory, searchTerm } = this.state;
         return todoList.filter((elem: Todo) => {
             if (category !== 'ALL') {
                 if (elem.category !== category) {
