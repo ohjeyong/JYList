@@ -1,7 +1,7 @@
 import { AxiosResponse, AxiosError } from 'axios';
 import { createAction } from './action-helpers';
 import { APIUser } from '../models/user';
-import { APITodo, Todo, Comment } from '../models/todo';
+import { APITodo, Todo, Comment, APIComment } from '../models/todo';
 
 export enum ActionTypes {
     GET_LOGIN_USER_INFO_BY_TOKEN_PENDING = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/PENDING',
@@ -30,6 +30,10 @@ export enum ActionTypes {
     SET_ALERT_TODO_DELETE = '[todo] SET_ALERT_TODO_DELETE',
     REQUEST_TODO_COMMENT_DELETE = '[todo] REQUEST_TODO_COMMENT_DELETE',
     SET_ALERT_TODO_COMMENT_DELETE = '[todo] SET_ALERT_TODO_COMMENT_DELETE',
+    REQUEST_CREATE_TODO_COMMENT_PENDING = '[todo] REQUEST_CREATE_TODO_COMMENT_PENDING',
+    REQUEST_CREATE_TODO_COMMENT_FULFILLED = '[todo] REQUEST_CREATE_TODO_COMMENT_FULFILLED',
+    REQUEST_CREATE_TODO_COMMENT_REJECTED = '[todo] REQUEST_CREATE_TODO_COMMENT_REJECTED',
+    SET_TODO_COMMENT_FORM_VALUE = '[todo] SET_TODO_COMMENT_FORM_VALUE',
 }
 
 export const actions = {
@@ -70,6 +74,12 @@ export const actions = {
         createAction(ActionTypes.REQUEST_TODO_COMMENT_DELETE, response),
     setAlertTodoCommentDelete: (comment: Comment | null) =>
         createAction(ActionTypes.SET_ALERT_TODO_COMMENT_DELETE, comment),
+    requestCreateTodoCommentPending: () => createAction(ActionTypes.REQUEST_CREATE_TODO_COMMENT_PENDING),
+    requestCreateTodoCommentFulfilled: (response: AxiosResponse<{todo_id: number, comment: APIComment}>) =>
+        createAction(ActionTypes.REQUEST_CREATE_TODO_COMMENT_FULFILLED, response),
+    requestCreateTodoCommentRejected: (response: AxiosResponse) =>
+        createAction(ActionTypes.REQUEST_CREATE_TODO_COMMENT_REJECTED, response),
+    setTodoCommentFormValue: (value: string) => createAction(ActionTypes.SET_TODO_COMMENT_FORM_VALUE, value)
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

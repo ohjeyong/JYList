@@ -6,6 +6,11 @@ export interface TodoState {
     loadingTodoList: boolean;
     alertTodoDelete: Todo | null;
     alertCommentDelete: Comment | null;
+    commentFormLoading: boolean;
+    commentFormValue: string;
+    commentFormError: {
+        content?: string[]
+    };
 }
 
 const initialState: TodoState = {
@@ -13,6 +18,9 @@ const initialState: TodoState = {
     loadingTodoList: false,
     alertTodoDelete: null,
     alertCommentDelete: null,
+    commentFormLoading: false,
+    commentFormValue: '',
+    commentFormError: {},
 };
 
 function replaceTodo(oldList: Todo[], todo: Todo) {
@@ -93,6 +101,38 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
             return {
                 ...state,
                 alertCommentDelete: action.payload
+            };
+        }
+        case fromActions.ActionTypes.REQUEST_CREATE_TODO_COMMENT_PENDING: {
+            return {
+                ...state,
+                commentFormLoading: true
+            };
+        }
+        case fromActions.ActionTypes.REQUEST_CREATE_TODO_COMMENT_FULFILLED: {
+            const todo_id = action.payload.data.todo_id;
+            const comment = new Comment(action.payload.data.comment);
+            const todo = state.todoList.find((elem: Todo) => elem.id === todo_id);
+            todo!.commentList = [...todo!.commentList, comment];
+            return {
+                ...state,
+                commentFormLoading: false,
+                todoList: replaceTodo(state.todoList, todo!),
+                commentFormError: {},
+                commentFormValue: ''
+            };
+        }
+        case fromActions.ActionTypes.SET_TODO_COMMENT_FORM_VALUE: {
+            return {
+                ...state,
+                commentFormValue: action.payload
+            };
+        }
+        case fromActions.ActionTypes.REQUEST_CREATE_TODO_COMMENT_REJECTED: {
+            return {
+                ...state,
+                commentFormLoading: false,
+                commentFormError: action.payload.data
             };
         }
         default: {

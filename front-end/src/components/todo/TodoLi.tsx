@@ -11,6 +11,7 @@ import { RevertCompleteButtonContainer } from '../../containers/todo/RevertCompl
 import { CompleteButtonContainer } from '../../containers/todo/CompleteButtonContainer';
 import { DeleteButtonContainer } from '../../containers/todo/DeleteButtonContainer';
 import { TodoCommentDeleteButtonContainer } from '../../containers/todo/TodoCommentDeleteButtonContainer';
+import { TodoCommentFormContainer } from '../../containers/todo/TodoCommentFormContainer';
 
 interface State {
     showComments: boolean;
@@ -150,14 +151,9 @@ export class TodoLi extends React.Component<Props, State> {
                                             ))}
                                         </ul>
                                 }
-                                <form className="TodoCommentForm">
-                                    <input type="text"/>
-                                    <button
-                                        type="submit"
-                                    >
-                                        쓰기
-                                    </button>
-                                </form>
+                                <TodoCommentFormContainer
+                                    todo={todo}
+                                />
                             </div>
                         :
                             null
