@@ -4,6 +4,10 @@ import { Todo, Category as CategoryType, CategoryInner as CategoryInnerType, Tag
 import { CategorySelector } from './CategorySelector';
 import blueGrey from 'material-ui/colors/blueGrey';
 import AllIcon from '@material-ui/icons/Subject';
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
+import Input, { InputAdornment } from 'material-ui/Input';
+import SearchIcon from '@material-ui/icons/Search';
 
 interface Category extends CategoryType {
     ALL: CategoryInnerType;
@@ -28,6 +32,7 @@ interface State {
     category: keyof typeof Category;
     completeCategory: keyof typeof CompleteCategory;
     searchTerm: string;
+    filteredTodoList: Todo[];
 }
 
 interface Props {
@@ -43,12 +48,28 @@ export class TodoList extends React.Component<Props, State> {
             category: 'ALL',
             completeCategory: 'all',
             searchTerm: '',
+            filteredTodoList: props.todoList
         };
     }
 
     onChangeCategory = (category: keyof typeof Category) => {
         this.setState({
-            category: category
+            category: category,
+            filteredTodoList: this.getFilteredTodoList()
+        });
+    }
+
+    onChangeCompleteCategory = (completeCateogry: keyof typeof CompleteCategory) => {
+        this.setState({
+            completeCategory: completeCateogry,
+            filteredTodoList: this.getFilteredTodoList()
+        });
+    }
+
+    onChangeSearchTerm = (searchTerm: string) => {
+        this.setState({
+            searchTerm,
+            filteredTodoList: this.getFilteredTodoList()
         });
     }
 
@@ -91,68 +112,104 @@ export class TodoList extends React.Component<Props, State> {
 
     render() {
         const { emptyTodoListText } = this.props;
-        const { category } = this.state;
-        const filteredTodoList = this.getFilteredTodoList();
-        if (filteredTodoList.length === 0) {
-            return (
-                <span className="HelpText" style={{margin: 'auto'}}>{emptyTodoListText || 'Todo 가 없습니다.'}</span>
-            );
-        } else {
-            let categorySelectorMovingBorderLeft = '0';
-            if (category === 'ALL') {
-                categorySelectorMovingBorderLeft = '0';
-            } else if (category === 'FOOD') {
-                categorySelectorMovingBorderLeft = '25%';
-            } else if (category === 'PLACE') {
-                categorySelectorMovingBorderLeft = '50%';
-            } else if (category === 'TODO') {
-                categorySelectorMovingBorderLeft = '75%';
-            }
-            return (
-                <div className="TodoList">
-                    <div className="TodoListFilterWrapper">
-                        <div className="TodoListFilterUpper">
-                            <div
-                                className="CategorySelectorMovingBorder"
-                                style={{
-                                    border: `1px solid ${Category[category].color}`,
-                                    left: categorySelectorMovingBorderLeft
-                                }}
-                            />
-                            <CategorySelector
-                                category="ALL"
-                                isActive={category === 'ALL'}
-                                onClick={this.onChangeCategory}
-                            />
-                            <CategorySelector
-                                category="FOOD"
-                                isActive={category === 'FOOD'}
-                                onClick={this.onChangeCategory}
-                            />
-                            <CategorySelector
-                                category="PLACE"
-                                isActive={category === 'PLACE'}
-                                onClick={this.onChangeCategory}
-                            />
-                            <CategorySelector
-                                category="TODO"
-                                isActive={category === 'TODO'}
-                                onClick={this.onChangeCategory}
-                            />
-                        </div>
-                        <div>
-                            selector, textfield
-                        </div>
-                    </div>
-                    <ul>
-                        {filteredTodoList.map((eachTodo: Todo) => {
-                            return (
-                                <TodoLi key={eachTodo.id} todo={eachTodo}/>
-                            );
-                        })}
-                    </ul>
-                </div>
-            );
+        const { category, completeCategory, searchTerm, filteredTodoList } = this.state;
+        let categorySelectorMovingBorderLeft = '0';
+        if (category === 'ALL') {
+            categorySelectorMovingBorderLeft = '0';
+        } else if (category === 'FOOD') {
+            categorySelectorMovingBorderLeft = '25%';
+        } else if (category === 'PLACE') {
+            categorySelectorMovingBorderLeft = '50%';
+        } else if (category === 'TODO') {
+            categorySelectorMovingBorderLeft = '75%';
         }
+        return (
+            <div className="TodoList">
+                <div className="TodoListFilterWrapper">
+                    <div className="TodoListFilterUpper">
+                        <div
+                            className="CategorySelectorMovingBorder"
+                            style={{
+                                border: `1px solid ${Category[category].color}`,
+                                left: categorySelectorMovingBorderLeft
+                            }}
+                        />
+                        <CategorySelector
+                            category="ALL"
+                            isActive={category === 'ALL'}
+                            onClick={this.onChangeCategory}
+                        />
+                        <CategorySelector
+                            category="FOOD"
+                            isActive={category === 'FOOD'}
+                            onClick={this.onChangeCategory}
+                        />
+                        <CategorySelector
+                            category="PLACE"
+                            isActive={category === 'PLACE'}
+                            onClick={this.onChangeCategory}
+                        />
+                        <CategorySelector
+                            category="TODO"
+                            isActive={category === 'TODO'}
+                            onClick={this.onChangeCategory}
+                        />
+                    </div>
+                    <div
+                        className="TodoListFilterLower"
+                    >
+                        <Select
+                            style={{
+                                fontSize: '0.8em'
+                            }}
+                            value={completeCategory}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                this.onChangeCompleteCategory(e.target.value as keyof typeof CompleteCategory);
+                            }}
+                        >
+                            <MenuItem value="all">
+                                {CompleteCategory.all}
+                            </MenuItem>
+                            <MenuItem value="complete">
+                                {CompleteCategory.complete}
+                            </MenuItem>
+                            <MenuItem value="notComplete">
+                                {CompleteCategory.notComplete}
+                            </MenuItem>
+                        </Select>
+                        <Input
+                            fullWidth={true}
+                            style={{
+                                marginLeft: '20px',
+                                fontSize: '0.8em'
+                            }}
+                            value={searchTerm}
+                            placeholder="내용, 태그로 검색"
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                this.onChangeSearchTerm(e.currentTarget.value);
+                            }}
+                            endAdornment={
+                                <InputAdornment position="end">
+                                    <SearchIcon/>
+                                </InputAdornment>
+                            }
+                        />
+                    </div>
+                </div>
+                {
+                    filteredTodoList.length === 0
+                    ?
+                        <span className="HelpText" style={{margin: 'auto'}}>{emptyTodoListText || 'Todo 가 없습니다.'}</span>
+                    :
+                        <ul>
+                            {filteredTodoList.map((eachTodo: Todo) => {
+                                return (
+                                    <TodoLi key={eachTodo.id} todo={eachTodo}/>
+                                );
+                            })}
+                        </ul>
+                }
+            </div>
+        );
     }
 }
