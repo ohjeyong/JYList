@@ -152,7 +152,7 @@ export const thunksActionCreators = {
         setAlertTodoCommentDelete: (comment: Comment | null) => actions.setAlertTodoCommentDelete(comment),
         requestCreateTodoComment: (todoId: number, content: string) => {
             return async (dispatch: Dispatch<RootReducer>) => {
-                dispatch(actions.requestCreateTodoCommentPending);
+                dispatch(actions.requestCreateTodoCommentPending());
                 try {
                     const response = await axios.post(`/api/todo-comment/`, {
                         todo_id: todoId,

@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import * as React from 'react';
 import { TodoCommentForm as Props } from '../../containers/todo/TodoCommentFormContainer';
 import red from 'material-ui/colors/red';
+import { CircularProgress } from 'material-ui/Progress';
 
 export const TodoCommentForm: React.SFC<Props> = (props: Props) => (
     <div className="TodoCommentForm">
@@ -22,8 +23,17 @@ export const TodoCommentForm: React.SFC<Props> = (props: Props) => (
             />
             <button
                 type="submit"
+                disabled={props.commentFormLoading}
             >
-                쓰기
+                {
+                    props.commentFormLoading
+                    ?
+                        <CircularProgress
+                            size="11px"
+                        />
+                    :
+                        '쓰기'
+                }
             </button>
         </form>
         {
