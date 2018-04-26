@@ -8,6 +8,9 @@ import Select from 'material-ui/Select';
 import { MenuItem } from 'material-ui/Menu';
 import Input, { InputAdornment } from 'material-ui/Input';
 import SearchIcon from '@material-ui/icons/Search';
+import { DialogTodoDeleteAlertContainer } from '../../containers/todo/DialogTodoDeleteAlertContainer';
+import { DialogTodoCommentDeleteAlertContainer } from '../../containers/todo/DialogTodoCommentDeleteAlertContainer';
+import { TodoFormTriggerButtonContainer } from '../../containers/todo/TodoFormTriggerButtonContainer';
 
 interface Category extends CategoryType {
     ALL: CategoryInnerType;
@@ -120,92 +123,105 @@ export class TodoList extends React.Component<Props, State> {
             categorySelectorMovingBorderLeft = '75%';
         }
         return (
-            <div className="TodoList">
-                <div className="TodoListFilterWrapper">
-                    <div className="TodoListFilterUpper">
+            <React.Fragment>
+                <DialogTodoDeleteAlertContainer/>
+                <DialogTodoCommentDeleteAlertContainer/>
+                <TodoFormTriggerButtonContainer
+                    style={{
+                        position: 'absolute',
+                        bottom: '15px',
+                        right: '15px'
+                    }}
+                />
+                <div className="TodoList">
+                    <div className="TodoListFilterWrapper">
+                        <div className="TodoListFilterUpper">
+                            <div
+                                className="CategorySelectorMovingBorder"
+                                style={{
+                                    border: `1px solid ${Category[category].color}`,
+                                    left: categorySelectorMovingBorderLeft
+                                }}
+                            />
+                            <CategorySelector
+                                category="ALL"
+                                isActive={category === 'ALL'}
+                                onClick={this.onChangeCategory}
+                            />
+                            <CategorySelector
+                                category="FOOD"
+                                isActive={category === 'FOOD'}
+                                onClick={this.onChangeCategory}
+                            />
+                            <CategorySelector
+                                category="PLACE"
+                                isActive={category === 'PLACE'}
+                                onClick={this.onChangeCategory}
+                            />
+                            <CategorySelector
+                                category="TODO"
+                                isActive={category === 'TODO'}
+                                onClick={this.onChangeCategory}
+                            />
+                        </div>
                         <div
-                            className="CategorySelectorMovingBorder"
-                            style={{
-                                border: `1px solid ${Category[category].color}`,
-                                left: categorySelectorMovingBorderLeft
-                            }}
-                        />
-                        <CategorySelector
-                            category="ALL"
-                            isActive={category === 'ALL'}
-                            onClick={this.onChangeCategory}
-                        />
-                        <CategorySelector
-                            category="FOOD"
-                            isActive={category === 'FOOD'}
-                            onClick={this.onChangeCategory}
-                        />
-                        <CategorySelector
-                            category="PLACE"
-                            isActive={category === 'PLACE'}
-                            onClick={this.onChangeCategory}
-                        />
-                        <CategorySelector
-                            category="TODO"
-                            isActive={category === 'TODO'}
-                            onClick={this.onChangeCategory}
-                        />
-                    </div>
-                    <div
-                        className="TodoListFilterLower"
-                    >
-                        <Select
-                            style={{
-                                fontSize: '0.8em'
-                            }}
-                            value={completeCategory}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                this.onChangeCompleteCategory(e.target.value as keyof typeof CompleteCategory);
-                            }}
+                            className="TodoListFilterLower"
                         >
-                            <MenuItem value="all">
-                                {CompleteCategory.all}
-                            </MenuItem>
-                            <MenuItem value="complete">
-                                {CompleteCategory.complete}
-                            </MenuItem>
-                            <MenuItem value="notComplete">
-                                {CompleteCategory.notComplete}
-                            </MenuItem>
-                        </Select>
-                        <Input
-                            fullWidth={true}
-                            style={{
-                                marginLeft: '20px',
-                                fontSize: '0.8em'
-                            }}
-                            value={searchTerm}
-                            placeholder="내용, 태그로 검색"
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                                this.onChangeSearchTerm(e.currentTarget.value);
-                            }}
-                            endAdornment={
-                                <InputAdornment position="end">
-                                    <SearchIcon/>
-                                </InputAdornment>
-                            }
-                        />
+                            <Select
+                                style={{
+                                    fontSize: '0.8em'
+                                }}
+                                value={completeCategory}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    this.onChangeCompleteCategory(e.target.value as keyof typeof CompleteCategory);
+                                }}
+                            >
+                                <MenuItem value="all">
+                                    {CompleteCategory.all}
+                                </MenuItem>
+                                <MenuItem value="complete">
+                                    {CompleteCategory.complete}
+                                </MenuItem>
+                                <MenuItem value="notComplete">
+                                    {CompleteCategory.notComplete}
+                                </MenuItem>
+                            </Select>
+                            <Input
+                                fullWidth={true}
+                                style={{
+                                    marginLeft: '20px',
+                                    fontSize: '0.8em'
+                                }}
+                                value={searchTerm}
+                                placeholder="내용, 태그로 검색"
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                    this.onChangeSearchTerm(e.currentTarget.value);
+                                }}
+                                endAdornment={
+                                    <InputAdornment position="end">
+                                        <SearchIcon/>
+                                    </InputAdornment>
+                                }
+                            />
+                        </div>
                     </div>
+                    {
+                        filteredTodoList.length === 0
+                            ?
+                            <span className="HelpText" style={{margin: 'auto'}}>
+                                {emptyTodoListText || 'Todo 가 없습니다.'}
+                            </span>
+                            :
+                            <ul>
+                                {filteredTodoList.map((eachTodo: Todo) => {
+                                    return (
+                                        <TodoLi key={eachTodo.id} todo={eachTodo}/>
+                                    );
+                                })}
+                            </ul>
+                    }
                 </div>
-                {
-                    filteredTodoList.length === 0
-                    ?
-                        <span className="HelpText" style={{margin: 'auto'}}>{emptyTodoListText || 'Todo 가 없습니다.'}</span>
-                    :
-                        <ul>
-                            {filteredTodoList.map((eachTodo: Todo) => {
-                                return (
-                                    <TodoLi key={eachTodo.id} todo={eachTodo}/>
-                                );
-                            })}
-                        </ul>
-                }
-            </div>
+            </React.Fragment>
         );
     }
 }
