@@ -169,4 +169,5 @@ export const thunksActionCreators = {
             };
         },
         setTodoCommentFormValue: (value: string) => actions.setTodoCommentFormValue(value),
+        setShowTodoForm: (value: boolean) => actions.setShowTodoForm(value),
 };

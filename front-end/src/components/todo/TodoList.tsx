@@ -32,7 +32,6 @@ interface State {
     category: keyof typeof Category;
     completeCategory: keyof typeof CompleteCategory;
     searchTerm: string;
-    filteredTodoList: Todo[];
 }
 
 interface Props {
@@ -48,34 +47,30 @@ export class TodoList extends React.Component<Props, State> {
             category: 'ALL',
             completeCategory: 'all',
             searchTerm: '',
-            filteredTodoList: props.todoList
         };
     }
 
     onChangeCategory = (category: keyof typeof Category) => {
         this.setState({
             category: category,
-            filteredTodoList: this.getFilteredTodoList(category, this.state.completeCategory, this.state.searchTerm)
         });
     }
 
     onChangeCompleteCategory = (completeCateogry: keyof typeof CompleteCategory) => {
         this.setState({
             completeCategory: completeCateogry,
-            filteredTodoList: this.getFilteredTodoList(this.state.category, completeCateogry, this.state.searchTerm)
         });
     }
 
     onChangeSearchTerm = (searchTerm: string) => {
         this.setState({
             searchTerm,
-            filteredTodoList: this.getFilteredTodoList(this.state.category, this.state.completeCategory, searchTerm)
         });
     }
 
-    getFilteredTodoList = (category: keyof typeof Category, completeCategory: keyof typeof CompleteCategory,
-                           searchTerm: string): Todo[] => {
+    getFilteredTodoList = (): Todo[] => {
         const { todoList } = this.props;
+        const { category, completeCategory, searchTerm } = this.state;
         return todoList.filter((elem: Todo) => {
             if (category !== 'ALL') {
                 if (elem.category !== category) {
@@ -112,7 +107,8 @@ export class TodoList extends React.Component<Props, State> {
 
     render() {
         const { emptyTodoListText } = this.props;
-        const { category, completeCategory, searchTerm, filteredTodoList } = this.state;
+        const { category, completeCategory, searchTerm } = this.state;
+        const filteredTodoList = this.getFilteredTodoList();
         let categorySelectorMovingBorderLeft = '0';
         if (category === 'ALL') {
             categorySelectorMovingBorderLeft = '0';

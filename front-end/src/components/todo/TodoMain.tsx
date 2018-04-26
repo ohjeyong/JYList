@@ -4,6 +4,7 @@ import { TodoMain as Props } from '../../containers/todo/TodoMainContainer';
 import { TodoList } from './TodoList';
 import { DialogTodoDeleteAlertContainer } from '../../containers/todo/DialogTodoDeleteAlertContainer';
 import { DialogTodoCommentDeleteAlertContainer } from '../../containers/todo/DialogTodoCommentDeleteAlertContainer';
+import { TodoFormTriggerButtonContainer } from '../../containers/todo/TodoFormTriggerButtonContainer';
 
 export class TodoMain extends React.Component<Props> {
     componentDidMount() {
@@ -25,6 +26,13 @@ export class TodoMain extends React.Component<Props> {
                 />
                 <DialogTodoDeleteAlertContainer/>
                 <DialogTodoCommentDeleteAlertContainer/>
+                <TodoFormTriggerButtonContainer
+                    style={{
+                        position: 'absolute',
+                        bottom: '15px',
+                        right: '15px'
+                    }}
+                />
             </React.Fragment>
         );
     }

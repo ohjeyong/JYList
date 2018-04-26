@@ -34,6 +34,7 @@ export enum ActionTypes {
     REQUEST_CREATE_TODO_COMMENT_FULFILLED = '[todo] REQUEST_CREATE_TODO_COMMENT_FULFILLED',
     REQUEST_CREATE_TODO_COMMENT_REJECTED = '[todo] REQUEST_CREATE_TODO_COMMENT_REJECTED',
     SET_TODO_COMMENT_FORM_VALUE = '[todo] SET_TODO_COMMENT_FORM_VALUE',
+    SET_SHOW_TODO_FORM = '[todo] SET_SHOW_TODO_FORM'
 }
 
 export const actions = {
@@ -79,7 +80,8 @@ export const actions = {
         createAction(ActionTypes.REQUEST_CREATE_TODO_COMMENT_FULFILLED, response),
     requestCreateTodoCommentRejected: (response: AxiosResponse) =>
         createAction(ActionTypes.REQUEST_CREATE_TODO_COMMENT_REJECTED, response),
-    setTodoCommentFormValue: (value: string) => createAction(ActionTypes.SET_TODO_COMMENT_FORM_VALUE, value)
+    setTodoCommentFormValue: (value: string) => createAction(ActionTypes.SET_TODO_COMMENT_FORM_VALUE, value),
+    setShowTodoForm: (value: boolean) => createAction(ActionTypes.SET_SHOW_TODO_FORM, value),
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

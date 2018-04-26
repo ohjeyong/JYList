@@ -11,6 +11,7 @@ export interface TodoState {
     commentFormError: {
         content?: string[]
     };
+    showTodoForm: boolean;
 }
 
 const initialState: TodoState = {
@@ -21,6 +22,7 @@ const initialState: TodoState = {
     commentFormLoading: false,
     commentFormValue: '',
     commentFormError: {},
+    showTodoForm: false,
 };
 
 function replaceTodo(oldList: Todo[], todo: Todo) {
@@ -133,6 +135,12 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
                 ...state,
                 commentFormLoading: false,
                 commentFormError: action.payload.data
+            };
+        }
+        case fromActions.ActionTypes.SET_SHOW_TODO_FORM: {
+            return {
+                ...state,
+                showTodoForm: action.payload
             };
         }
         default: {
