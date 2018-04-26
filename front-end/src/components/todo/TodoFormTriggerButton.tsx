@@ -9,6 +9,7 @@ export const TodoFormTriggerButton: React.SFC<Props> = (props: Props) => {
             variant="fab"
             onClick={() => props.setShowTodoForm(true)}
             style={{
+                zIndex: 1,
                 ...props.style
             }}
             color="primary"

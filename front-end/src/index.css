@@ -275,3 +275,11 @@ a {
     align-items: center;
     margin-top: 5px;
 }
+.TodoFormToolbar {
+    justify-content: space-between;
+    color: white;
+}
+.TodoFormToolbar > div:first-child {
+    display: flex;
+    align-items: center;
+}

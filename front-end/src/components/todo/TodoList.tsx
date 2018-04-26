@@ -11,6 +11,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import { DialogTodoDeleteAlertContainer } from '../../containers/todo/DialogTodoDeleteAlertContainer';
 import { DialogTodoCommentDeleteAlertContainer } from '../../containers/todo/DialogTodoCommentDeleteAlertContainer';
 import { TodoFormTriggerButtonContainer } from '../../containers/todo/TodoFormTriggerButtonContainer';
+import { TodoFormDialogContainer } from '../../containers/todo/TodoFormDialogContainer';
 
 interface Category extends CategoryType {
     ALL: CategoryInnerType;
@@ -126,6 +127,7 @@ export class TodoList extends React.Component<Props, State> {
             <React.Fragment>
                 <DialogTodoDeleteAlertContainer/>
                 <DialogTodoCommentDeleteAlertContainer/>
+                <TodoFormDialogContainer/>
                 <TodoFormTriggerButtonContainer
                     style={{
                         position: 'absolute',
