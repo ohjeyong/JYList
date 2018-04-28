@@ -170,4 +170,19 @@ export const thunksActionCreators = {
         },
         setTodoCommentFormValue: (value: string) => actions.setTodoCommentFormValue(value),
         setShowTodoForm: (value: boolean) => actions.setShowTodoForm(value),
+        fetchTagListByQuery: (value: string) => {
+            return async (dispatch: Dispatch<RootReducer>) => {
+                dispatch(actions.fetchTagListByQueryPending());
+                try {
+                    const response = await axios.get(`/api/tag/search/`, {
+                        params: {
+                            q: value
+                        }
+                    });
+                    dispatch(actions.fetchTagListByQueryFulfilled(response));
+                } catch (error) {
+                    dispatch(actions.setAppErrorMessage(error.message));
+                }
+            };
+        }
 };

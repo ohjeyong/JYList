@@ -1,7 +1,7 @@
 import { AxiosResponse, AxiosError } from 'axios';
 import { createAction } from './action-helpers';
 import { APIUser } from '../models/user';
-import { APITodo, Todo, Comment, APIComment } from '../models/todo';
+import { APITodo, Todo, Comment, APIComment, APITag } from '../models/todo';
 
 export enum ActionTypes {
     GET_LOGIN_USER_INFO_BY_TOKEN_PENDING = '[user] GET_LOGIN_USER_INFO_BY_TOKEN/PENDING',
@@ -34,7 +34,10 @@ export enum ActionTypes {
     REQUEST_CREATE_TODO_COMMENT_FULFILLED = '[todo] REQUEST_CREATE_TODO_COMMENT_FULFILLED',
     REQUEST_CREATE_TODO_COMMENT_REJECTED = '[todo] REQUEST_CREATE_TODO_COMMENT_REJECTED',
     SET_TODO_COMMENT_FORM_VALUE = '[todo] SET_TODO_COMMENT_FORM_VALUE',
-    SET_SHOW_TODO_FORM = '[todo] SET_SHOW_TODO_FORM'
+    SET_SHOW_TODO_FORM = '[todo] SET_SHOW_TODO_FORM',
+    FETCH_TAG_LIST_BY_QUERY_PENDING = '[todo] FETCH_TAG_LIST_BY_QUERY_PENDING',
+    FETCH_TAG_LIST_BY_QUERY_FULFILLED = '[todo] FETCH_TAG_LIST_BY_QUERY_FULFILLED',
+    FETCH_TAG_LIST_BY_QUERY_REJECTED = '[todo] FETCH_TAG_LIST_BY_QUERY_REJECTED',
 }
 
 export const actions = {
@@ -82,6 +85,11 @@ export const actions = {
         createAction(ActionTypes.REQUEST_CREATE_TODO_COMMENT_REJECTED, response),
     setTodoCommentFormValue: (value: string) => createAction(ActionTypes.SET_TODO_COMMENT_FORM_VALUE, value),
     setShowTodoForm: (value: boolean) => createAction(ActionTypes.SET_SHOW_TODO_FORM, value),
+    fetchTagListByQueryPending: () => createAction(ActionTypes.FETCH_TAG_LIST_BY_QUERY_PENDING),
+    fetchTagListByQueryFulfilled: (response: AxiosResponse<APITag[]>) =>
+        createAction(ActionTypes.FETCH_TAG_LIST_BY_QUERY_FULFILLED, response),
+    fetchTagListByQueryRejected: (response: AxiosError) =>
+        createAction(ActionTypes.FETCH_TAG_LIST_BY_QUERY_REJECTED, response),
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

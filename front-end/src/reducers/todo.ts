@@ -1,5 +1,5 @@
 import * as fromActions from '../actions';
-import { Todo, Comment } from '../models/todo';
+import { Todo, Comment, Tag } from '../models/todo';
 
 export interface TodoState {
     todoList: Todo[];
@@ -12,6 +12,8 @@ export interface TodoState {
         content?: string[]
     };
     showTodoForm: boolean;
+    tagSearchLoading: boolean;
+    tagSearchResult: Tag[];
 }
 
 const initialState: TodoState = {
@@ -23,6 +25,8 @@ const initialState: TodoState = {
     commentFormValue: '',
     commentFormError: {},
     showTodoForm: false,
+    tagSearchLoading: false,
+    tagSearchResult: [],
 };
 
 function replaceTodo(oldList: Todo[], todo: Todo) {
@@ -141,6 +145,21 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
             return {
                 ...state,
                 showTodoForm: action.payload
+            };
+        }
+        case fromActions.ActionTypes.FETCH_TAG_LIST_BY_QUERY_PENDING: {
+            return {
+                ...state,
+                tagSearchLoading: true,
+                tagSearchResult: []
+            };
+        }
+        case fromActions.ActionTypes.FETCH_TAG_LIST_BY_QUERY_FULFILLED: {
+            const tagSearchResult = action.payload.data.map(apiTag => new Tag(apiTag));
+            return {
+                ...state,
+                tagSearchLoading: false,
+                tagSearchResult: tagSearchResult
             };
         }
         default: {
