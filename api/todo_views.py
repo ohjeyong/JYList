@@ -1,5 +1,5 @@
 from rest_framework import status, viewsets, generics
-from rest_framework.decorators import detail_route
+from rest_framework.decorators import detail_route, list_route
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -100,6 +100,16 @@ class TodoCommentViewSet(FriendsQuerysetMixin, viewsets.ModelViewSet):
         return Response({"id": pk, "todo_id": todo_pk})
 
 
-class TagListView(generics.ListAPIView):
+class TagViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
+    permission_classes = [IsAuthenticated]
+
+    @list_route()
+    def search(self, request):
+        term = request.query_params.get('q', None)
+        if term is None or term == '':
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        qs = self.queryset.filter(name__icontains=term)
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
