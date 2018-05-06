@@ -15,6 +15,7 @@ import TextField from 'material-ui/TextField';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import { MenuItem } from 'material-ui/Menu';
 import { CategorySelector } from './CategorySelector';
+import { TagInputContainer, Tag } from '../../containers/todo/TagInputContainer';
 
 // tslint:disable-next-line
 function Transition(props: any) {
@@ -30,12 +31,14 @@ interface State {
     category: keyof Category | '';
     content: string;
     error: Error;
+    tags: Tag[];
 }
 
 export class TodoFormDialog extends React.Component<Props, State> {
     readonly state: State = {
         category: '',
         content: '',
+        tags: [],
         error: {}
     };
 
@@ -78,7 +81,7 @@ export class TodoFormDialog extends React.Component<Props, State> {
 
     render() {
         const isFullScreen: boolean = window.innerHeight < 820;
-        const { category, content, error } = this.state;
+        const { category, content, error, tags } = this.state;
         return (
             <Dialog
                 fullScreen={isFullScreen}
@@ -175,6 +178,11 @@ export class TodoFormDialog extends React.Component<Props, State> {
                                 {error.content}
                             </FormHelperText>
                         </FormControl>
+                        <TagInputContainer
+                            tags={tags}
+                            handleAddition={(tag: Tag) => console.log(tag)}
+                            handleDelete={(id: string) => console.log(id)}
+                        />
                     </div>
                 </DialogContent>
 

@@ -174,7 +174,7 @@ export const thunksActionCreators = {
             return async (dispatch: Dispatch<RootReducer>) => {
                 dispatch(actions.fetchTagListByQueryPending());
                 try {
-                    const response = await axios.get(`/api/tag/search/`, {
+                    const response = await axios.get(`/api/tag-list/search/`, {
                         params: {
                             q: value
                         }
