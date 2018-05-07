@@ -25,7 +25,7 @@ function changeTagModelListToTagList(tagList: TagModel[]) {
 interface OwnProps {
     tags: Tag[];
     handleAddition: (tag: Tag) => void;
-    handleDelete: (id: string) => void;
+    handleDelete: (id: number) => void;
 }
 
 export type TagInput = StateToProps & DispatchToProps & OwnProps;

@@ -54,6 +54,20 @@ export class TodoFormDialog extends React.Component<Props, State> {
         });
     }
 
+    onTagAddition = (tag: Tag) => {
+        this.setState({
+            tags: [...this.state.tags, tag]
+        });
+    }
+
+    onTagDelete = (idx: number) => {
+        const newTags = [...this.state.tags];
+        _.pullAt(newTags, idx);
+        this.setState({
+            tags: newTags
+        });
+    }
+
     handleClose = () => {
         this.props.setShowTodoForm(false);
     }
@@ -180,8 +194,8 @@ export class TodoFormDialog extends React.Component<Props, State> {
                         </FormControl>
                         <TagInputContainer
                             tags={tags}
-                            handleAddition={(tag: Tag) => console.log(tag)}
-                            handleDelete={(id: string) => console.log(id)}
+                            handleAddition={this.onTagAddition}
+                            handleDelete={this.onTagDelete}
                         />
                     </div>
                 </DialogContent>
