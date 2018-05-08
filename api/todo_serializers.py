@@ -42,11 +42,12 @@ class TodoSerializer(serializers.ModelSerializer):
     author = UserSerializer(read_only=True)
     author_id = serializers.PrimaryKeyRelatedField(write_only=True, queryset=User.objects.all(), source='author')
     comment_list = CommentSerializer(source='todocomment_set.all', many=True, read_only=True)
-    tag_list = TagSerializer(source='tag.all', many=True, required=False)
+    tag_list = TagSerializer(read_only=True, many=True, source='tag')
 
     def create(self, validated_data):
-        tag_list = validated_data.pop('tag', dict()).get('all', list())
+        tag_list = self.initial_data.get('tag_list', list())
         todo = Todo.objects.create(**validated_data)
         for each_tag in tag_list:
-            Tag.objects.create(todo=todo, **each_tag)
+            tag, _ = Tag.objects.get_or_create(**each_tag)
+            tag.todo_set.add(todo)
         return todo
