@@ -1,5 +1,7 @@
 import * as fromActions from '../actions';
-import { Todo, Comment, Tag } from '../models/todo';
+import { Todo, Comment, Tag as TagModel, Category } from '../models/todo';
+import { Tag } from '../containers/todo/TagInputContainer';
+import { Error as TodoFormDialogError } from '../components/todo/TodoFormDialog';
 
 export interface TodoState {
     todoList: Todo[];
@@ -13,8 +15,14 @@ export interface TodoState {
     };
     showTodoForm: boolean;
     tagSearchLoading: boolean;
-    tagSearchResult: Tag[];
+    tagSearchResult: TagModel[];
     todoFormLoading: boolean;
+    todoFormDialog: {
+        category: '' | keyof Category,
+        content: string,
+        tagList: Tag[],
+        error: TodoFormDialogError
+    };
 }
 
 const initialState: TodoState = {
@@ -29,6 +37,12 @@ const initialState: TodoState = {
     tagSearchLoading: false,
     tagSearchResult: [],
     todoFormLoading: false,
+    todoFormDialog: {
+        category: '',
+        content: '',
+        tagList: [],
+        error: {}
+    }
 };
 
 function replaceTodo(oldList: Todo[], todo: Todo) {
@@ -157,7 +171,7 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
             };
         }
         case fromActions.ActionTypes.FETCH_TAG_LIST_BY_QUERY_FULFILLED: {
-            const tagSearchResult = action.payload.data.map(apiTag => new Tag(apiTag));
+            const tagSearchResult = action.payload.data.map(apiTag => new TagModel(apiTag));
             return {
                 ...state,
                 tagSearchLoading: false,
@@ -175,7 +189,20 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
             return {
                 ...state,
                 todoList: [todo, ...state.todoList],
-                showTodoForm: false
+                showTodoForm: false,
+                todoFormDialog: {
+                    ...initialState.todoFormDialog
+                }
+            };
+        }
+        case fromActions.ActionTypes.CHANGE_TODO_FORM_DIALOG: {
+            const payload = action.payload;
+            return {
+                ...state,
+                todoFormDialog: {
+                    ...state.todoFormDialog,
+                    [payload.name]: payload.value
+                }
             };
         }
         default: {

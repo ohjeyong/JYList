@@ -41,6 +41,7 @@ export enum ActionTypes {
     REQUEST_CREATE_TODO_PENDING = '[todo] REQUEST_CREATE_TODO_PENDING',
     REQUEST_CREATE_TODO_FULFILLED = '[todo] REQUEST_CREATE_TODO_FULFILLED',
     REQUEST_CREATE_TODO_REJECTED = '[todo] REQUEST_CREATE_TODO_REJECTED',
+    CHANGE_TODO_FORM_DIALOG = '[todo] CHANGE_TODO_FORM_DIALOG',
 }
 
 export const actions = {
@@ -98,6 +99,9 @@ export const actions = {
         createAction(ActionTypes.REQUEST_CREATE_TODO_FULFILLED, response),
     requestCreateTodoRejected: (response: AxiosError) =>
         createAction(ActionTypes.REQUEST_CREATE_TODO_REJECTED, response),
+    // tslint:disable-next-line
+    changeTodoFormDialog: (name: 'category' | 'content' | 'tagList' | 'error', value: any) =>
+        createAction(ActionTypes.CHANGE_TODO_FORM_DIALOG, { name, value })
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

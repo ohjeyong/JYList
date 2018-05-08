@@ -22,50 +22,28 @@ function Transition(props: any) {
     return <Slide direction="up" {...props}/>;
 }
 
-interface Error {
+export interface Error {
     category?: '카테고리를 선택해주세요.';
     content?: '내용을 입력해주세요.';
 }
 
-interface State {
-    category: keyof Category | '';
-    content: string;
-    error: Error;
-    tags: Tag[];
-}
-
-export class TodoFormDialog extends React.Component<Props, State> {
-    readonly state: State = {
-        category: '',
-        content: '',
-        tags: [],
-        error: {}
-    };
-
+export class TodoFormDialog extends React.Component<Props> {
     onChangeContent = (value: string) => {
-        this.setState({
-            content: value
-        });
+        this.props.changeTodoFormDialog('content', value);
     }
 
     onChangeCategory = (category: keyof Category | '') => {
-        this.setState({
-            category
-        });
+        this.props.changeTodoFormDialog('category', category);
     }
 
     onTagAddition = (tag: Tag) => {
-        this.setState({
-            tags: [...this.state.tags, tag]
-        });
+        this.props.changeTodoFormDialog('tagList', [...this.props.todoFormDialog.tagList, tag]);
     }
 
     onTagDelete = (idx: number) => {
-        const newTags = [...this.state.tags];
+        const newTags = [...this.props.todoFormDialog.tagList];
         _.pullAt(newTags, idx);
-        this.setState({
-            tags: newTags
-        });
+        this.props.changeTodoFormDialog('tagList', newTags);
     }
 
     handleClose = () => {
@@ -73,32 +51,28 @@ export class TodoFormDialog extends React.Component<Props, State> {
     }
 
     handleSave = () => {
-        this.setState({
-            error: {}
-        });
-        const { category, content, tags } = this.state;
-        const error: Error = {};
+        this.props.changeTodoFormDialog('error', {});
+        const { category, content, tagList, error } = this.props.todoFormDialog;
+        const err: Error = {};
         if (category === '') {
-            error.category = '카테고리를 선택해주세요.';
+            err.category = '카테고리를 선택해주세요.';
         }
         if (content === '') {
-            error.content = '내용을 입력해주세요.';
+            err.content = '내용을 입력해주세요.';
         }
         if (_.isEmpty(error)) {
-            const tag = tags.map(elem => ({
+            const tag = tagList.map(elem => ({
                 name: elem.text
             }));
             this.props.requestCreateTodo(category as keyof Category, content, tag);
         } else {
-            this.setState({
-                error
-            });
+            this.props.changeTodoFormDialog('error', err);
         }
     }
 
     render() {
         const isFullScreen: boolean = window.innerHeight < 820;
-        const { category, content, error, tags } = this.state;
+        const { category, content, error, tagList } = this.props.todoFormDialog;
         return (
             <Dialog
                 fullScreen={isFullScreen}
@@ -196,7 +170,7 @@ export class TodoFormDialog extends React.Component<Props, State> {
                             </FormHelperText>
                         </FormControl>
                         <TagInputContainer
-                            tags={tags}
+                            tags={tagList}
                             handleAddition={this.onTagAddition}
                             handleDelete={this.onTagDelete}
                         />

@@ -199,5 +199,8 @@ export const thunksActionCreators = {
                     dispatch(actions.requestCreateTodoRejected(error));
                 }
             };
-        }
+        },
+        // tslint:disable-next-line
+        changeTodoFormDialog: (name: 'category' | 'content' | 'tagList' | 'error', value: any) =>
+            actions.changeTodoFormDialog(name, value)
 };
