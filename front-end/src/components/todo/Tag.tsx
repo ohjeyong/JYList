@@ -12,6 +12,9 @@ export const Tag: React.SFC<Props> = (props: Props) => {
     return (
         <Chip
             className="Tag"
+            style={{
+                marginBottom: '5px'
+            }}
             label={tag.name}
             onDelete={
                 onRemove ? () => onRemove(tag.name) :

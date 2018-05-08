@@ -14,6 +14,7 @@ export interface TodoState {
     showTodoForm: boolean;
     tagSearchLoading: boolean;
     tagSearchResult: Tag[];
+    todoFormLoading: boolean;
 }
 
 const initialState: TodoState = {
@@ -27,6 +28,7 @@ const initialState: TodoState = {
     showTodoForm: false,
     tagSearchLoading: false,
     tagSearchResult: [],
+    todoFormLoading: false,
 };
 
 function replaceTodo(oldList: Todo[], todo: Todo) {
@@ -160,6 +162,20 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
                 ...state,
                 tagSearchLoading: false,
                 tagSearchResult: tagSearchResult
+            };
+        }
+        case fromActions.ActionTypes.REQUEST_CREATE_TODO_PENDING: {
+            return {
+                ...state,
+                todoFormLoading: true
+            };
+        }
+        case fromActions.ActionTypes.REQUEST_CREATE_TODO_FULFILLED: {
+            const todo: Todo = new Todo(action.payload.data);
+            return {
+                ...state,
+                todoList: [todo, ...state.todoList],
+                showTodoForm: false
             };
         }
         default: {

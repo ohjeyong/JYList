@@ -38,6 +38,9 @@ export enum ActionTypes {
     FETCH_TAG_LIST_BY_QUERY_PENDING = '[todo] FETCH_TAG_LIST_BY_QUERY_PENDING',
     FETCH_TAG_LIST_BY_QUERY_FULFILLED = '[todo] FETCH_TAG_LIST_BY_QUERY_FULFILLED',
     FETCH_TAG_LIST_BY_QUERY_REJECTED = '[todo] FETCH_TAG_LIST_BY_QUERY_REJECTED',
+    REQUEST_CREATE_TODO_PENDING = '[todo] REQUEST_CREATE_TODO_PENDING',
+    REQUEST_CREATE_TODO_FULFILLED = '[todo] REQUEST_CREATE_TODO_FULFILLED',
+    REQUEST_CREATE_TODO_REJECTED = '[todo] REQUEST_CREATE_TODO_REJECTED',
 }
 
 export const actions = {
@@ -90,6 +93,11 @@ export const actions = {
         createAction(ActionTypes.FETCH_TAG_LIST_BY_QUERY_FULFILLED, response),
     fetchTagListByQueryRejected: (response: AxiosError) =>
         createAction(ActionTypes.FETCH_TAG_LIST_BY_QUERY_REJECTED, response),
+    requestCreateTodoPending: () => createAction(ActionTypes.REQUEST_CREATE_TODO_PENDING),
+    requestCreateTodoFulfilled: (response: AxiosResponse<APITodo>) =>
+        createAction(ActionTypes.REQUEST_CREATE_TODO_FULFILLED, response),
+    requestCreateTodoRejected: (response: AxiosError) =>
+        createAction(ActionTypes.REQUEST_CREATE_TODO_REJECTED, response),
 };
 
 export type Actions = ReturnType<typeof actions[keyof typeof actions]>;

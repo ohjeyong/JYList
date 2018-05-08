@@ -3,7 +3,7 @@ import { actions } from './types';
 import { getAuthToken } from '../utils/localStorage';
 import { Dispatch } from 'react-redux';
 import { RootReducer } from '../reducers';
-import { Todo, Comment } from '../models/todo';
+import { Todo, Comment, Category } from '../models/todo';
 
 axios.defaults.baseURL = 'http://localhost:8000';
 
@@ -182,6 +182,21 @@ export const thunksActionCreators = {
                     dispatch(actions.fetchTagListByQueryFulfilled(response));
                 } catch (error) {
                     dispatch(actions.setAppErrorMessage(error.message));
+                }
+            };
+        },
+        requestCreateTodo: (category: keyof Category, content: string, tagList: { name: string }[]) => {
+            return async (dispatch: Dispatch<RootReducer>) => {
+                dispatch(actions.requestCreateTodoPending());
+                try {
+                    const response = await axios.post('/api/todo/', {
+                        category,
+                        content,
+                        tag_list: tagList
+                    });
+                    dispatch(actions.requestCreateTodoFulfilled(response));
+                } catch (error) {
+                    dispatch(actions.requestCreateTodoRejected(error));
                 }
             };
         }

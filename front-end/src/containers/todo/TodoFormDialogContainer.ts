@@ -4,17 +4,19 @@ import { TodoFormDialog } from '../../components/todo/TodoFormDialog';
 import { thunksActionCreators } from '../../actions';
 import { bindActionCreators, Dispatch } from 'redux';
 
-type StateToProps = Pick<TodoState, 'showTodoForm'>;
-type DispatchToProps = Pick<typeof thunksActionCreators, 'setShowTodoForm'>;
+type StateToProps = Pick<TodoState, 'showTodoForm' | 'todoFormLoading'>;
+type DispatchToProps = Pick<typeof thunksActionCreators, 'setShowTodoForm' | 'requestCreateTodo'>;
 export type TodoFormDialog = StateToProps & DispatchToProps;
 
 const mapStateToProps = (state: RootReducer): StateToProps => ({
-    showTodoForm: state.todo.showTodoForm
+    showTodoForm: state.todo.showTodoForm,
+    todoFormLoading: state.todo.todoFormLoading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
     const map: DispatchToProps = {
-        setShowTodoForm: thunksActionCreators.setShowTodoForm
+        setShowTodoForm: thunksActionCreators.setShowTodoForm,
+        requestCreateTodo: thunksActionCreators.requestCreateTodo
     };
     return bindActionCreators(map, dispatch);
 };

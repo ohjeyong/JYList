@@ -76,7 +76,7 @@ export class TodoFormDialog extends React.Component<Props, State> {
         this.setState({
             error: {}
         });
-        const { category, content } = this.state;
+        const { category, content, tags } = this.state;
         const error: Error = {};
         if (category === '') {
             error.category = '카테고리를 선택해주세요.';
@@ -85,7 +85,10 @@ export class TodoFormDialog extends React.Component<Props, State> {
             error.content = '내용을 입력해주세요.';
         }
         if (_.isEmpty(error)) {
-            console.log(this.state);
+            const tag = tags.map(elem => ({
+                name: elem.text
+            }));
+            this.props.requestCreateTodo(category as keyof Category, content, tag);
         } else {
             this.setState({
                 error
