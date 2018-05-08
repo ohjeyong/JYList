@@ -48,6 +48,10 @@ class TodoSerializer(serializers.ModelSerializer):
         tag_list = self.initial_data.get('tag_list', list())
         todo = Todo.objects.create(**validated_data)
         for each_tag in tag_list:
-            tag, _ = Tag.objects.get_or_create(**each_tag)
-            tag.todo_set.add(todo)
+            tag = Tag.objects.filter(name=each_tag['name'])
+            if tag:
+                tag.first().todo_set.add(todo)
+            else:
+                tag = Tag.objects.create(name=each_tag['name'], author=self.validated_data['author'])
+                tag.todo_set.add(todo)
         return todo

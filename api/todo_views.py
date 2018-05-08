@@ -31,9 +31,6 @@ class TodoViewSet(FriendsQuerysetMixin, viewsets.ModelViewSet):
         data = request.data
         user = request.user
         data['author_id'] = user.id
-        if 'tag_list' in data:
-            for each_tag in data['tag_list']:
-                each_tag['author_id'] = user.id
         serializer = self.get_serializer(data=data)
         if serializer.is_valid():
             serializer.save()
