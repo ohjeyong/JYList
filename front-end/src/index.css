@@ -283,3 +283,7 @@ a {
     display: flex;
     align-items: center;
 }
+
+div.ReactTags__suggestions {
+    z-index: 1;
+}

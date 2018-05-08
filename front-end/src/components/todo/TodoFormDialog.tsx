@@ -12,6 +12,7 @@ import Typography from 'material-ui/Typography';
 import Slide from 'material-ui/transitions/Slide';
 import Select from 'material-ui/Select';
 import TextField from 'material-ui/TextField';
+import { CircularProgress } from 'material-ui/Progress';
 import { FormControl, FormHelperText } from 'material-ui/Form';
 import { MenuItem } from 'material-ui/Menu';
 import { CategorySelector } from './CategorySelector';
@@ -52,7 +53,7 @@ export class TodoFormDialog extends React.Component<Props> {
 
     handleSave = () => {
         this.props.changeTodoFormDialog('error', {});
-        const { category, content, tagList, error } = this.props.todoFormDialog;
+        const { category, content, tagList } = this.props.todoFormDialog;
         const err: Error = {};
         if (category === '') {
             err.category = '카테고리를 선택해주세요.';
@@ -60,7 +61,7 @@ export class TodoFormDialog extends React.Component<Props> {
         if (content === '') {
             err.content = '내용을 입력해주세요.';
         }
-        if (_.isEmpty(error)) {
+        if (_.isEmpty(err)) {
             const tag = tagList.map(elem => ({
                 name: elem.text
             }));
@@ -106,8 +107,10 @@ export class TodoFormDialog extends React.Component<Props> {
                                 <Button
                                     color="inherit"
                                     onClick={() => this.handleSave()}
+                                    disabled={this.props.todoFormLoading}
                                 >
-                                    추가하기
+                                    {this.props.todoFormLoading ?
+                                        <CircularProgress style={{color: 'white'}} size={20}/> : '추가하기'}
                                 </Button>
                             </Toolbar>
                         </AppBar> :
@@ -174,6 +177,35 @@ export class TodoFormDialog extends React.Component<Props> {
                             handleAddition={this.onTagAddition}
                             handleDelete={this.onTagDelete}
                         />
+                        {
+                            isFullScreen ?
+                                null :
+                                <div
+                                    style={{
+                                        marginTop: '10px',
+                                        textAlign: 'right'
+                                    }}
+                                >
+                                    <Button
+                                        onClick={() => this.handleClose()}
+                                        variant="raised"
+                                        color="secondary"
+                                        style={{
+                                            marginRight: '5px'
+                                        }}
+                                    >
+                                        취소
+                                    </Button>
+                                    <Button
+                                        variant="raised"
+                                        color="primary"
+                                        onClick={() => this.handleSave()}
+                                        disabled={this.props.todoFormLoading}
+                                    >
+                                        {this.props.todoFormLoading ? <CircularProgress size={20}/> : '추가'}
+                                    </Button>
+                                </div>
+                        }
                     </div>
                 </DialogContent>
 

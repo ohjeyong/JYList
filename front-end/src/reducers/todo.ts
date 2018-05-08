@@ -190,6 +190,7 @@ export const todoReducer = (state: TodoState = initialState, action: fromActions
                 ...state,
                 todoList: [todo, ...state.todoList],
                 showTodoForm: false,
+                todoFormLoading: false,
                 todoFormDialog: {
                     ...initialState.todoFormDialog
                 }
