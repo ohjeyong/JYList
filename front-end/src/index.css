@@ -229,6 +229,12 @@ a {
     display: flex;
     flex-direction: column;
 }
+@media screen and (min-width: 992px){
+    .TodoRouterWrapper {
+        margin: auto;
+        width: 600px;
+    }
+}
 .TodoRouterWrapper > .TodoList {
     flex: 1;
     height: 100%;
@@ -286,4 +292,11 @@ a {
 
 div.ReactTags__suggestions {
     z-index: 1;
+}
+
+.NotFoundWrapper {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
