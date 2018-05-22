@@ -1,8 +1,8 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import { TodoCommentForm as Props } from '../../containers/todo/TodoCommentFormContainer';
-import red from 'material-ui/colors/red';
-import { CircularProgress } from 'material-ui/Progress';
+import { CircularProgress } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 
 export const TodoCommentForm: React.SFC<Props> = (props: Props) => (
     <div className="TodoCommentForm">

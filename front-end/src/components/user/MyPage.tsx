@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { MyPage as Props } from '../../containers/user/MyPageContainer';
 import { User } from '../../models/user';
-import Avator from 'material-ui/Avatar';
+import { Avatar, Button } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
-import Button from 'material-ui/Button';
 
 export const MyPage: React.SFC<Props> = (props: Props) => {
     const loginUser = props.loginUser as User;
@@ -11,9 +10,9 @@ export const MyPage: React.SFC<Props> = (props: Props) => {
         <div className="MyPage">
             <div className="MyPageInner">
                 <div className="MyPageContent">
-                    <Avator>
+                    <Avatar>
                         <PersonIcon/>
-                    </Avator>
+                    </Avatar>
                     <div>
                         <div>{loginUser.username}</div>
                         <div>{loginUser.name}</div>

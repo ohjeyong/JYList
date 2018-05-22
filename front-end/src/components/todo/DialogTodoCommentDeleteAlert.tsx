@@ -1,7 +1,6 @@
 import * as React from 'react';
-import Dialog, { DialogActions, DialogContent } from 'material-ui/Dialog';
+import { Dialog, DialogActions, DialogContent, Button } from '@material-ui/core';
 import { DialogTodoCommentDeleteAlert as Props } from '../../containers/todo/DialogTodoCommentDeleteAlertContainer';
-import Button from 'material-ui/Button';
 
 export const DialogTodoCommentDeleteAlert: React.SFC<Props> = (props: Props) => (
     <Dialog

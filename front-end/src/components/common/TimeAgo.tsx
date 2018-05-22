@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Tooltip from 'material-ui/Tooltip';
+import { Tooltip } from '@material-ui/core';
 import { beautifyDateTime } from '../../utils/date';
 // @ts-ignore
 import ReactTimeAgo from 'react-timeago';

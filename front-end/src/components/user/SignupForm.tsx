@@ -1,7 +1,6 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import Button from 'material-ui/Button';
-import { CircularProgress } from 'material-ui/Progress';
+import { Button, CircularProgress } from '@material-ui/core';
 import { TextInputControl } from '../common';
 import { User } from '../../models/user';
 import { Redirect } from 'react-router';

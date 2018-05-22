@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { MainSwitch } from '../../routers/MainSwitch';
-import IconButton from 'material-ui/IconButton';
+import { IconButton } from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import { Link } from 'react-router-dom';
 

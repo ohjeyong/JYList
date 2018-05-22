@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { Todo } from '../../models/todo';
-import Paper from 'material-ui/Paper';
-import Divider from 'material-ui/Divider';
+import { Paper, Divider } from '@material-ui/core';
 import { CategoryChip } from './CategoryChip';
 import { LikeButtonContainer } from '../../containers/todo/LikeButtonContainer';
 import { Tag } from './Tag';

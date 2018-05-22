@@ -1,6 +1,6 @@
 import * as React from 'react';
-import Button from 'material-ui/Button';
-import orange from 'material-ui/colors/orange';
+import { Button } from '@material-ui/core';
+import { orange } from '@material-ui/core/colors';
 import { RevertCompleteButton as Props } from '../../containers/todo/RevertCompleteButtonContainer';
 
 export const RevertCompleteButton: React.SFC<Props> = (props: Props) => (

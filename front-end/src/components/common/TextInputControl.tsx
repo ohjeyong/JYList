@@ -1,6 +1,5 @@
 import * as React from 'react';
-import Input, { InputLabel } from 'material-ui/Input';
-import { FormControl, FormHelperText } from 'material-ui/Form';
+import { Input, InputLabel, FormControl, FormHelperText } from '@material-ui/core';
 
 interface Props {
     errorObject: object;

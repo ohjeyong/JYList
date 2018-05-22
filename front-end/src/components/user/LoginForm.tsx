@@ -1,9 +1,7 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import TextField from 'material-ui/TextField';
-import Button from 'material-ui/Button';
-import { CircularProgress } from 'material-ui/Progress';
-import { red } from 'material-ui/colors';
+import { Button, TextField, CircularProgress } from '@material-ui/core';
+import { red } from '@material-ui/core/colors';
 import { User } from '../../models/user';
 import { Redirect } from 'react-router';
 

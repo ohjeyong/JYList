@@ -2,11 +2,9 @@ import * as React from 'react';
 import { TodoLi } from './TodoLi';
 import { Todo, Category as CategoryType, CategoryInner as CategoryInnerType, Tag } from '../../models/todo';
 import { CategorySelector } from './CategorySelector';
-import blueGrey from 'material-ui/colors/blueGrey';
+import { Select, MenuItem, Input, InputAdornment } from '@material-ui/core';
+import { blueGrey } from '@material-ui/core/colors';
 import AllIcon from '@material-ui/icons/Subject';
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
-import Input, { InputAdornment } from 'material-ui/Input';
 import SearchIcon from '@material-ui/icons/Search';
 import { DialogTodoDeleteAlertContainer } from '../../containers/todo/DialogTodoDeleteAlertContainer';
 import { DialogTodoCommentDeleteAlertContainer } from '../../containers/todo/DialogTodoCommentDeleteAlertContainer';
@@ -174,7 +172,7 @@ export class TodoList extends React.Component<Props, State> {
                                     fontSize: '0.8em'
                                 }}
                                 value={completeCategory}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                     this.onChangeCompleteCategory(e.target.value as keyof typeof CompleteCategory);
                                 }}
                             >

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { CircularProgress } from 'material-ui/Progress';
+import { CircularProgress } from '@material-ui/core';
 import { TodoMain as Props } from '../../containers/todo/TodoMainContainer';
 import { TodoList } from './TodoList';
 

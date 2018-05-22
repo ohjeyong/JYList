@@ -1,20 +1,11 @@
 import * as _ from 'lodash';
 import * as React from 'react';
-import Dialog, { DialogTitle, DialogContent } from 'material-ui/Dialog';
 import { Category } from '../../models/todo';
 import { TodoFormDialog as Props } from '../../containers/todo/TodoFormDialogContainer';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
+import { AppBar, Toolbar, Button, Typography, Slide, Select, TextField, CircularProgress, FormControl, FormHelperText,
+    MenuItem, Dialog, DialogTitle, DialogContent } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import IconButton from 'material-ui/IconButton';
-import Button from 'material-ui/Button';
-import Typography from 'material-ui/Typography';
-import Slide from 'material-ui/transitions/Slide';
-import Select from 'material-ui/Select';
-import TextField from 'material-ui/TextField';
-import { CircularProgress } from 'material-ui/Progress';
-import { FormControl, FormHelperText } from 'material-ui/Form';
-import { MenuItem } from 'material-ui/Menu';
+import { IconButton } from '@material-ui/core';
 import { CategorySelector } from './CategorySelector';
 import { TagInputContainer, Tag } from '../../containers/todo/TagInputContainer';
 
@@ -79,7 +70,7 @@ export class TodoFormDialog extends React.Component<Props> {
                 fullScreen={isFullScreen}
                 open={this.props.showTodoForm}
                 onClose={() => this.handleClose()}
-                transition={Transition}
+                TransitionComponent={Transition}
             >
                 {
                     isFullScreen ?
@@ -131,7 +122,7 @@ export class TodoFormDialog extends React.Component<Props> {
                             <Select
                                 displayEmpty={true}
                                 value={category}
-                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                                onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                                     this.onChangeCategory(e.target.value as keyof Category | '');
                                 }}
                             >

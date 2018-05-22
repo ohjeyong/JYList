@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { TodoCommentDeleteButton as Props } from '../../containers/todo/TodoCommentDeleteButtonContainer';
-import IconButton from 'material-ui/IconButton';
+import { IconButton } from '@material-ui/core';
 import DeleteIcon from '@material-ui/icons/Delete';
 import { User } from '../../models/user';
 

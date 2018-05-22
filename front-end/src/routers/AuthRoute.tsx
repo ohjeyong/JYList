@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import * as React from 'react';
 import { Redirect, Route } from 'react-router';
-import { CircularProgress } from 'material-ui/Progress';
+import { CircularProgress } from '@material-ui/core';
 import { AuthRoute as Props } from '../containers/AuthRouteContainer';
 import { getAuthToken } from '../utils/localStorage';
 

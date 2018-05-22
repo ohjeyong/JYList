@@ -1,14 +1,11 @@
 /* tslint:disable:variable-name */
 import { User } from '../user';
 import { APIComment, APITodo, APITag } from './APIReturn';
-import Orange from 'material-ui/colors/orange';
-import Teal from 'material-ui/colors/teal';
-import Blue from 'material-ui/colors/blue';
-import SvgIcon from 'material-ui/SvgIcon';
+import { SvgIcon } from '@material-ui/core';
 import FoodIcon from '@material-ui/icons/Restaurant';
 import PlaceIcon from '@material-ui/icons/Place';
 import TodoIcon from '@material-ui/icons/Star';
-import teal from 'material-ui/colors/teal';
+import { teal, orange, blue } from '@material-ui/core/colors';
 
 export { APITodo, APIComment, APITag };
 
@@ -36,17 +33,17 @@ export interface Category {
 export const Category: Category = {
     FOOD: {
         value: '먹을 것',
-        color: Orange[500],
+        color: orange[500],
         icon: FoodIcon
     },
     PLACE: {
         value: '갈 곳',
-        color: Teal[500],
+        color: teal[500],
         icon: PlaceIcon
     },
     TODO: {
         value: '할 것',
-        color: Blue[500],
+        color: blue[500],
         icon: TodoIcon
     }
 };

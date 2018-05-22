@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Chip from 'material-ui/Chip';
+import { Chip } from '@material-ui/core';
 import { Tag as TagModel } from '../../models/todo';
 
 interface Props {

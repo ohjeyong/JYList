@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Button from 'material-ui/Button';
+import { Button } from '@material-ui/core';
 import { CompleteButton as Props } from '../../containers/todo/CompleteButtonContainer';
 import { Todo } from '../../models/todo';
 
