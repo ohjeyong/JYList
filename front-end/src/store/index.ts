@@ -6,7 +6,7 @@ const middlewares = [];
 
 middlewares.push(thunkMiddleware);
 
-if (process.env.NODE_ENV === `development`) {
+if (process.env.NODE_ENV === 'development') {
     const { logger } = require('redux-logger');
     middlewares.push(logger);
 }
