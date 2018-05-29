@@ -19,8 +19,8 @@ services:
       - ./config/nginx:/etc/nginx/conf.d
     depends_on:
       - web
-    db:
-      image: postgres
-      environment:
-        POSTGRES_PASSWORD: postgres_jylist_pwd
+db:
+  image: postgres
+  environment:
+    POSTGRES_PASSWORD: postgres_jylist_pwd
 
