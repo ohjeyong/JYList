@@ -1,26 +1,26 @@
 version: '3'
 services:
-	web:
-		build: .
-		command: python manage.py collectstatic --no-input
-		command: gunicorn config.wsgi -b 0.0.0.0:8000
-		volumes:
-			- .:/code
-		ports:
-			- "8000:8000"
-		depends_on:
-			- db
-	nginx:
-		image: nginx:latest
-		ports:
-			- "80:80"
-		volumes:
-			- ./stroot:/stroot
-			- ./config/nginx:/etc/nginx/conf.d
-		depends_on:
-			- web
-	db:
-		image: postgres
+  web:
+    build: .
+    command: python manage.py collectstatic --no-input
+    command: gunicorn config.wsgi -b 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./stroot:/stroot
+      - ./config/nginx:/etc/nginx/conf.d
+    depends_on:
+      - web
+    db:
+      image: postgres
 		environment:
 			POSTGRES_PASSWORD: postgres_jylist_pwd
 
