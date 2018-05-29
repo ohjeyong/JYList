@@ -21,6 +21,6 @@ services:
       - web
     db:
       image: postgres
-		environment:
-			POSTGRES_PASSWORD: postgres_jylist_pwd
+      environment:
+        POSTGRES_PASSWORD: postgres_jylist_pwd
 
