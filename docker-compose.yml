@@ -14,3 +14,11 @@ services:
     volumes:
       - .:/jylist
     command: bash -c "python manage.py collectstatic --noinput && gunicorn config.wsgi -b 0.0.0.0:8000"
+  db:
+    image: postgres:10.4
+    environment:
+      POSTGRES_PASSWORD: ''
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+volumes:
+  postgres_data:
