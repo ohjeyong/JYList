@@ -3,7 +3,7 @@ services:
   nginx:
     image: nginx:latest
     volumes:
-      - ./nginx:/etc/nginx/conf.d
+      - ./config/nginx:/etc/nginx/conf.d
       - ./stroot:/stroot
     depends_on:
       - web
