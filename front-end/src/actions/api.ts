@@ -8,7 +8,7 @@ import { Todo, Comment, Category } from '../models/todo';
 if (process.env.NODE_ENV === 'development') {
     axios.defaults.baseURL = 'http://localhost:8000';
 } else {
-    axios.defaults.baseURL = 'http://localhost:8000';
+    axios.defaults.baseURL = 'http://45.63.110.62';
 }
 
 export const thunksActionCreators = {
