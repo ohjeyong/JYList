@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./stroot:/stroot
+      - .:/jylist
+    depends_on:
+      - web
+  
+  web:
+    build: .
+    volumes:
+      - .:/jylist
+    command: bash -c "python manage.py collectstatic --noinput && gunicorn config.wsgi -b 0.0.0.0:8000"
+
+  db:
+    image: postgres:10.4
+    environment:
+      POSTGRES_PASSWORD: ''
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+volumes:
+  postgres_data:
