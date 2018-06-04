@@ -4,9 +4,15 @@ services:
   nginx:
     image: nginx:latest
     volumes:
+      - /docker-letsencrypt/etc/letsencrypt:/etc/letsencrypt/
+      - /docker-letsencrypt/var/lib/letsencrypt:/var/lib/letsencrypt/
+      - /docker-letsencrypt/var/log/letsencrypt:/var/log/letsencrypt/
       - ./config/nginx:/etc/nginx/conf.d
       - ./stroot:/stroot
       - .:/jylist
+    ports:
+      - "80:80"
+      - "443:443"
     depends_on:
       - web
   
@@ -15,6 +21,8 @@ services:
     volumes:
       - .:/jylist
     command: bash -c "python manage.py collectstatic --noinput && gunicorn config.wsgi -b 0.0.0.0:8000"
+    depends_on:
+      - db
 
   db:
     image: postgres:10.4
@@ -25,3 +33,4 @@ services:
 
 volumes:
   postgres_data:
+
