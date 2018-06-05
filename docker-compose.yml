@@ -28,7 +28,7 @@ services:
   db:
     image: postgres:10.4
     environment:
-      POSTGRES_PASSWORD: glacth2352
+      POSTGRES_PASSWORD:
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
