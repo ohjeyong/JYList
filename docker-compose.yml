@@ -7,6 +7,7 @@ services:
       - /docker-letsencrypt/etc/letsencrypt:/etc/letsencrypt/
       - /docker-letsencrypt/var/lib/letsencrypt:/var/lib/letsencrypt/
       - /docker-letsencrypt/var/log/letsencrypt:/var/log/letsencrypt/
+      - /nginx-log:/var/log/nginx/
       - ./config/nginx:/etc/nginx/conf.d
       - ./stroot:/stroot
       - .:/jylist
@@ -27,7 +28,7 @@ services:
   db:
     image: postgres:10.4
     environment:
-      POSTGRES_PASSWORD: ''
+      POSTGRES_PASSWORD: glacth2352
     volumes:
       - postgres_data:/var/lib/postgresql/data/
 
