@@ -7,6 +7,12 @@ body > #root {
     width: 100%;
     height: 100%;
     display: flex;
+    letter-spacing: -0.04em;
+    font-family: Apple SD Gothic Neo, notokr, dotum, serif;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -moz-font-feature-settings: "liga";
 }
 
 a {
