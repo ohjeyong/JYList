@@ -17,13 +17,15 @@ interface Props {
 
 export const TimeAgo: React.SFC<Props> = (props: Props) => {
     const date = props.date;
+    const beautifiedDateTime = beautifyDateTime(date);
     return (
         <Tooltip
-            title={beautifyDateTime(date)}
+            title={beautifiedDateTime}
         >
             <ReactTimeAgo
                 date={date}
                 formatter={formatter}
+                title={null}
                 style={{
                     ...props.style,
                     color: 'rgba(0,0,0,0.54)'
