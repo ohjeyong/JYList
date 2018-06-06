@@ -206,3 +206,5 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     )
 }
+
+PUSH_BULLET_API_KEY = get_env('PUSH_BULLET_API_KEY')
