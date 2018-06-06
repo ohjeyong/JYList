@@ -1,9 +1,8 @@
 import { connect } from 'react-redux';
 import { RevertCompleteButton } from '../../components/todo/RevertCompleteButton';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { Todo } from '../../models/todo';
 import { bindActionCreators, Dispatch } from 'redux';
-import { RootReducer } from '../../reducers';
 
 type DispatchToProps = Pick<typeof thunksActionCreators, 'requestTodoRevertComplete'>;
 interface OwnProps {
@@ -12,7 +11,7 @@ interface OwnProps {
 
 export type RevertCompleteButton = DispatchToProps & OwnProps;
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         requestTodoRevertComplete: thunksActionCreators.requestTodoRevertComplete
     };

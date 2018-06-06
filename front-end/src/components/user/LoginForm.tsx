@@ -26,8 +26,8 @@ export class LoginForm extends React.Component<Props, State> {
 
     onChange = (key: keyof State) => (e: React.FormEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
-        // tslint:disable-next-line:no-any
-        this.setState({ [key as any]: value });
+        // @ts-ignore
+        this.setState({ [key]: value });
     }
 
     onSubmit = (e: React.FormEvent<HTMLFormElement>) => {

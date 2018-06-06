@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { LoginSignup } from '../../components/user/LoginSignup';
 import { UserState, RootReducer } from '../../reducers';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { Dispatch, bindActionCreators } from 'redux';
 
 type StateToProps = Pick<UserState,
@@ -21,7 +21,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>) => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>) => {
     const map = {
         setAppErrorMessage: thunksActionCreators.setAppErrorMessage,
         setShowSignupForm: thunksActionCreators.setShowSignupForm,

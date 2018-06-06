@@ -1,6 +1,6 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { RootReducer, UserState } from '../../reducers';
 import { MyPage } from '../../components/user/MyPage';
 
@@ -15,7 +15,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         logoutRequest: thunksActionCreators.logoutRequest
     };

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { TodoCommentForm } from '../../components/todo/TodoCommentForm';
 import { RootReducer, TodoState } from '../../reducers';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { bindActionCreators, Dispatch } from 'redux';
 import { Todo } from '../../models/todo';
 
@@ -20,7 +20,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => ({
     commentFormValue: state.todo.commentFormValue,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         requestCreateTodoComment: thunksActionCreators.requestCreateTodoComment,
         setTodoCommentFormValue: thunksActionCreators.setTodoCommentFormValue,

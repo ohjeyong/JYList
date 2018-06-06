@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { bindActionCreators, Dispatch } from 'redux';
-import { RootReducer } from '../../reducers';
 import { LikeButton } from '../../components/todo/LikeButton';
 import { Todo } from '../../models/todo';
 
@@ -12,7 +11,7 @@ interface OwnProps {
 
 export type LikeButton = DispatchToProps & OwnProps;
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         requestAddLike: thunksActionCreators.requestAddLike
     };

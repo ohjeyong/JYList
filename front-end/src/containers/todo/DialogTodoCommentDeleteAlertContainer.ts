@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { DialogTodoCommentDeleteAlert } from '../../components/todo/DialogTodoCommentDeleteAlert';
 import { RootReducer, TodoState } from '../../reducers';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { bindActionCreators, Dispatch } from 'redux';
 
 type StateToProps = Pick<TodoState, 'alertCommentDelete'>;
@@ -15,7 +15,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         setAlertTodoCommentDelete: thunksActionCreators.setAlertTodoCommentDelete,
         requestTodoCommentDelete: thunksActionCreators.requestTodoCommentDelete

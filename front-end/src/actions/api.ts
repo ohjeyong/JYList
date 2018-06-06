@@ -1,8 +1,7 @@
 import axios from 'axios';
-import { actions } from './types';
+import { actions, Actions } from './types';
 import { getAuthToken } from '../utils/localStorage';
 import { Dispatch } from 'react-redux';
-import { RootReducer } from '../reducers';
 import { Todo, Comment, Category } from '../models/todo';
 
 if (process.env.NODE_ENV === 'development') {
@@ -13,7 +12,7 @@ if (process.env.NODE_ENV === 'development') {
 
 export const thunksActionCreators = {
     getLoginUserInfoByToken: () => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             dispatch(actions.getLoginUserInfoByTokenPending());
             const token = getAuthToken();
             try {
@@ -35,7 +34,7 @@ export const thunksActionCreators = {
         };
     },
     logoutRequest: () => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             dispatch(actions.logoutPending());
             try {
                 await axios.get('/api/users/me/');
@@ -51,7 +50,7 @@ export const thunksActionCreators = {
     setShowSignupForm: actions.setShowSignupForm,
     setShowLoginErrorMessage: actions.setShowLoginErrorMessage,
     loginRequest: (username: string, password: string) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             dispatch(actions.loginRequestPending());
             try {
                 const response = await axios.post('/api/users/login/', {
@@ -73,7 +72,7 @@ export const thunksActionCreators = {
         };
     },
     signupRequest: (username: string, password1: string, password2: string, name: string) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             dispatch(actions.signupRequestPending());
             try {
                 const response = await axios.post('/api/users/signup/', {
@@ -92,7 +91,7 @@ export const thunksActionCreators = {
         };
     },
     fetchTodoList: () => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             dispatch(actions.fetchTodoListPending());
             try {
                 const response = await axios.get('/api/todo/');
@@ -103,7 +102,7 @@ export const thunksActionCreators = {
         };
     },
     requestAddLike: (todoId: number) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             try {
                 const response = await axios.post(`/api/todo/${todoId}/add_like/`);
                 dispatch(actions.requestAddLike(response));
@@ -113,7 +112,7 @@ export const thunksActionCreators = {
         };
     },
     requestTodoRevertComplete: (todoId: number) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             try {
                 const response = await axios.post(`/api/todo/${todoId}/revert_complete/`);
                 dispatch(actions.requestTodoRevertComplete(response));
@@ -123,7 +122,7 @@ export const thunksActionCreators = {
         };
     },
     requestTodoComplete: (todoId: number) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             try {
                 const response = await axios.post(`/api/todo/${todoId}/complete/`);
                 dispatch(actions.requestTodoComplete(response));
@@ -133,7 +132,7 @@ export const thunksActionCreators = {
         };
     },
     requestTodoDelete: (todoId: number) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             try {
                 const response = await axios.delete(`/api/todo/${todoId}/`);
                 dispatch(actions.requestTodoDelete(response));
@@ -144,7 +143,7 @@ export const thunksActionCreators = {
     },
     setAlertTodoDelete: (todo: Todo | null) => actions.setAlertTodoDelete(todo),
     requestTodoCommentDelete: (comment: Comment) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             try {
                 const response = await axios.delete(`/api/todo-comment/${comment.id}/`);
                 dispatch(actions.requestTodoCommentDelete(response));
@@ -155,7 +154,7 @@ export const thunksActionCreators = {
     },
     setAlertTodoCommentDelete: (comment: Comment | null) => actions.setAlertTodoCommentDelete(comment),
     requestCreateTodoComment: (todoId: number, content: string) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             dispatch(actions.requestCreateTodoCommentPending());
             try {
                 const response = await axios.post(`/api/todo-comment/`, {
@@ -175,7 +174,7 @@ export const thunksActionCreators = {
     setTodoCommentFormValue: (value: string) => actions.setTodoCommentFormValue(value),
     setShowTodoForm: (value: boolean) => actions.setShowTodoForm(value),
     fetchTagListByQuery: (value: string) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             dispatch(actions.fetchTagListByQueryPending());
             try {
                 const response = await axios.get(`/api/tag-list/search/`, {
@@ -190,7 +189,7 @@ export const thunksActionCreators = {
         };
     },
     requestCreateTodo: (category: keyof Category, content: string, tagList: { name: string }[]) => {
-        return async (dispatch: Dispatch<RootReducer>) => {
+        return async (dispatch: Dispatch<Actions>) => {
             dispatch(actions.requestCreateTodoPending());
             try {
                 const response = await axios.post('/api/todo/', {

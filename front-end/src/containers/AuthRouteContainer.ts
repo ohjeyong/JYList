@@ -1,7 +1,7 @@
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { AuthRoute } from '../routers/AuthRoute';
-import { thunksActionCreators } from '../actions';
+import { thunksActionCreators, Actions } from '../actions';
 import { RootReducer, UserState, AppState } from '../reducers';
 import { RouteProps } from 'react-router';
 
@@ -18,7 +18,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         getLoginUserInfoByToken: thunksActionCreators.getLoginUserInfoByToken,
         setAppLoading: thunksActionCreators.setAppLoading,

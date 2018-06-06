@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { RootReducer, TodoState } from '../../reducers';
 import { TodoFormDialog } from '../../components/todo/TodoFormDialog';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { bindActionCreators, Dispatch } from 'redux';
 
 type StateToProps = Pick<TodoState, 'showTodoForm' | 'todoFormLoading' | 'todoFormDialog'>;
@@ -15,7 +15,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => ({
     todoFormDialog: state.todo.todoFormDialog,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         setShowTodoForm: thunksActionCreators.setShowTodoForm,
         requestCreateTodo: thunksActionCreators.requestCreateTodo,

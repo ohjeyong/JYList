@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { TodoFormTriggerButton } from '../../components/todo/TodoFormTriggerButton';
-import { RootReducer } from '../../reducers';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { bindActionCreators, Dispatch } from 'redux';
 
 type DispatchToProps = Pick<typeof thunksActionCreators, 'setShowTodoForm'>;
@@ -12,7 +11,7 @@ interface OwnProps {
 
 export type TodoFormTriggerButton = DispatchToProps & OwnProps;
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         setShowTodoForm: thunksActionCreators.setShowTodoForm
     };

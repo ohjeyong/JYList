@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { TagInput } from '../../components/todo/TagInput';
 import { RootReducer, TodoState } from '../../reducers';
 import { Tag as TagModel } from '../../models/todo';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 
 export interface Tag {
     id: string;
@@ -38,7 +38,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         fetchTagListByQuery: thunksActionCreators.fetchTagListByQuery
     };

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { TodoMain } from '../../components/todo/TodoMain';
 import { RootReducer, TodoState } from '../../reducers';
-import { thunksActionCreators } from '../../actions';
+import { thunksActionCreators, Actions } from '../../actions';
 import { bindActionCreators, Dispatch } from 'redux';
 
 type StateToProps = Pick<TodoState, 'loadingTodoList' | 'todoList'>;
@@ -16,7 +16,7 @@ const mapStateToProps = (state: RootReducer): StateToProps => {
     };
 };
 
-const mapDispatchToProps = (dispatch: Dispatch<RootReducer>): DispatchToProps => {
+const mapDispatchToProps = (dispatch: Dispatch<Actions>): DispatchToProps => {
     const map: DispatchToProps = {
         fetchTodoList: thunksActionCreators.fetchTodoList
     };
