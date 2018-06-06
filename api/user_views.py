@@ -1,6 +1,6 @@
 from django.contrib.auth import login, logout, authenticate
 from rest_framework import status, viewsets
-from rest_framework.decorators import list_route
+from rest_framework.decorators import action
 from rest_framework.exceptions import ParseError, AuthenticationFailed
 from rest_framework.response import Response
 
@@ -9,7 +9,7 @@ from .user_serializers import UserSerializer, UserRegistrationSerializer
 
 class UserViewSet(viewsets.ViewSet):
 
-    @list_route(methods=['POST'])
+    @action(methods=['POST'], detail=False)
     def login(self, request):
         data = request.data
         username = data.get('username')
@@ -23,19 +23,19 @@ class UserViewSet(viewsets.ViewSet):
         user_serializer = UserSerializer(user)
         return Response(user_serializer.data)
 
-    @list_route()
+    @action(detail=False)
     def logout(self, request):
         logout(request)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-    @list_route()
+    @action(detail=False)
     def me(self, request):
         if not request.user.is_authenticated:
             return Response(dict())
         user_serializer = UserSerializer(request.user)
         return Response(user_serializer.data)
 
-    @list_route(methods=['POST'])
+    @action(methods=['POST'], detail=False)
     def signup(self, request):
         data = request.data
         serializer = UserRegistrationSerializer(data=data)

@@ -1,5 +1,5 @@
-from rest_framework import status, viewsets, generics
-from rest_framework.decorators import detail_route, list_route
+from rest_framework import status, viewsets
+from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
@@ -44,19 +44,19 @@ class TodoViewSet(FriendsQuerysetMixin, viewsets.ModelViewSet):
         self.perform_destroy(instance)
         return Response({"id": pk})
 
-    @detail_route(methods=['POST'])
+    @action(methods=['POST'], detail=True)
     def complete(self, request, pk=None):
         todo = self.get_object()
         todo.complete(request.user)
         return Response(self.get_serializer(todo).data)
 
-    @detail_route(methods=['POST'])
+    @action(methods=['POST'], detail=True)
     def revert_complete(self, request, pk=None):
         todo = self.get_object()
         todo.revert_complete()
         return Response(self.get_serializer(todo).data)
 
-    @detail_route(methods=['POST'])
+    @action(methods=['POST'], detail=True)
     def add_like(self, request, pk=None):
         todo = self.get_object()
         todo.add_like()
@@ -102,7 +102,7 @@ class TagViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TagSerializer
     permission_classes = [IsAuthenticated]
 
-    @list_route()
+    @action(detail=False)
     def search(self, request):
         term = request.query_params.get('q', None)
         if term is None or term == '':
