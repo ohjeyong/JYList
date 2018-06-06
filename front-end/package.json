@@ -6,7 +6,6 @@
     "@material-ui/core": "^1.0.0",
     "@material-ui/icons": "^1.0.0-beta.42",
     "axios": "^0.18.0",
-    "fsevents": "^1.2.4",
     "lodash": "^4.17.5",
     "react": "^16.4.0",
     "react-dom": "^16.4.0",
