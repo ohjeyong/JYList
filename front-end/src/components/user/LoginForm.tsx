@@ -26,8 +26,7 @@ export class LoginForm extends React.Component<Props, State> {
 
     onChange = (key: keyof State) => (e: React.FormEvent<HTMLInputElement>) => {
         const value = e.currentTarget.value;
-        // @ts-ignore
-        this.setState({ [key]: value });
+        this.setState({ [key]: value } as Pick<State, keyof State>);
     }
 
     onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
