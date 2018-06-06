@@ -3,6 +3,18 @@ html, body {
     width: 100vw;
 }
 
+@font-face {
+    font-family: 'notokr';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/notokr-regular.eot');
+    src: url('./fonts/notokr-regular.eot?iefix') format('embedded-opentype'),
+    url('./fonts/notokr-regular.woff2') format('woff2'),
+    url('./fonts/notokr-regular.woff') format('woff'),
+    url('./fonts/notokr-regular.ttf') format('truetype'),
+    url('./fonts/notokr-regular.svg#notokr-regular') format('svg');
+}
+
 body > #root {
     width: 100%;
     height: 100%;
